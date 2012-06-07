@@ -10,7 +10,7 @@ var view = Ti.UI.createScrollView({
 Ti.include('/data.js');
 
 for (i in data) {
-	url = 'subcategories.js';
+	url = 'posts.js';
 	Ti.include('/ui/elements/category.js');
 }
 

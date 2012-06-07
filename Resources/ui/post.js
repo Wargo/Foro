@@ -53,6 +53,7 @@ var viewUser = Ti.UI.createLabel({
 	right:15,
 });
 
+user.index = 1;
 user.add(image);
 user.add(name);
 user.add(date);
@@ -91,3 +92,31 @@ content.add(message);
 
 view.add(content);
 win.add(view);
+
+user.addEventListener('click', function(e) {
+	if (e.source.index) {
+		var current = e.source;
+	} else {
+		var current = e.source.parent;
+	}
+	
+	var user = Ti.UI.createWindow({
+		title:'Nombre usuario',
+		url:'user.js',
+		backgroundColor:'#FFF',
+		barColor:'#429BDA'
+	});
+	
+	var animation = Ti.UI.createAnimation({
+		backgroundColor:'#429BDA',
+		duration:300
+	});
+	
+	animation.addEventListener('complete', function() {
+		current.backgroundColor = '#F2F2F2';
+	});
+	current.animate(animation);
+	
+	//win.nav.open(post);
+	Ti.UI.currentTab.open(user);
+});

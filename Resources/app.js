@@ -21,7 +21,7 @@ if (Ti.version < 1.8 ) {
 	
 	var posts = Ti.UI.createWindow({
 		backgroundColor:'#CCC',
-		title:L('Foro'),
+		title:L('Categorías'),
 		url:'ui/categories.js',
 		barColor:'#429BDA'
 	});
