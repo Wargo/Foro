@@ -7,11 +7,33 @@ var view = Ti.UI.createScrollView({
 	showVerticalScrollIndicator: true
 });
 
-Ti.include('/data.js');
+var loading = Titanium.UI.createActivityIndicator({
+    message:'',
+    style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
+    top:'50%'
+});
 
-for (i in data) {
-	url = 'subcategories.js';
-	Ti.include('/ui/elements/category.js');
-}
+view.add(loading);
+loading.show();
+
+Ti.include('/forums.js');
+
+var interval = setInterval(function() {
+	if (data) {
+		for (i in data) {
+			url = 'subcategories.js';
+			Ti.include('/ui/elements/category.js');
+		}
+		clearInterval(interval);
+		loading.hide();
+		view.remove(loading);
+	}
+	if (error) {
+		alert(error);
+		clearInterval(interval);
+		loading.hide();
+		view.remove(loading);
+	}
+}, 100);
 
 win.add(view);
