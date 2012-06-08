@@ -67,6 +67,7 @@ register.addEventListener('click', function() {
 		url:'register.js',
 		barColor:'#429BDA'
 	});
+	registerWin.root = win.root;
 	win.nav.open(registerWin);
 });
 
