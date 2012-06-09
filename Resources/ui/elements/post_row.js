@@ -2,27 +2,27 @@ var title = Ti.UI.createLabel({
 	text:data[i].title,
 	font:{fontSize:14},
 	color:'#257CBC',
-	top:0,
-	height:35,
+	top:10,
+	height:40,
 	left:70,
-	right:35
+	right:25
 });
-var intro = Ti.UI.createLabel({
-	text:data[i].intro,
+var username = Ti.UI.createLabel({
+	text:data[i].date + ' - ' + data[i].username,
 	font:{fontSize:14},
-	color:'#333',
-	top:25,
+	color:'#666',
+	top:50,
 	left:70,
-	height:45,
-	right:10
+	height:15,
+	right:15
 });
-var date = Ti.UI.createLabel({
+var numPosts = Ti.UI.createLabel({
 	color:'#999',
 	font:{fontSize:10},
-	text:data[i].date,
+	text:data[i].posts + ' ' + L('respuestas'),
 	top:3,
 	right:5,
-	height:15,
+	height:10,
 });
 var image = Ti.UI.createImageView({
 	image: 'https://twimg0-a.akamaihd.net/profile_images/1350365115/guille_normal.jpg',
@@ -52,15 +52,24 @@ if (i == data.length - 1) {
 
 content.index = i + 1;
 content.title = title;
-content.intro = intro;
+content.username = username;
 content.image = image;
-content.date = date;
+content.numPosts = numPosts;
+content.id = data[i].id;
 
 content.add(title);
-content.add(intro);
-content.add(date);
+content.add(username);
+content.add(numPosts);
 content.add(image);
-view.add(content);
+
+var row = Ti.UI.createTableViewRow({
+	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
+});
+
+row.add(content);
+tableData.push(row);
+
+//view.add(content);
 
 content.addEventListener('click', function(e) {
 	if (e.source.index) {

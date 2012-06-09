@@ -1,6 +1,6 @@
 var data = '';
 var error = '';
-var path = 'http://www.servidordeprueba.net/webs/foro/forums.php';
+var path = 'http://www.servidordeprueba.net/webs/foro/post.php';
 var client = Ti.Network.createHTTPClient({
 	onload: function(e) {
 		Ti.API.info('success');
@@ -13,7 +13,7 @@ var client = Ti.Network.createHTTPClient({
 	timeout: 5000
 });
 
-Ti.API.info('entro');
-
-client.open('GET', path);
-client.send();
+client.open('POST', path);
+client.send({
+	id:id
+});

@@ -1,10 +1,7 @@
 var win = Ti.UI.currentWindow;
 
-var view = Ti.UI.createScrollView({
-	backgroundColor: '#DDD',
-	layout: 'vertical',
-	contentHeight:'auto',
-	showVerticalScrollIndicator: true
+var tableView = Ti.UI.createTableView({
+	backgroundColor: '#DDD'
 });
 
 var loading = Titanium.UI.createActivityIndicator({
@@ -13,27 +10,32 @@ var loading = Titanium.UI.createActivityIndicator({
     top:'50%'
 });
 
-view.add(loading);
+win.add(loading);
 loading.show();
+var tableData = [];
 
-Ti.include('/forums.js');
+var url = 'subcategories.js';
+var element = '/ui/elements/category.js';
+var loadFrom = '/forums.js';
+Ti.include(loadFrom);
 
 var interval = setInterval(function() {
 	if (data) {
 		for (i in data) {
-			url = 'subcategories.js';
-			Ti.include('/ui/elements/category.js');
+			Ti.include(element);
 		}
 		clearInterval(interval);
 		loading.hide();
-		view.remove(loading);
+		win.remove(loading);
+		tableView.data = tableData;
+		win.add(tableView);
 	}
 	if (error) {
 		alert(error);
 		clearInterval(interval);
 		loading.hide();
-		view.remove(loading);
+		win.remove(loading);
 	}
 }, 100);
 
-win.add(view);
+Ti.include('/ui/reload.js');

@@ -8,6 +8,24 @@ var title = Ti.UI.createLabel({
 	right:35
 });
 
+var numTopics = Ti.UI.createLabel({
+	color:'#999',
+	font:{fontSize:13},
+	text:data[i].topics + ' Temas',
+	top:5,
+	right:5,
+	height:10
+});
+
+var numPosts = Ti.UI.createLabel({
+	color:'#999',
+	font:{fontSize:13},
+	text:data[i].posts + ' Posts',
+	bottom:5,
+	right:5,
+	height:10
+});
+
 var margin = 7;
 
 var content = Ti.UI.createView({
@@ -29,9 +47,23 @@ if (i == data.length - 1) {
 
 content.index = i + 1;
 content.title = title;
+content.id = data[i].id;
 
 content.add(title);
-view.add(content);
+
+if (data[i].topics > 0) {
+	content.add(numTopics);
+}
+if (data[i].posts > 0) {
+	content.add(numPosts);
+}
+
+var row = Ti.UI.createTableViewRow({
+	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
+});
+
+row.add(content);
+tableData.push(row);
 
 content.addEventListener('click', function(e) {
 	if (e.source.index) {
@@ -42,7 +74,6 @@ content.addEventListener('click', function(e) {
 	
 	var posts = Ti.UI.createWindow({
 		title:current.title.text,
-		//url:'posts.js',
 		url:url,
 		backgroundColor:'#FFF',
 		barColor:'#429BDA'

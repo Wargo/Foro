@@ -1,17 +1,42 @@
 var win = Ti.UI.currentWindow;
 
-var view = Ti.UI.createScrollView({
-	backgroundColor: '#DDD',
-	layout: 'vertical',
-	contentHeight:'auto',
-	showVerticalScrollIndicator: true
+var tableView = Ti.UI.createTableView({
+	backgroundColor: '#DDD'
 });
 
-Ti.include('/data.js');
+var loading = Titanium.UI.createActivityIndicator({
+    message:'',
+    style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
+    top:'50%'
+});
 
-for (i in data) {
-	url = 'posts.js';
-	Ti.include('/ui/elements/category.js');
-}
+win.add(loading);
+loading.show();
+var tableData = [];
 
-win.add(view);
+var url = 'posts.js';
+var element = '/ui/elements/category.js';
+var id = win.current.id;
+var loadFrom = '/subforums.js'
+Ti.include(loadFrom);
+
+var interval = setInterval(function() {
+	if (data) {
+		for (i in data) {
+			Ti.include(element);
+		}
+		clearInterval(interval);
+		loading.hide();
+		win.remove(loading);
+		tableView.data = tableData;
+		win.add(tableView);
+	}
+	if (error) {
+		alert(error);
+		clearInterval(interval);
+		loading.hide();
+		win.remove(loading);
+	}
+}, 100);
+
+Ti.include('/ui/reload.js');
