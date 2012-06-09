@@ -15,5 +15,6 @@ var client = Ti.Network.createHTTPClient({
 
 client.open('POST', path);
 client.send({
-	id:id
+	id:id,
+	page:page
 });

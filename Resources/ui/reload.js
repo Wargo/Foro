@@ -78,16 +78,13 @@ tableView.headerPullView = tableHeader;
 
 tableView.addEventListener('scroll',function(e) {
 	var offset = e.contentOffset.y;
-	if (offset <= -65.0 && !pulling)
-	{
+	if (offset <= -65.0 && !pulling) {
 		var t = Ti.UI.create2DMatrix();
 		t = t.rotate(-180);
 		pulling = true;
 		arrow.animate({transform:t,duration:180});
 		statusLabel.text = L('Suelta para recargar...');
-	}
-	else if (pulling && offset > -65.0 && offset < 0)
-	{
+	} else if (pulling && offset > -65.0 && offset < 0) {
 		pulling = false;
 		var t = Ti.UI.create2DMatrix();
 		arrow.animate({transform:t,duration:180});
@@ -96,8 +93,7 @@ tableView.addEventListener('scroll',function(e) {
 });
 
 tableView.addEventListener('scrollEnd',function(e) {
-	if (pulling && !reloading && e.contentOffset.y <= -65.0)
-	{
+	if (pulling && !reloading && e.contentOffset.y <= -65.0) {
 		reloading = true;
 		pulling = false;
 		arrow.hide();

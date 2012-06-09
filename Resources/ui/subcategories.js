@@ -1,4 +1,5 @@
 var win = Ti.UI.currentWindow;
+var page = 1;
 
 var tableView = Ti.UI.createTableView({
 	backgroundColor: '#DDD'
@@ -27,7 +28,7 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		win.remove(loading);
+		//win.remove(loading);
 		tableView.data = tableData;
 		win.add(tableView);
 	}
@@ -40,3 +41,4 @@ var interval = setInterval(function() {
 }, 100);
 
 Ti.include('/ui/reload.js');
+Ti.include('/ui/append.js');

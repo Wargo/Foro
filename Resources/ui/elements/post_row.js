@@ -42,14 +42,6 @@ var content = Ti.UI.createView({
 	bottom:1
 });
 
-if (i == 0) {
-	content.top = margin;
-	//content.borderRadius = 5;
-}
-if (i == data.length - 1) {
-	content.bottom = margin;
-}
-
 content.index = i + 1;
 content.title = title;
 content.username = username;
@@ -67,9 +59,19 @@ var row = Ti.UI.createTableViewRow({
 });
 
 row.add(content);
-tableData.push(row);
 
-//view.add(content);
+if (page > 1) {
+	tableView.appendRow(row);
+} else {
+	tableData.push(row);
+	if (i == 0) {
+		content.top = margin;
+	}
+	if (i == data.length - 1) {
+		// Si no, al concatenar se queda feo
+		//content.bottom = margin;
+	}
+}
 
 content.addEventListener('click', function(e) {
 	if (e.source.index) {

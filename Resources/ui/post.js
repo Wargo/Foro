@@ -1,4 +1,5 @@
 var win = Ti.UI.currentWindow;
+var page = 1;
 var margin = 7;
 
 var tableView = Ti.UI.createTableView({
@@ -40,3 +41,4 @@ var interval = setInterval(function() {
 }, 100);
 
 Ti.include('/ui/reload.js');
+Ti.include('/ui/append.js');

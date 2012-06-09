@@ -88,7 +88,12 @@ var row = Ti.UI.createTableViewRow({
 });
 
 row.add(content);
-tableData.push(row);
+
+if (page > 1) {
+	tableView.appendRow(row);
+} else {
+	tableData.push(row);
+}
 
 user.addEventListener('click', function(e) {
 	if (e.source.index) {

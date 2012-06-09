@@ -1,4 +1,5 @@
 var win = Ti.UI.currentWindow;
+var page = 1;
 
 var tableView = Ti.UI.createTableView({
 	backgroundColor: '#DDD'
