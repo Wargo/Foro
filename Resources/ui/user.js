@@ -20,7 +20,7 @@ var content = Ti.UI.createView({
 
 var user = Ti.UI.createView({
 	backgroundColor:'#F2F2F2',
-	height:80
+	height:100
 });
 
 var image = Ti.UI.createImageView({
@@ -29,17 +29,35 @@ var image = Ti.UI.createImageView({
 	top:15,
 	width:48
 });
-var name = Ti.UI.createLabel({
-	text:'Nombre usuario',
+var username = Ti.UI.createLabel({
+	text:win.current.username,
 	font:{fontSize:14},
 	color:'#257CBC',
-	top:20,
+	top:10,
+	left:80,
+	right:35
+});
+var name = Ti.UI.createLabel({
+	text:win.current.name,
+	font:{fontSize:14},
+	color:'#333',
+	top:30,
+	left:80,
+	right:35
+});
+var registered = Ti.UI.createLabel({
+	text:L('Fecha registro') + ': ' + win.current.registered,
+	font:{fontSize:14},
+	color:'#999',
+	top:50,
 	left:80,
 	right:35
 });
 
 user.add(image);
 user.add(name);
+user.add(username);
+user.add(registered);
 content.add(user);
 
 view.add(content);

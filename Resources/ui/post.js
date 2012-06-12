@@ -1,9 +1,17 @@
 var win = Ti.UI.currentWindow;
 var page = 1;
+var lastPage = 1;
 var margin = 7;
 
+var reply = Ti.UI.createButton({
+	title:L('<-')
+});
+
+win.rightNavButton = reply;
+
 var tableView = Ti.UI.createTableView({
-	backgroundColor: '#DDD'
+	backgroundColor: '#DDD',
+	top:30
 });
 
 var loading = Titanium.UI.createActivityIndicator({
@@ -30,6 +38,7 @@ var interval = setInterval(function() {
 		loading.hide();
 		//win.remove(loading);
 		tableView.data = tableData;
+		Ti.include('/ui/paginator.js');
 		win.add(tableView);
 	}
 	if (error) {
@@ -41,4 +50,4 @@ var interval = setInterval(function() {
 }, 100);
 
 Ti.include('/ui/reload.js');
-Ti.include('/ui/append.js');
+//Ti.include('/ui/append.js');

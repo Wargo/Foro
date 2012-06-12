@@ -3,8 +3,10 @@ var error = '';
 var path = 'http://www.servidordeprueba.net/webs/foro/post.php';
 var client = Ti.Network.createHTTPClient({
 	onload: function(e) {
-		Ti.API.info('success');
-		data = eval(this.responseText);
+		Ti.API.info('success ' + this.responseText);
+		data = eval('(' + this.responseText + ')');
+		lastPage = data.lastPage;
+		data = data.data;
 	},
 	onerror: function(e) {
 		error = L('Ha ocurrido un error con la conexión');

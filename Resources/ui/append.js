@@ -1,5 +1,4 @@
 var updating = false;
-var countingPages = 1;
 var lastRow = 0;
 
 var loadingRow = Ti.UI.createTableViewRow({

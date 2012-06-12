@@ -43,6 +43,10 @@ var viewUser = Ti.UI.createLabel({
 	right:15,
 });
 
+user.username = data[i].username;
+user.name = data[i].name;
+user.registered = data[i].registered;
+
 user.index = 1;
 user.add(image);
 user.add(name);
@@ -72,14 +76,15 @@ var text = Ti.UI.createLabel({
 	//text:data[i].text,
 	font:{fontSize:14},
 	color:'#333',
-	top:40,
+	//top:40,
+	top:10,
 	left:15,
 	height:'auto',
 	right:10,
 	bottom:15
 });
 
-message.add(title);
+//message.add(title);
 message.add(text);
 content.add(message);
 
@@ -89,11 +94,14 @@ var row = Ti.UI.createTableViewRow({
 
 row.add(content);
 
+/*
 if (page > 1) {
 	tableView.appendRow(row);
 } else {
 	tableData.push(row);
 }
+*/
+tableData.push(row);
 
 user.addEventListener('click', function(e) {
 	if (e.source.index) {
@@ -103,11 +111,13 @@ user.addEventListener('click', function(e) {
 	}
 	
 	var user = Ti.UI.createWindow({
-		title:'Nombre usuario',
+		title:current.username,
 		url:'user.js',
 		backgroundColor:'#FFF',
 		barColor:'#429BDA'
 	});
+	
+	user.current = current;
 	
 	var animation = Ti.UI.createAnimation({
 		backgroundColor:'#429BDA',

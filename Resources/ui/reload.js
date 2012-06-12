@@ -109,9 +109,10 @@ var pulling = false;
 var reloading = false;
  
 function beginReloading() {
-	// just mock out the reload
-	//setTimeout(endReloading,2000);
+	// Reseteando valores
 	data = null;
+	page = 1;
+	lastRow = 0;
 	Ti.include(loadFrom);
 	var interval = setInterval(function() {
 		if (data) {
