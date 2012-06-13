@@ -24,10 +24,11 @@ var user = Ti.UI.createView({
 });
 
 var image = Ti.UI.createImageView({
-	image: 'https://twimg0-a.akamaihd.net/profile_images/1350365115/guille_normal.jpg',
+	image: win.current.avatar,
 	left:15,
 	top:15,
-	width:48
+	width:48,
+	height:48
 });
 var username = Ti.UI.createLabel({
 	text:win.current.username,
@@ -63,11 +64,12 @@ content.add(user);
 view.add(content);
 win.add(view);
 
-image.addEventListener('click', function() {
-	var imageUrl = 'http://profile.ak.fbcdn.net/hprofile-ak-snc4/202890_1154122999_7801142_n.jpg';
+image.addEventListener('click', function(e) {
+	//var imageUrl = 'http://profile.ak.fbcdn.net/hprofile-ak-snc4/202890_1154122999_7801142_n.jpg';
+	var imageUrl = e.source.image;
 	
 	var imageBigWin = Ti.UI.createWindow({
-		title:'Nombre usuario',
+		title:win.current.username,
 		backgroundColor:'#000',
 		barColor:'#429BDA'
 	});

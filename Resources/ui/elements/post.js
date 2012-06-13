@@ -14,10 +14,12 @@ var user = Ti.UI.createView({
 });
 
 var image = Ti.UI.createImageView({
-	image: 'https://twimg0-a.akamaihd.net/profile_images/1350365115/guille_normal.jpg',
+	//image: 'https://twimg0-a.akamaihd.net/profile_images/1350365115/guille_normal.jpg',
+	image:data[i].avatar,
 	left:15,
 	top:15,
-	width:48
+	width:48,
+	height:48
 });
 var name = Ti.UI.createLabel({
 	text:data[i].username,
@@ -49,6 +51,7 @@ var viewUser = Ti.UI.createLabel({
 user.username = data[i].username;
 user.name = data[i].name;
 user.registered = data[i].registered;
+user.avatar = data[i].avatar;
 
 user.index = 1;
 user.add(image);

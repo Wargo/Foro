@@ -46,6 +46,19 @@ if (Ti.version < 1.8 ) {
 	});
 	favorites.containingTab = tab2;
 	
+	var recent = Ti.UI.createWindow({
+		backgroundColor:'#CCC',
+		title:L('Recientes'),
+		url:'ui/recent.js',
+		barColor:'#429BDA'
+	});
+	
+	var tab3 = Ti.UI.createTab({
+		icon: Ti.UI.iPhone.SystemIcon.MOST_RECENT,
+		window: recent
+	});
+	recent.containingTab = tab3;
+	
 	var login = Ti.UI.createWindow({
 		backgroundColor:'#CCC',
 		title:L('Favoritos'),
@@ -53,15 +66,16 @@ if (Ti.version < 1.8 ) {
 		barColor:'#429BDA'
 	});
 	
-	var tab3 = Ti.UI.createTab({
+	var tab4 = Ti.UI.createTab({
 		icon: Ti.UI.iPhone.SystemIcon.CONTACTS,
 		window: login
 	});
-	login.containingTab = tab3;
+	login.containingTab = tab4;
 	
 	tabGroup.addTab(tab1);
-	tabGroup.addTab(tab2);
-	//tabGroup.addTab(tab3);
+	//tabGroup.addTab(tab2);
+	tabGroup.addTab(tab3);
+	//tabGroup.addTab(tab4);
 	
 	tabGroup.open();
 	

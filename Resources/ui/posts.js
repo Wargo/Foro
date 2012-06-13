@@ -8,7 +8,8 @@ var createPost = Ti.UI.createButton({
 win.rightNavButton = createPost;
 
 createPost.addEventListener('click', function() {
-	if (Ti.App.Properties.getString('login', null)) {
+	//if (Ti.App.Properties.getString('login', null)) {
+	if (Math.round(Math.random())) { // TODO
 		var createPost = Ti.UI.createWindow({
 			url:'new_post.js',
 			barColor:'#429BDA',

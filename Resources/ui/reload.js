@@ -113,11 +113,19 @@ function beginReloading() {
 	data = null;
 	page = 1;
 	lastRow = 0;
+	
 	Ti.include(loadFrom);
 	var interval = setInterval(function() {
 		if (data) {
 			endReloading(data);
 			clearInterval(interval);
+			
+			// Reseteando pacinación
+			if (typeof first != 'undefined') {
+				first.color = prev.color = '#999';
+				first.borderColor = prev.borderColor = '#999';
+				currentPage.text = 1;
+			}
 		}
 		if (error) {
 			endReloading(null);

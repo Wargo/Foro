@@ -1,17 +1,8 @@
 var win = Ti.UI.currentWindow;
 var page = 1;
-var lastPage = 1;
-var margin = 7;
-
-var reply = Ti.UI.createButton({
-	title:L('<-')
-});
-
-win.rightNavButton = reply;
 
 var tableView = Ti.UI.createTableView({
-	backgroundColor: '#DDD',
-	bottom:35
+	backgroundColor: '#DDD'
 });
 
 var loading = Titanium.UI.createActivityIndicator({
@@ -24,9 +15,8 @@ win.add(loading);
 loading.show();
 var tableData = [];
 
-var element = '/ui/elements/post.js'
-var id = win.current.id;
-var loadFrom = '/post.js';
+var element = '/ui/elements/post_row.js'
+var loadFrom = '/recent.js';
 Ti.include(loadFrom);
 
 var interval = setInterval(function() {
@@ -38,7 +28,6 @@ var interval = setInterval(function() {
 		loading.hide();
 		//win.remove(loading);
 		tableView.data = tableData;
-		Ti.include('/ui/paginator.js');
 		win.add(tableView);
 	}
 	if (error) {
@@ -50,4 +39,4 @@ var interval = setInterval(function() {
 }, 100);
 
 Ti.include('/ui/reload.js');
-//Ti.include('/ui/append.js');
+Ti.include('/ui/append.js');

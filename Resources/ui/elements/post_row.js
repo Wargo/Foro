@@ -24,11 +24,14 @@ var numPosts = Ti.UI.createLabel({
 	right:5,
 	height:10,
 });
+
 var image = Ti.UI.createImageView({
-	image: 'https://twimg0-a.akamaihd.net/profile_images/1350365115/guille_normal.jpg',
+	//image: 'https://twimg0-a.akamaihd.net/profile_images/1350365115/guille_normal.jpg',
+	image:data[i].avatar,
 	left:10,
 	top:15,
-	width:48
+	width:48,
+	height:48
 });
 
 var margin = 7;
@@ -45,14 +48,14 @@ var content = Ti.UI.createView({
 content.index = i + 1;
 content.title = title;
 content.username = username;
-content.image = image;
 content.numPosts = numPosts;
 content.id = data[i].id;
+content.image = image;
 
+content.add(image);
 content.add(title);
 content.add(username);
 content.add(numPosts);
-content.add(image);
 
 var row = Ti.UI.createTableViewRow({
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
