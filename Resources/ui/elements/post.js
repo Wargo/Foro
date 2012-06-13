@@ -25,7 +25,8 @@ var name = Ti.UI.createLabel({
 	color:'#257CBC',
 	top:20,
 	left:80,
-	right:35
+	right:35,
+	height:15
 });
 var date = Ti.UI.createLabel({
 	text:data[i].date,
@@ -33,7 +34,8 @@ var date = Ti.UI.createLabel({
 	color:'#999',
 	top:40,
 	left:80,
-	right:35
+	right:35,
+	height:15
 });
 var viewUser = Ti.UI.createLabel({
 	text:'>',
@@ -41,6 +43,7 @@ var viewUser = Ti.UI.createLabel({
 	color:'#999',
 	top:30,
 	right:15,
+	height:15
 });
 
 user.username = data[i].username;
@@ -72,8 +75,8 @@ var title = Ti.UI.createLabel({
 //var text = Ti.UI.createWebView({
 	//html:data[i].text,
 var text = Ti.UI.createLabel({
-	text:data[i].text.replace('<p>', '').replace('</p>', '').replace('<br />', '\r\n'), //.replace('\&lt;\\\/p\&gt;', '').replace('&lt;/p&gt;', ''),
-	//text:data[i].text,
+	//text:data[i].text.replace('<p>', '').replace('</p>', '').replace('<br />', '\r\n'), //.replace('\&lt;\\\/p\&gt;', '').replace('&lt;/p&gt;', ''),
+	text:data[i].text,
 	font:{fontSize:14},
 	color:'#333',
 	//top:40,

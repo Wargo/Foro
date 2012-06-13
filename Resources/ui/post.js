@@ -11,7 +11,7 @@ win.rightNavButton = reply;
 
 var tableView = Ti.UI.createTableView({
 	backgroundColor: '#DDD',
-	top:30
+	top:35
 });
 
 var loading = Titanium.UI.createActivityIndicator({

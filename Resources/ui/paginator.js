@@ -1,5 +1,5 @@
 var paginate = Ti.UI.createView({
-	height:30,
+	height:35,
 	backgroundColor:'#DDD',
 	top:0
 });
@@ -9,7 +9,7 @@ var first = Ti.UI.createLabel({
 	textAlign:'center',
 	width:60,
 	left:5,
-	height:20,
+	height:25,
 	borderColor:'#429BDA',
 	color:'#429BDA',
 	borderRadius:5,
@@ -21,7 +21,7 @@ var prev = Ti.UI.createLabel({
 	textAlign:'center',
 	width:60,
 	left:70,
-	height:20,
+	height:25,
 	borderColor:'#429BDA',
 	color:'#429BDA',
 	borderRadius:5,
@@ -33,7 +33,7 @@ var next = Ti.UI.createLabel({
 	textAlign:'center',
 	width:60,
 	right:70,
-	height:20,
+	height:25,
 	borderColor:'#429BDA',
 	color:'#429BDA',
 	borderRadius:5,
@@ -45,7 +45,7 @@ var last = Ti.UI.createLabel({
 	textAlign:'center',
 	width:60,
 	right:5,
-	height:20,
+	height:25,
 	borderColor:'#429BDA',
 	color:'#429BDA',
 	borderRadius:5,
@@ -56,7 +56,7 @@ var currentPage = Ti.UI.createLabel({
 	text:page,
 	textAlign:'center',
 	width:40,
-	height:20,
+	height:25,
 	borderColor:'#429BDA',
 	color:'#429BDA',
 	borderRadius:5,
@@ -83,30 +83,32 @@ if (page == lastPage) {
 
 first.addEventListener('click', function() {
 	if (page != 1) {
-		reload(1);
+		reload(1, this);
 	}
 });
 prev.addEventListener('click', function() {
 	if (page != 1) {
-		reload(page - 1);
+		reload(page - 1, this);
 	}
 });
 next.addEventListener('click', function() {
 	if (page != lastPage) {
-		reload(page + 1);
+		reload(page + 1, this);
 	}
 });
 last.addEventListener('click', function() {
 	if (page != lastPage) {
-		reload(lastPage);
+		reload(lastPage, this);
 	}
 });
 
-function reload(p) {
+function reload(p, button) {
+	launchAnimation(button);
 	page = p;
 	Ti.include(loadFrom);
 	tableData = [];
 	tableView.data = null;
+	win.remove(tableView);
 	loading.show();
 	var interval = setInterval(function() {
 		if (data) {
@@ -127,4 +129,14 @@ function reload(p) {
 			win.remove(loading);
 		}
 	}, 100);
+}
+
+function launchAnimation(button) {
+	var anim = Ti.UI.createAnimation({
+		color:'#FFF',
+		borderColor:'#FFF',
+		backgroundColor:'429BDA',
+		duration:500
+	});
+	button.animate(anim);
 }
