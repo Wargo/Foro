@@ -1,5 +1,5 @@
 var paginate = Ti.UI.createView({
-	height:35,
+	height:40,
 	backgroundColor:'#DDD',
 	bottom:0
 });
@@ -9,7 +9,7 @@ var first = Ti.UI.createLabel({
 	textAlign:'center',
 	width:60,
 	left:5,
-	height:25,
+	height:30,
 	borderColor:'#429BDA',
 	color:'#429BDA',
 	borderRadius:5,
@@ -21,7 +21,7 @@ var prev = Ti.UI.createLabel({
 	textAlign:'center',
 	width:60,
 	left:70,
-	height:25,
+	height:30,
 	borderColor:'#429BDA',
 	color:'#429BDA',
 	borderRadius:5,
@@ -33,7 +33,7 @@ var next = Ti.UI.createLabel({
 	textAlign:'center',
 	width:60,
 	right:70,
-	height:25,
+	height:30,
 	borderColor:'#429BDA',
 	color:'#429BDA',
 	borderRadius:5,
@@ -45,7 +45,7 @@ var last = Ti.UI.createLabel({
 	textAlign:'center',
 	width:60,
 	right:5,
-	height:25,
+	height:30,
 	borderColor:'#429BDA',
 	color:'#429BDA',
 	borderRadius:5,
@@ -53,10 +53,10 @@ var last = Ti.UI.createLabel({
 	font:{fontSize:12},
 });
 var currentPage = Ti.UI.createLabel({
-	text:page,
+	text:page + ' / ' + lastPage,
 	textAlign:'center',
-	width:40,
-	height:25,
+	width:50,
+	height:30,
 	borderColor:'#429BDA',
 	color:'#429BDA',
 	borderRadius:5,

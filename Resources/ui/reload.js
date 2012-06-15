@@ -124,7 +124,7 @@ function beginReloading() {
 			if (typeof first != 'undefined') {
 				first.color = prev.color = '#999';
 				first.borderColor = prev.borderColor = '#999';
-				currentPage.text = 1;
+				currentPage.text = '1 / ' + lastPage;
 			}
 		}
 		if (error) {

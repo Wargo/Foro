@@ -1,5 +1,16 @@
 var win = Ti.UI.currentWindow;
 
+win.addEventListener('focus', function() {
+	if (Ti.App.Properties.getString('login')) {
+		Ti.UI.currentTab.open(Ti.UI.createWindow({url:'profile.js'}), {animated:false});
+		//Ti.UI.currentTab.window = Ti.UI.createWindow({url:'profile.js'});
+		//Ti.UI.currentTab.setWindow(Ti.UI.createWindow({url:'profile.js'}));
+	}
+});
+
+win.title = L('Login');
+win.barColor = '#429BDA';
+
 var cancelButton = Ti.UI.createButton({
 	title:L('Cancelar')
 });
@@ -7,14 +18,21 @@ var saveButton = Ti.UI.createButton({
 	title:L('login')
 });
 
-win.rightNavButton = saveButton;
 win.leftNavButton = cancelButton;
+win.rightNavButton = saveButton;
 
 cancelButton.addEventListener('click', function() {
-	win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+	if (typeof win.root != 'undefined') {
+		win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+	} else {
+		user.blur();
+		password.blur();
+	}
 });
 saveButton.addEventListener('click', function() {
-	win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+	user.blur();
+	password.blur();
+	Ti.include('/login.js');
 });
 
 var view = Ti.UI.createView({
@@ -59,7 +77,7 @@ var register = Ti.UI.createLabel({
 
 view.add(user);
 view.add(password);
-view.add(register);
+//view.add(register);
 
 register.addEventListener('click', function() {
 	var registerWin = Ti.UI.createWindow({

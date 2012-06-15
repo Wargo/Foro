@@ -61,7 +61,6 @@ if (Ti.version < 1.8 ) {
 	
 	var login = Ti.UI.createWindow({
 		backgroundColor:'#CCC',
-		title:L('Favoritos'),
 		url:'ui/login.js',
 		barColor:'#429BDA'
 	});
@@ -72,10 +71,22 @@ if (Ti.version < 1.8 ) {
 	});
 	login.containingTab = tab4;
 	
+	var profile = Ti.UI.createWindow({
+		backgroundColor:'#CCC',
+		url:'ui/profile.js',
+		barColor:'#429BDA'
+	});
+	
+	var tab5 = Ti.UI.createTab({
+		icon: Ti.UI.iPhone.SystemIcon.CONTACTS,
+		window: profile
+	});
+	profile.containingTab = tab5;
+	
 	tabGroup.addTab(tab1);
 	//tabGroup.addTab(tab2);
 	tabGroup.addTab(tab3);
-	//tabGroup.addTab(tab4);
+	tabGroup.addTab(tab5);
 	
 	tabGroup.open();
 	
