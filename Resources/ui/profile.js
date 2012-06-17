@@ -1,44 +1,71 @@
 var win = Ti.UI.currentWindow;
 
-win.addEventListener('focus', function() {
-	if (!Ti.App.Properties.getString('login')) {
-		Ti.UI.currentTab.open(Ti.UI.createWindow({url:'login.js'}), {animated:false});
-		//Ti.UI.currentTab.window = Ti.UI.createWindow({url:'login.js'});
-		//Ti.UI.currentTab.setWindow(Ti.UI.createWindow({url:'login.js'}));
-	}
-});
-
 win.backgroundColor = '#FFF';
 win.title = L('Tu perfil');
 win.barColor = '#429BDA';
 win.layout = 'vertical';
 
 var emptyView = Titanium.UI.createView();
-win.leftNavButton = emptyView;
+//win.leftNavButton = emptyView;
 
-win.add(Ti.UI.createLabel({text:Ti.App.Properties.getString('user')}));
-//win.add(Ti.UI.createLabel({text:Ti.App.Properties.getString('pass')}));
-win.add(Ti.UI.createLabel({text:'ID: ' + Ti.App.Properties.getString('login')}));
+var userLabel = Ti.UI.createLabel({text:Ti.App.Properties.getString('user', L('No estás atuentificado'))});
+var userLogin = Ti.UI.createLabel({text:'ID: ' + Ti.App.Properties.getString('login')});
 
-var desconnect = Ti.UI.createLabel({
+var disconnect = Ti.UI.createLabel({
 	text:L('Desconectar'),
 	color:'red'
 });
-
-win.add(desconnect);
-
-desconnect.addEventListener('click', function() {
+disconnect.addEventListener('click', function() {
 	Ti.App.Properties.setString('login', null);
 	Ti.App.Properties.setString('user', null);
 	Ti.App.Properties.setString('pass', null);
-
-	Ti.UI.currentTab.open(Ti.UI.createWindow({url:'login.js'}), {animated:false});
-	//Ti.UI.currentTab.window = Ti.UI.createWindow({url:'login.js'});
-	//Ti.UI.currentTab.setWindow(Ti.UI.createWindow({url:'login.js'}));
+	switchPage(win);
 });
 
-Ti.App.addEventListener('app:refreshTable',loadWindowData);
+var goLogin = Ti.UI.createButton({
+	title:L('Login')
+});
+	
+goLogin.addEventListener('click', function() {
+	var login = Ti.UI.createWindow({url:'login.js'});
+	login.p = win;
+	login.switchPage = switchPage;
+	Ti.UI.currentTab.open(login);
+});
 
-function loadWindowData() {
-	alert('a');
+var currentStatus = '';
+
+win.add(userLabel);
+switchPage(win);
+
+win.addEventListener('focus', function() {
+	if (Ti.App.Properties.getString('login')) {
+		//if (userLabel.text != Ti.App.Properties.getString('user')) {
+		if (currentStatus == 'out') {
+			switchPage(win);
+		}
+	} else {
+		//if (userLabel.text != L('No estás autentificado')) {
+		if (currentStatus == 'in') {
+			switchPage(win);
+		}
+	}
+});
+	
+
+function switchPage(win) {
+	if (Ti.App.Properties.getString('login')) {
+		currentStatus = 'in';
+		win.rightNavButton = emptyView;
+		userLabel.text = Ti.App.Properties.getString('user');
+		userLogin.text = 'ID: ' + Ti.App.Properties.getString('login');
+		win.add(userLogin);
+		win.add(disconnect);
+	} else {
+		currentStatus = 'out';
+		userLabel.text = L('No estás autentificado');
+		win.remove(userLogin);
+		win.rightNavButton = goLogin;
+		win.remove(disconnect);
+	}
 }

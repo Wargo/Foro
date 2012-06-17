@@ -26,7 +26,6 @@ createPost.addEventListener('click', function() {
 	var nav = Ti.UI.iPhone.createNavigationGroup({
 		window:createPost
 	});
-	
 	var root = Ti.UI.createWindow();
 	root.add(nav);
 	root.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});

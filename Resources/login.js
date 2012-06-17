@@ -50,8 +50,11 @@ function close() {
 	win.remove(loging);
 	if (typeof win.root != 'undefined') {
 		win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+		//win.switchPage(win.p);
 	} else {
-		Ti.UI.currentTab.open(Ti.UI.createWindow({url:'profile.js'}), {animated:false});
+		win.switchPage(win.p);
+		win.close();
+		//Ti.UI.currentTab.open(Ti.UI.createWindow({url:'profile.js'}), {animated:false});
 		//Ti.UI.currentTab.window = Ti.UI.createWindow({url:'profile.js'});
 		//Ti.UI.currentTab.setWindow(Ti.UI.createWindow({url:'profile.js'}));
 	}

@@ -74,6 +74,7 @@ if (Ti.version < 1.8 ) {
 	var profile = Ti.UI.createWindow({
 		backgroundColor:'#CCC',
 		url:'ui/profile.js',
+		//url:'ui/my.js',
 		barColor:'#429BDA'
 	});
 	
