@@ -17,6 +17,8 @@ if (Ti.version < 1.8 ) {
 // This is a single context application with mutliple windows in a stack
 (function() {
 	
+	Ti.App.dataURL = 'http://elembarazo.net/appMovil/'
+	
 	var tabGroup = Ti.UI.createTabGroup();
 	
 	var posts = Ti.UI.createWindow({

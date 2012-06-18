@@ -9,6 +9,33 @@ var reply = Ti.UI.createButton({
 
 win.rightNavButton = reply;
 
+reply.addEventListener('click', function() {
+	if (Ti.App.Properties.getString('login')) {
+		var createPost = Ti.UI.createWindow({
+			url:'new_post.js',
+			barColor:'#429BDA',
+			title:L('Responder')
+		});
+	} else {
+		var createPost = Ti.UI.createWindow({
+			url:'login.js',
+			barColor:'#429BDA',
+			title:L('Login')
+		});
+	}
+	
+	createPost.topic_id = win.current.id;
+	
+	var nav = Ti.UI.iPhone.createNavigationGroup({
+		window:createPost
+	});
+	var root = Ti.UI.createWindow();
+	root.add(nav);
+	root.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
+	createPost.root = root;
+	createPost.nav = nav;
+});
+
 var tableView = Ti.UI.createTableView({
 	backgroundColor: '#DDD',
 	bottom:40

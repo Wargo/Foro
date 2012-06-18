@@ -9,7 +9,6 @@ win.rightNavButton = createPost;
 
 createPost.addEventListener('click', function() {
 	if (Ti.App.Properties.getString('login')) {
-	//if (Math.round(Math.random())) { // TODO
 		var createPost = Ti.UI.createWindow({
 			url:'new_post.js',
 			barColor:'#429BDA',
@@ -23,6 +22,8 @@ createPost.addEventListener('click', function() {
 		});
 	}
 	
+	createPost.forum_id = win.current.id;
+	
 	var nav = Ti.UI.iPhone.createNavigationGroup({
 		window:createPost
 	});
@@ -31,7 +32,7 @@ createPost.addEventListener('click', function() {
 	root.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
 	createPost.root = root;
 	createPost.nav = nav;
-})
+});
 
 var tableView = Ti.UI.createTableView({
 	backgroundColor: '#DDD'

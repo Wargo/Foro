@@ -15,7 +15,7 @@ if (!user.value || !password.value) {
 	loading.show();
 	win.add(loging);
 	var error = '';
-	var path = 'http://www.servidordeprueba.net/webs/foro/login.php';
+	var path = Ti.App.dataURL + 'login.php';
 	var client = Ti.Network.createHTTPClient({
 		onload: function(e) {
 			Ti.API.info('success ' + this.responseText);

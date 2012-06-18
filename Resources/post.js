@@ -1,6 +1,6 @@
 var data = '';
 var error = '';
-var path = 'http://www.servidordeprueba.net/webs/foro/post.php';
+var path = Ti.App.dataURL + 'post.php';
 var client = Ti.Network.createHTTPClient({
 	onload: function(e) {
 		Ti.API.info('success ' + this.responseText);

@@ -1,6 +1,6 @@
 var data = '';
 var error = '';
-var path = 'http://www.servidordeprueba.net/webs/foro/subforums.php';
+var path = Ti.App.dataURL + 'subforums.php';
 var client = Ti.Network.createHTTPClient({
 	onload: function(e) {
 		Ti.API.info('success');
