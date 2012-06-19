@@ -19,6 +19,13 @@ if (Ti.version < 1.8 ) {
 	
 	Ti.App.dataURL = 'http://elembarazo.net/appMovil/'
 	
+	function strpos (haystack, needle, offset) {
+		var i = (haystack + '').indexOf(needle, (offset || 0));
+	    return i === -1 ? false : i;
+	}
+	
+	Ti.App.strpos = strpos;
+	
 	var tabGroup = Ti.UI.createTabGroup();
 	
 	var posts = Ti.UI.createWindow({

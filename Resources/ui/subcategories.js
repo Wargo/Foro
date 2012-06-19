@@ -37,6 +37,7 @@ var interval = setInterval(function() {
 		clearInterval(interval);
 		loading.hide();
 		win.remove(loading);
+		win.add(tableView);
 	}
 }, 100);
 

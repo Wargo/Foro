@@ -107,6 +107,7 @@ function reload(p, button) {
 	page = p;
 	Ti.include(loadFrom);
 	tableData = [];
+	tableData.push(rowTitle);
 	tableView.data = null;
 	win.remove(tableView);
 	loading.show();

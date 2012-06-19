@@ -120,7 +120,10 @@ function beginReloading() {
 			endReloading(data);
 			clearInterval(interval);
 			
-			// Reseteando pacinación
+			// Reseteando paginación "append"
+			updating = false;
+			
+			// Reseteando paginación "numérica"
 			if (typeof first != 'undefined') {
 				first.color = prev.color = '#999';
 				first.borderColor = prev.borderColor = '#999';
@@ -137,6 +140,10 @@ function beginReloading() {
 function endReloading(data) {
 	if (data) {
 		tableData = [];
+		if (typeof rowTitle != 'undefined') {
+			tableData.push(rowTitle);
+		}
+		
 		for (i in data) {
 			//Ti.include('/ui/elements/category.js');
 			Ti.include(element);

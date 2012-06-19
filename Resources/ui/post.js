@@ -4,7 +4,7 @@ var lastPage = 1;
 var margin = 7;
 
 var reply = Ti.UI.createButton({
-	title:L('<-')
+	title:L('Responder')
 });
 
 win.rightNavButton = reply;
@@ -49,7 +49,23 @@ var loading = Titanium.UI.createActivityIndicator({
 
 win.add(loading);
 loading.show();
+
 var tableData = [];
+
+var title = Ti.UI.createLabel({
+	text:win.title,
+	top:5,left:5,right:5,
+	textAlign:'center',
+	color:'#429BDA',
+	font:{fontWeight:'bold'}
+});
+var rowTitle = Ti.UI.createTableViewRow({
+	backgroundColor:'#EEE',
+	bottom:5,
+	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
+});
+rowTitle.add(title);
+tableData.push(rowTitle);
 
 var element = '/ui/elements/post.js'
 var id = win.current.id;

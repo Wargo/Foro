@@ -3,7 +3,7 @@ var error = '';
 var path = Ti.App.dataURL + 'posts.php';
 var client = Ti.Network.createHTTPClient({
 	onload: function(e) {
-		Ti.API.info('success');
+		Ti.API.info('success ' + this.responseText);
 		data = eval(this.responseText);
 	},
 	onerror: function(e) {

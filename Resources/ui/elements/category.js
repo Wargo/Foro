@@ -26,6 +26,15 @@ var numPosts = Ti.UI.createLabel({
 	height:10
 });
 
+var when = Ti.UI.createLabel({
+	color:'#999',
+	font:{fontSize:13},
+	text:data[i].date,
+	bottom:5,
+	right:5,
+	height:10
+});
+
 var margin = 7;
 
 var content = Ti.UI.createView({
@@ -46,9 +55,17 @@ content.add(title);
 if (data[i].topics > 0) {
 	content.add(numTopics);
 }
+if (data[i].date) {
+	if (Ti.App.strpos(data[i].date, 'segundo') || Ti.App.strpos(data[i].date, 'minuto')) { // TODO
+		when.color = '#72AD34';
+	}
+	content.add(when);
+}
+/*
 if (data[i].posts > 0) {
 	content.add(numPosts);
 }
+*/
 
 var row = Ti.UI.createTableViewRow({
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,

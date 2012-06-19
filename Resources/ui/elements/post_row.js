@@ -7,15 +7,33 @@ var title = Ti.UI.createLabel({
 	left:70,
 	right:25
 });
-var username = Ti.UI.createLabel({
-	text:data[i].date + ' - ' + data[i].username,
-	font:{fontSize:14},
-	color:'#666',
+var auxView = Ti.UI.createView({
+	layout:'horizontal',
 	top:50,
-	left:70,
-	height:15,
+	left:69,
+	height:20,
 	right:15
 });
+var dateLabel = Ti.UI.createLabel({
+	text:data[i].date,
+	font:{fontSize:13},
+	color:'#666',
+	height:20,
+});
+var usernameLabel = Ti.UI.createLabel({
+	//text:' (' + data[i].username + ')',
+	text:' - ' + data[i].username,
+	font:{fontSize:13},
+	color:'#666',
+	height:20,
+});
+auxView.add(dateLabel);
+auxView.add(usernameLabel);
+
+if (Ti.App.strpos(data[i].date, 'segundo') || Ti.App.strpos(data[i].date, 'minuto')) { // TODO distinto para idiomas
+	dateLabel.color = '#72AD34';
+}
+
 var numPosts = Ti.UI.createLabel({
 	color:'#999',
 	font:{fontSize:10},
@@ -26,7 +44,6 @@ var numPosts = Ti.UI.createLabel({
 });
 
 var image = Ti.UI.createImageView({
-	//image: 'https://twimg0-a.akamaihd.net/profile_images/1350365115/guille_normal.jpg',
 	image:data[i].avatar,
 	left:10,
 	top:15,
@@ -47,14 +64,13 @@ var content = Ti.UI.createView({
 
 content.index = i + 1;
 content.title = title;
-content.username = username;
 content.numPosts = numPosts;
 content.id = data[i].id;
 content.image = image;
 
 content.add(image);
 content.add(title);
-content.add(username);
+content.add(auxView);
 content.add(numPosts);
 
 var row = Ti.UI.createTableViewRow({
@@ -81,6 +97,10 @@ content.addEventListener('click', function(e) {
 		var current = e.source;
 	} else {
 		var current = e.source.parent;
+	}
+	
+	if (typeof current.title.text == 'undefined') {
+		return;
 	}
 	
 	var post = Ti.UI.createWindow({
