@@ -2,7 +2,7 @@ var win = Ti.UI.currentWindow;
 var page = 1;
 
 var createPost = Ti.UI.createButton({
-	title:L('+')
+	title:L('Nuevo')
 });
 
 win.rightNavButton = createPost;
@@ -50,6 +50,7 @@ var tableData = [];
 
 var element = '/ui/elements/post_row.js'
 var id = win.current.id;
+
 var loadFrom = '/posts.js';
 Ti.include(loadFrom);
 

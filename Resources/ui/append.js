@@ -40,7 +40,7 @@ function beginUpdate(){
 			}
 		}
 		if (error) {
-			endReloading(null);
+			//endReloading(null);
 			clearInterval(interval);
 		}
 	}, 100);
@@ -63,7 +63,9 @@ tableView.addEventListener('scroll', function(e){
 		var nearEnd = theEnd * .95;
 	
 		if (!updating && (total >= nearEnd)) {
-			beginUpdate();
+			if (data.length > 10) {
+				beginUpdate();
+			}
 		}
 	}
 	lastDistance = distance;

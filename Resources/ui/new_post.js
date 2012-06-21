@@ -14,6 +14,10 @@ cancelButton.addEventListener('click', function() {
 	win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 });
 saveButton.addEventListener('click', function() {
+	if (text.value == '') {
+		alert(L('Debes rellenar el mensaje'));
+		return false;
+	}
 	var loging = Ti.UI.createView({
 		backgroundColor:'#CCC',
 		opacity:0.7,
@@ -77,19 +81,20 @@ var title = Ti.UI.createTextField({
 	top:20,
 	left:15,right:15,
 	backgroundColor:'#FFF',
-	borderRadius: 3,
-	borderColor:'#999'
+	borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
 });
 
 var text = Ti.UI.createTextArea({
 	value: L('Texto'),
-	color:'#CCC',
+	color:'#AAA',
 	top:20,
 	height:100,
 	left:15,right:15,
+	font:{fontSize:14},
 	backgroundColor:'#FFF',
 	borderRadius: 3,
-	borderColor:'#999'
+	borderColor:'#999',
+	suppressReturn:false,
 });
 
 text._hintText = text.value;
@@ -103,7 +108,7 @@ text.addEventListener('focus', function(e) {
 text.addEventListener('blur', function(e){
     if(e.source.value == ''){
         e.source.value = e.source._hintText;
-		e.source.color = '#CCC';
+		e.source.color = '#AAA';
     }
 });
 

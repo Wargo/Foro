@@ -117,7 +117,7 @@ function beginReloading() {
 	Ti.include(loadFrom);
 	var interval = setInterval(function() {
 		if (data) {
-			endReloading(data);
+			endReloading(data, null);
 			clearInterval(interval);
 			
 			// Reseteando paginación "append"
@@ -127,17 +127,17 @@ function beginReloading() {
 			if (typeof first != 'undefined') {
 				first.color = prev.color = '#999';
 				first.borderColor = prev.borderColor = '#999';
-				currentPage.text = '1 / ' + lastPage;
+				currentPage.text = '1/' + lastPage;
 			}
 		}
 		if (error) {
-			endReloading(null);
+			endReloading(null, error);
 			clearInterval(interval);
 		}
 	}, 100);
 }
  
-function endReloading(data) {
+function endReloading(data, error) {
 	if (data) {
 		tableData = [];
 		if (typeof rowTitle != 'undefined') {
@@ -154,7 +154,7 @@ function endReloading(data) {
 		tableView.data = tableData;
 		win.add(tableView);
 	} else {
-		alert("Error")
+		alert(error)
 	}
 	
 	// when you're done, just reset

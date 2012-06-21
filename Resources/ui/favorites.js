@@ -1,23 +1,72 @@
 var win = Ti.UI.currentWindow;
+var page = 1;
 
-var createPost = Ti.UI.createButton({
+var tableView = Ti.UI.createTableView({
+	backgroundColor: '#DDD'
+});
+
+var edit = Ti.UI.createButton({
 	title:L('Editar')
 });
-
-win.rightNavButton = createPost;
-
-var view = Ti.UI.createScrollView({
-	backgroundColor: '#DDD',
-	layout: 'vertical',
-	contentHeight:'auto',
-	showVerticalScrollIndicator: true
+var cancel = Titanium.UI.createButton({
+	title:L('Cancelar'),
+	style:Titanium.UI.iPhone.SystemButtonStyle.DONE
 });
 
-Ti.include('/data.js');
+win.rightNavButton = edit;
+edit.addEventListener('click', function() {
+	win.rightNavButton = cancel;
+	tableView.editing = true;
+});
+cancel.addEventListener('click', function() {
+	win.rightNavButton = edit;
+	tableView.editing = false;
+});
 
-for (i in data) {
-	url = 'posts.js';
-	Ti.include('/ui/elements/category.js');
-}
+tableView.editable = true;
 
-win.add(view);
+tableView.addEventListener('delete', function(e) {
+	var favorites = Ti.App.Properties.getList('favorites', []);
+	while (favorites.indexOf(e.row.content.id) !== -1) {
+		favorites.splice(favorites.indexOf(e.row.content.id), 1);
+	}
+	Ti.App.Properties.setList('favorites', favorites);
+});
+
+var loading = Titanium.UI.createActivityIndicator({
+    message:'',
+    style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
+    top:'50%'
+});
+
+win.add(loading);
+loading.show();
+var tableData = [];
+
+var url = 'posts.js';
+var element = '/ui/elements/category.js';
+//var id = win.current.id;
+var loadFrom = '/favorites.js'
+Ti.include(loadFrom);
+
+var interval = setInterval(function() {
+	if (data) {
+		for (i in data) {
+			Ti.include(element);
+		}
+		clearInterval(interval);
+		loading.hide();
+		tableView.data = tableData;
+		win.add(tableView);
+	}
+	if (error) {
+		alert(error);
+		clearInterval(interval);
+		loading.hide();
+		win.remove(loading);
+		win.add(tableView);
+	}
+}, 100);
+
+Ti.include('/ui/reload.js');
+Ti.include('/ui/append.js');

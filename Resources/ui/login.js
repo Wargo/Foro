@@ -38,11 +38,8 @@ var user = Ti.UI.createTextField({
 	top:20,
 	left:15,right:15,
 	backgroundColor:'#FFF',
-	borderRadius:5,
-	borderColor:'#999',
-	height:30,
-	paddingLeft:5,
-	paddingRight:5
+	borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	autocapitalization:Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
 });
 
 var password = Ti.UI.createTextField({
@@ -51,11 +48,7 @@ var password = Ti.UI.createTextField({
 	top:20,
 	left:15,right:15,
 	backgroundColor:'#FFF',
-	borderRadius:5,
-	borderColor:'#999',
-	height:30,
-	paddingLeft:5,
-	paddingRight:5
+	borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
 });
 
 setTimeout(function() {
@@ -70,9 +63,10 @@ var register = Ti.UI.createLabel({
 
 view.add(user);
 view.add(password);
-//view.add(register);
+view.add(register);
 
 register.addEventListener('click', function() {
+	/*
 	var registerWin = Ti.UI.createWindow({
 		title:L('Registro'),
 		url:'register.js',
@@ -80,6 +74,8 @@ register.addEventListener('click', function() {
 	});
 	registerWin.root = win.root;
 	win.nav.open(registerWin);
+	*/
+	Ti.Platform.openURL('http://elembarazo.net');
 });
 
 win.add(view);

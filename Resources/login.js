@@ -35,7 +35,7 @@ if (!user.value || !password.value) {
 			Ti.API.info('error');
 			close();
 		},
-		timeout: 5000
+		timeout: 15000
 	});
 	
 	client.open('POST', path);

@@ -23,7 +23,15 @@ if (Ti.version < 1.8 ) {
 		var i = (haystack + '').indexOf(needle, (offset || 0));
 	    return i === -1 ? false : i;
 	}
-	
+	function inArray(needle, haystack) {
+	    var length = haystack.length;
+	    for(var i = 0; i < length; i++) {
+	        if(haystack[i] == needle) return true;
+	    }
+	    return false;
+	}
+
+	Ti.App.inArray = inArray;
 	Ti.App.strpos = strpos;
 	
 	var tabGroup = Ti.UI.createTabGroup();
@@ -50,7 +58,9 @@ if (Ti.version < 1.8 ) {
 	});
 	
 	var tab2 = Ti.UI.createTab({
-		icon: Ti.UI.iPhone.SystemIcon.FAVORITES,
+		//icon: Ti.UI.iPhone.SystemIcon.FAVORITES,
+		icon:'ui/images/star.png',
+		title:L('Favoritos'),
 		window: favorites
 	});
 	favorites.containingTab = tab2;
@@ -63,22 +73,12 @@ if (Ti.version < 1.8 ) {
 	});
 	
 	var tab3 = Ti.UI.createTab({
-		icon: Ti.UI.iPhone.SystemIcon.MOST_RECENT,
+		//icon: Ti.UI.iPhone.SystemIcon.MOST_RECENT,
+		title:L('Más recientes'),
+		icon:'ui/images/recents.png',
 		window: recent
 	});
 	recent.containingTab = tab3;
-	
-	var login = Ti.UI.createWindow({
-		backgroundColor:'#CCC',
-		url:'ui/login.js',
-		barColor:'#429BDA'
-	});
-	
-	var tab4 = Ti.UI.createTab({
-		icon: Ti.UI.iPhone.SystemIcon.CONTACTS,
-		window: login
-	});
-	login.containingTab = tab4;
 	
 	var profile = Ti.UI.createWindow({
 		backgroundColor:'#CCC',
@@ -88,13 +88,15 @@ if (Ti.version < 1.8 ) {
 	});
 	
 	var tab5 = Ti.UI.createTab({
-		icon: Ti.UI.iPhone.SystemIcon.CONTACTS,
+		//icon: Ti.UI.iPhone.SystemIcon.CONTACTS,
+		title:L('Mi perfil'),
+		icon:'ui/images/profile.png',
 		window: profile
 	});
 	profile.containingTab = tab5;
 	
 	tabGroup.addTab(tab1);
-	//tabGroup.addTab(tab2);
+	tabGroup.addTab(tab2);
 	tabGroup.addTab(tab3);
 	tabGroup.addTab(tab5);
 	

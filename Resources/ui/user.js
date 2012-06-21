@@ -1,26 +1,23 @@
 var win = Ti.UI.currentWindow;
 var margin = 7;
 
-var view = Ti.UI.createScrollView({
-	backgroundColor: '#DDD',
-	layout: 'vertical',
-	contentHeight:'auto',
-	showVerticalScrollIndicator: true
-});
+var view = Ti.UI.createTableView({
+	backgroundColor: '#DDD'
+})
 
 var content = Ti.UI.createView({
-	backgroundColor:'#FFF',
+	backgroundColor:'#F2F2F2',
 	borderRadius:5,
 	height:Ti.UI.SIZE,
 	left:margin,
 	right:margin,
 	top:margin,
-	layout:'vertical'
+	layout:'horizontal',
+	height:160
 });
 
 var user = Ti.UI.createView({
-	backgroundColor:'#F2F2F2',
-	height:100
+	layout:'vertical'
 });
 
 var image = Ti.UI.createImageView({
@@ -34,38 +31,53 @@ var username = Ti.UI.createLabel({
 	text:win.current.username,
 	font:{fontSize:14},
 	color:'#257CBC',
-	top:10,
-	left:80,
-	right:35
+	top:5,
+	left:20,
+	right:15
 });
 var name = Ti.UI.createLabel({
 	text:win.current.name,
 	font:{fontSize:14},
 	color:'#333',
-	top:30,
-	left:80,
-	right:35
+	top:5,
+	left:20,
+	right:15
 });
 var registered = Ti.UI.createLabel({
-	text:L('Fecha registro') + ': ' + win.current.registered,
+	text:L('Registro') + ': ' + win.current.registered,
 	font:{fontSize:14},
 	color:'#999',
-	top:50,
-	left:80,
-	right:35
+	top:5,
+	left:20,
+	right:15
+});
+var numPosts = Ti.UI.createLabel({
+	text:win.current.num_posts == 1 ? '1 post' : win.current.num_posts + ' posts',
+	font:{fontSize:14},
+	color:'#999',
+	top:5,
+	left:20,
+	right:15
 });
 
-user.add(image);
-user.add(name);
+content.add(image);
 user.add(username);
+user.add(name);
 user.add(registered);
+user.add(numPosts);
 content.add(user);
 
-view.add(content);
+var row = Ti.UI.createTableViewRow({
+	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
+});
+
+row.add(content);
+var tableData = [];
+tableData.push(row);
+view.data = tableData;
 win.add(view);
 
 image.addEventListener('click', function(e) {
-	//var imageUrl = 'http://profile.ak.fbcdn.net/hprofile-ak-snc4/202890_1154122999_7801142_n.jpg';
 	var imageUrl = e.source.image;
 	
 	var imageBigWin = Ti.UI.createWindow({

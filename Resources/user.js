@@ -1,10 +1,10 @@
-var data = '';
+var userData = '';
 var error = '';
-var path = Ti.App.dataURL + 'recent.php';
+var path = Ti.App.dataURL + 'user.php';
 var client = Ti.Network.createHTTPClient({
 	onload: function(e) {
-		Ti.API.info('success');
-		data = eval(this.responseText);
+		Ti.API.info('success ' + this.responseText);
+		userData = eval('(' + this.responseText + ')');
 	},
 	onerror: function(e) {
 		error = L('Ha ocurrido un error con la conexión');
@@ -15,5 +15,5 @@ var client = Ti.Network.createHTTPClient({
 
 client.open('POST', path);
 client.send({
-	page:page
+	id:Ti.App.Properties.getString('login')
 });

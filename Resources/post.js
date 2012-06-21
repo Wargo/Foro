@@ -12,7 +12,7 @@ var client = Ti.Network.createHTTPClient({
 		error = L('Ha ocurrido un error con la conexión');
 		Ti.API.info('error');
 	},
-	timeout: 5000
+	timeout: 15000
 });
 
 client.open('POST', path);

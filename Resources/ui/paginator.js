@@ -53,7 +53,7 @@ var last = Ti.UI.createLabel({
 	font:{fontSize:12},
 });
 var currentPage = Ti.UI.createLabel({
-	text:page + ' / ' + lastPage,
+	text:page + '/' + lastPage,
 	textAlign:'center',
 	width:50,
 	height:30,

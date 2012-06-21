@@ -52,6 +52,7 @@ user.username = data[i].username;
 user.name = data[i].name;
 user.registered = data[i].registered;
 user.avatar = data[i].avatar;
+user.num_posts = data[i].num_posts;
 
 user.index = 1;
 user.add(image);

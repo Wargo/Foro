@@ -11,16 +11,20 @@ var title = Ti.UI.createLabel({
 var numTopics = Ti.UI.createLabel({
 	color:'#999',
 	font:{fontSize:13},
-	text:data[i].topics + ' Temas',
+	text:data[i].topics == 1 ? '1 tema' : data[i].topics + ' temas',
 	top:5,
 	right:5,
 	height:10
 });
 
+if (loadFrom == '/forums.js') {
+	numTopics.text = data[i].topics == 1 ? '1 foro' : data[i].topics + ' foros';
+}
+
 var numPosts = Ti.UI.createLabel({
 	color:'#999',
 	font:{fontSize:13},
-	text:data[i].posts + ' Posts',
+	text:data[i].posts + ' posts',
 	bottom:5,
 	right:5,
 	height:10
@@ -71,6 +75,8 @@ var row = Ti.UI.createTableViewRow({
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 });
 
+row.content = content;
+
 row.add(content);
 
 if (page > 1) {
@@ -81,10 +87,16 @@ if (page > 1) {
 		content.top = margin;
 	}
 	if (i == data.length - 1) {
-		// Si no, al concatenar se queda feo
+		// Lo quito porque al concatenar se queda feo
 		//content.bottom = margin;
 	}
 }
+
+/*
+content.touched = false;
+content.x = null;
+content.y = null;
+*/
 
 content.addEventListener('click', function(e) {
 	if (e.source.index) {
@@ -92,7 +104,12 @@ content.addEventListener('click', function(e) {
 	} else {
 		var current = e.source.parent;
 	}
-	
+	/*
+	if (current.touched) {
+		addingFav(current);
+		return;
+	}	
+	*/
 	var posts = Ti.UI.createWindow({
 		title:current.title.text,
 		url:url,
@@ -112,6 +129,45 @@ content.addEventListener('click', function(e) {
 	});
 	current.animate(animation);
 	
-	//win.nav.open(post);
 	Ti.UI.currentTab.open(posts);
 });
+
+/*
+content.addEventListener('longpress', function(e) {
+	if (e.source.index) {
+		var current = e.source;
+	} else {
+		var current = e.source.parent;
+	}
+	//addingFav(current);
+});
+
+content.addEventListener('touchstart', function(e) {
+	if (e.source.index) {
+		var current = e.source;
+	} else {
+		var current = e.source.parent;
+	}
+	current.x = e.x;
+	current.y = e.y;
+	//addingFav(current);
+});
+content.addEventListener('touchmove', function(e) {
+	if (e.source.index) {
+		var current = e.source;
+	} else {
+		var current = e.source.parent;
+	}
+	if (e.y == current.y) {
+		if (e.x != current.x) {
+			addingFav(current);
+		}
+	}
+	//addingFav(current);
+});
+
+function addingFav(current) {
+	current.touched = true;
+	current.backgroundColor = '#ff0000'
+}
+*/

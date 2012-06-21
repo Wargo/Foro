@@ -99,7 +99,7 @@ content.addEventListener('click', function(e) {
 		var current = e.source.parent;
 	}
 	
-	if (typeof current.title.text == 'undefined') {
+	if (typeof current.title == 'undefined') {
 		return;
 	}
 	
