@@ -153,6 +153,10 @@ function endReloading(data, error) {
 		//win.remove(loading);
 		tableView.data = tableData;
 		win.add(tableView);
+		
+		if (typeof editing != 'undefined' && editing == true) {
+			startAddToFav(false);
+		}
 	} else {
 		alert(error)
 	}

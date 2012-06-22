@@ -5,6 +5,8 @@ var tableView = Ti.UI.createTableView({
 	backgroundColor: '#DDD'
 });
 
+var editing = false;
+
 var edit = Ti.UI.createButton({
 	title:L('Favoritos')
 });
@@ -13,23 +15,34 @@ var cancel = Titanium.UI.createButton({
 	style:Titanium.UI.iPhone.SystemButtonStyle.DONE
 });
 
-//tableView.editable = true;
 win.rightNavButton = edit;
 edit.addEventListener('click', function() {
+	editing = true;
+	startAddToFav(false);
 	win.rightNavButton = cancel;
-	for (row in tableData) {
-		var addMe = Ti.UI.createImageView({
-			image:'images/off.png',
+});
+
+function startAddToFav(animated) {
+	for (i in tableView.data[0].rows) {
+		var row = tableView.data[0].rows[i];
+		
+		if (typeof row.addMe != 'undefined' && row.addMe.opacity == '1') {
+			continue;
+		}
+		
+		var addMe = Ti.UI.createLabel({
+			backgroundImage:'images/off.png',
+			width:32,
+			height:32,
 			left:-25,
 			opacity:0
 		});
-		addMe.id = tableData[row].content.id;
-		if (Ti.App.inArray(tableData[row].content.id, Ti.App.Properties.getList('favorites', []))) {
-			addMe.image = 'images/on.png';
+		addMe.id = row.content.id;
+		if (Ti.App.inArray(row.content.id, Ti.App.Properties.getList('favorites', []))) {
+			addMe.backgroundImage = 'images/on.png';
 		}
-		tableData[row].add(addMe);
-		tableData[row].addMe = addMe;
-		//tableData[row].content.title.left = 50,
+		row.add(addMe);
+		row.addMe = addMe;
 		var animation1 = Ti.UI.createAnimation({
 			left: 10,
 			duration:300,
@@ -39,31 +52,42 @@ edit.addEventListener('click', function() {
 			left: 50,
 			duration:300
 		});
-		tableData[row].addMe.animation = animation1;
-		tableData[row].content.title.animation = animation2;
+		if (animated) {
+			row.addMe.animation = animation1;
+			row.content.title.animation = animation2;
+		} else {
+			row.addMe.left = 10;
+			row.addMe.opacity = 1;
+			row.content.title.left = 50;
+		}
 		
 		addMe.addEventListener('click', function(e) {
 			var favorites = Ti.App.Properties.getList('favorites', []);
 			if (!Ti.App.inArray(e.source.id, Ti.App.Properties.getList('favorites', []))) {
 				favorites.push(e.source.id);
 				Ti.App.Properties.setList('favorites', favorites);
-				e.source.image = 'images/on.png';
+				e.source.backgroundImage = 'images/on.png';
 			} else {
 				while (favorites.indexOf(e.source.id) !== -1) {
 					favorites.splice(favorites.indexOf(e.source.id), 1);
 				}
 				Ti.App.Properties.setList('favorites', favorites);
-				e.source.image = 'images/off.png';
+				e.source.backgroundImage = 'images/off.png';
 			}
 			Ti.API.info(favorites);
 		})
 	}
-	//tableView.editing = true;
-});
+}
+
 cancel.addEventListener('click', function() {
+	editing = false;
+	endAddToFav(false);
 	win.rightNavButton = edit;
-	for (row in tableData) {
-		//tableData[row].content.title.left = 15;
+});
+
+function endAddToFav(animated) {
+	for (i in tableView.data[0].rows) {
+		var row = tableView.data[0].rows[i];
 		var animation1 = Ti.UI.createAnimation({
 			left: -25,
 			duration:300,
@@ -73,24 +97,19 @@ cancel.addEventListener('click', function() {
 			left: 15,
 			duration:300
 		});
-		tableData[row].addMe.animation = animation1;
-		tableData[row].content.title.animation = animation2;
-		setTimeout(function() {
-			tableData[row].remove(tableData[row].addMe);
-		},300)
+		if (animated) {
+			row.addMe.animation = animation1;
+			row.content.title.animation = animation2;
+		} else {
+			if (typeof row.addMe != 'undefined') {
+				row.addMe.left = -25;
+				row.addMe.opacity = 0;
+				row.content.title.left = 15;
+			}
+		}
+		setTimeout("row.remove(row.addMe)", 300);
 	}
-	//tableView.editing = false;
-});
-
-
-
-/*
-var favorites = Ti.App.Properties.getList('favorites', []);
-favorites.push(win.current.id);
-Ti.App.Properties.setList('favorites', favorites);
-*/
-	
-	
+}
 
 var loading = Titanium.UI.createActivityIndicator({
     message:'',

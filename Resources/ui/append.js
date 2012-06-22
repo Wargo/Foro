@@ -38,6 +38,9 @@ function beginUpdate(){
 			if (data.length > 0) {
 				updating = false;
 			}
+			if (typeof editing != 'undefined' && editing == true) {
+				startAddToFav(false);
+			}
 		}
 		if (error) {
 			//endReloading(null);
