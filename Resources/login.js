@@ -22,7 +22,7 @@ if (!user.value || !password.value) {
 			if (this.responseText != 0) {
 				Ti.App.Properties.setString('login', this.responseText);
 				Ti.App.Properties.setString('user', user.value);
-				Ti.App.Properties.setString('pass', password.value);
+				//Ti.App.Properties.setString('pass', password.value);
 				close();
 			} else {
 				alert(L('Usuario y/o contraseña erróneos'));

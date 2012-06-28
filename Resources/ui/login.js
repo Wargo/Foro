@@ -39,7 +39,7 @@ var user = Ti.UI.createTextField({
 	left:15,right:15,
 	backgroundColor:'#FFF',
 	borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-	autocapitalization:Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
+	autocapitalization:Ti.UI.TEXT_AUTOCAPITALIZATION_NONE
 });
 
 var password = Ti.UI.createTextField({
@@ -52,18 +52,17 @@ var password = Ti.UI.createTextField({
 });
 
 setTimeout(function() {
-	user.focus();
+	//user.focus();
 }, 300);
 
 var register = Ti.UI.createLabel({
 	text:L('Si no tienes cuenta, regístrate'),
 	color:'#429BDA',
-	top:30
+	top:20
 });
 
 view.add(user);
 view.add(password);
-view.add(register);
 
 register.addEventListener('click', function() {
 	/*
@@ -78,4 +77,59 @@ register.addEventListener('click', function() {
 	Ti.Platform.openURL('http://elembarazo.net');
 });
 
+Ti.Facebook.appid = '79e6bd59041528981deb53e94c325651';
+Ti.Facebook.permissions = ['email', 'user_birthday', 'user_hometown'];
+Ti.Facebook.addEventListener('login', function(e) {
+	var loging = Ti.UI.createView({
+		backgroundColor:'#CCC',
+		opacity:0.5,
+	});
+	var loading = Titanium.UI.createActivityIndicator({
+	    message:L('Autentificando...'),
+	    style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
+	    top:'50%'
+	});
+	loging.add(loading);
+	loading.show();
+	win.add(loging);
+    if (e.success) {
+		realLogin();
+    } else if (e.error) {
+        alert(e.error);
+    } else if (e.cancelled) {
+        //alert("Cancelled");
+    }
+});
+//Ti.Facebook.authorize();
+//Titanium.Facebook.addEventListener('logout', function(e) {
+    //alert('Logged out');
+//});
+
+var facebook = Ti.Facebook.createLoginButton({
+	top:15,
+	style:Ti.Facebook.BUTTON_STYLE_WIDE
+});
+
+view.add(facebook);
+view.add(register);
+
 win.add(view);
+
+
+if (Ti.Facebook.loggedIn) {
+	//realLogin();
+}
+
+var facebookData = [];
+function realLogin() {
+	Ti.Facebook.requestWithGraphPath('me', {}, 'GET', function(e) {
+	    if (e.success) {
+	        facebookData = eval('(' + e.result + ')');
+	        Ti.include('/flogin.js');
+	    } else if (e.error) {
+	        alert(e.error);
+	    } else {
+	        alert('Unknown response');
+	    }
+	});
+}

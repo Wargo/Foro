@@ -155,6 +155,9 @@ disconnect.addEventListener('click', function() {
 	Ti.App.Properties.setString('login', null);
 	Ti.App.Properties.setString('user', null);
 	Ti.App.Properties.setString('pass', null);
+	if (Ti.Facebook.loggedIn) {
+		Ti.Facebook.logout();
+	}
 	switchPage(win);
 });
 

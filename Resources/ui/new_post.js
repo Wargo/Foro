@@ -13,8 +13,9 @@ var client = Ti.Network.createHTTPClient({
 
 client.open('POST', path);
 client.send({
-	user:Ti.App.Properties.getString('user'),
-	pass:Ti.App.Properties.getString('pass'),
+	//user:Ti.App.Properties.getString('user'),
+	//pass:Ti.App.Properties.getString('pass'),
+	userId:Ti.App.Properties.getString('login'),
 	onlyLogin:true
 });
 	
@@ -75,16 +76,18 @@ saveButton.addEventListener('click', function() {
 		client.send({
 			topic_id:win.topic_id,
 			post_content:text.value,
-			user:Ti.App.Properties.getString('user'),
-			pass:Ti.App.Properties.getString('pass'),
+			//user:Ti.App.Properties.getString('user'),
+			//pass:Ti.App.Properties.getString('pass'),
+			userId:Ti.App.Properties.getString('login')
 		});
 	} else if (typeof win.forum_id != 'undefined') {
 		client.send({
 			forum_id:win.forum_id,
 			topic:title.value,
 			post_content:text.value,
-			user:Ti.App.Properties.getString('user'),
-			pass:Ti.App.Properties.getString('pass'),
+			//user:Ti.App.Properties.getString('user'),
+			//pass:Ti.App.Properties.getString('pass'),
+			userId:Ti.App.Properties.getString('login')
 		});
 	} else {
 		alert(L('Error enviando mensaje'));
