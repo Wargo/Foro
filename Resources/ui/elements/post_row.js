@@ -66,6 +66,7 @@ content.index = i + 1;
 content.title = title;
 content.numPosts = numPosts;
 content.id = data[i].id;
+content.open = data[i].open;
 content.image = image;
 
 content.add(image);

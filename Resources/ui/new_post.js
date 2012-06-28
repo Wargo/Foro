@@ -1,5 +1,23 @@
 var win = Ti.UI.currentWindow;
 
+var path = Ti.App.dataURL + 'create_post.php';
+var client = Ti.Network.createHTTPClient({
+	onload: function(e) {
+		Ti.API.info('success ' + this.responseText);
+	},
+	onerror: function(e) {
+		//Ti.API.info('error');
+	},
+	timeout: 15000
+});
+
+client.open('POST', path);
+client.send({
+	user:Ti.App.Properties.getString('user'),
+	pass:Ti.App.Properties.getString('pass'),
+	onlyLogin:true
+});
+	
 var cancelButton = Ti.UI.createButton({
 	title:L('Cancelar')
 });
@@ -37,11 +55,13 @@ saveButton.addEventListener('click', function() {
 			Ti.API.info('success ' + this.responseText);
 			var result = eval('(' + this.responseText + ')');
 			if (!result || result.status != 'ok') {
-				alert(L('Error guardando el mensaje'));
+				alert(L('Error guardando el mensaje, vuelve a intentarlo en unos momentos'));
+				loading.hide();
+				win.remove(loging);
+			} else {
+				win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 			}
-			loading.hide();
-			win.remove(loging);
-			win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+			
 		},
 		onerror: function(e) {
 			alert(L('Ha ocurrido un error con la conexión'));
@@ -88,7 +108,7 @@ var text = Ti.UI.createTextArea({
 	value: L('Texto'),
 	color:'#AAA',
 	top:20,
-	height:100,
+	height:'40%',
 	left:15,right:15,
 	font:{fontSize:14},
 	backgroundColor:'#FFF',
@@ -96,6 +116,10 @@ var text = Ti.UI.createTextArea({
 	borderColor:'#999',
 	suppressReturn:false,
 });
+
+if (typeof win.forum_id != 'undefined') {
+	text.height = '30%';
+}
 
 text._hintText = text.value;
 

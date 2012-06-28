@@ -72,7 +72,7 @@ if (data[i].posts > 0) {
 */
 
 var row = Ti.UI.createTableViewRow({
-	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
+	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
 });
 
 row.content = content;

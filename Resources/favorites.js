@@ -19,6 +19,6 @@ var client = Ti.Network.createHTTPClient({
 
 client.open('POST', path);
 client.send({
-	forums:'[' + Ti.App.Properties.getList('favorites').join(',') + ']',
+	forums:'[' + Ti.App.Properties.getList('favorites', []).join(',') + ']',
 	page:page
 });

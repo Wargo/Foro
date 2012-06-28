@@ -111,7 +111,9 @@ var reloading = false;
 function beginReloading() {
 	// Reseteando valores
 	data = null;
-	page = 1;
+	if (typeof first == 'undefined') { // Si está en paginador append (NO es post.js)
+		page = 1;
+	}
 	lastRow = 0;
 	
 	Ti.include(loadFrom);
@@ -122,13 +124,6 @@ function beginReloading() {
 			
 			// Reseteando paginación "append"
 			updating = false;
-			
-			// Reseteando paginación "numérica"
-			if (typeof first != 'undefined') {
-				first.color = prev.color = '#999';
-				first.borderColor = prev.borderColor = '#999';
-				currentPage.text = '1/' + lastPage;
-			}
 		}
 		if (error) {
 			endReloading(null, error);

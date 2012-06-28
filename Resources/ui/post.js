@@ -7,7 +7,12 @@ var reply = Ti.UI.createButton({
 	title:L('Responder')
 });
 
+if (win.current.open == 0) {
+	reply.title = L('Cerrado');
+	reply.enabled = false;
+}
 win.rightNavButton = reply;
+
 
 reply.addEventListener('click', function() {
 	if (Ti.App.Properties.getString('login')) {
@@ -57,7 +62,9 @@ var title = Ti.UI.createLabel({
 	top:5,left:5,right:5,
 	textAlign:'center',
 	color:'#429BDA',
-	font:{fontWeight:'bold'}
+	font:{fontWeight:'bold'},
+	shadowColor:"#CCC",
+	shadowOffset:{x:1,y:1}
 });
 var rowTitle = Ti.UI.createTableViewRow({
 	backgroundColor:'#EEE',
