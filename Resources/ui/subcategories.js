@@ -9,6 +9,7 @@ var editing = false;
 
 var edit = Ti.UI.createButton({
 	title:L('Favoritos')
+	//style:Ti.UI.iPhone.SystemIcon.FAVORITES
 });
 var cancel = Titanium.UI.createButton({
 	title:L('Guardar'),

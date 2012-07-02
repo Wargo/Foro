@@ -4,7 +4,8 @@ var lastPage = 1;
 var margin = 7;
 
 var reply = Ti.UI.createButton({
-	title:L('Responder')
+	//title:L('Responder')
+	systemButton:Ti.UI.iPhone.SystemButton.REPLY
 });
 
 if (win.current.open == 0) {

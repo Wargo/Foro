@@ -113,7 +113,7 @@ image.addEventListener('click', function(e) {
 	if (!Ti.App.Properties.getString('login')) {
 		return;
 	}
-	var imageUrl = e.source.image;
+	var imageUrl = e.source.big;
 	
 	var imageBigWin = Ti.UI.createWindow({
 		title:Ti.App.Properties.getString('user'),
@@ -149,7 +149,7 @@ image.addEventListener('click', function(e) {
  */
 
 var disconnect = Ti.UI.createButton({
-	title:L('Desconectar'),
+	title:L('Desconectar')
 });
 disconnect.addEventListener('click', function() {
 	var confirm = Ti.UI.createAlertDialog({
@@ -207,8 +207,8 @@ win.addEventListener('focus', function() {
 function switchPage(win) {
 	if (Ti.App.Properties.getString('login')) {
 		currentStatus = 'in';
-		win.rightNavButton = emptyView;
-		win.leftNavButton = disconnect;
+		win.rightNavButton = disconnect;
+		//win.leftNavButton = disconnect;
 		
 		Ti.include('/user.js');
 		var interval = setInterval(function() {
@@ -218,6 +218,7 @@ function switchPage(win) {
 				name.text = userData[0].name;
 				registered.text = userData[0].date;
 				image.image = userData[0].avatar;
+				image.big = userData[0].avatar_big;
 				numPosts.text = userData[0].num_posts == 1 ? '1 post' : userData[0].num_posts + ' posts';
 				email.text = userData[0].email;
 				register.text = L('Para editar tus datos, pincha aquí');
@@ -228,6 +229,7 @@ function switchPage(win) {
 				name.text = L('No estás autentificado');
 				registered.text = '';
 				image.image = 'images/profile.png';
+				image.big = 'images/profile.png';
 				numPosts.text = '';
 				email.text = '';
 				register.text = ''; //L('Si no tienes cuenta, regístrate');
@@ -236,12 +238,13 @@ function switchPage(win) {
 	} else {
 		currentStatus = 'out';
 		win.rightNavButton = goLogin;
-		win.leftNavButton = emptyView;
+		//win.leftNavButton = emptyView;
 		
 		username.text = '';
 		name.text = L('No estás autentificado');
 		registered.text = '';
 		image.image = 'images/profile.png';
+		image.big = 'images/profile.png';
 		numPosts.text = '';
 		email.text = '';
 		register.text = ''; //L('Si no tienes cuenta, regístrate');

@@ -2,7 +2,8 @@ var win = Ti.UI.currentWindow;
 var page = 1;
 
 var createPost = Ti.UI.createButton({
-	title:L('Nuevo')
+	//title:L('Nuevo')
+	systemButton:Ti.UI.iPhone.SystemButton.COMPOSE
 });
 
 win.rightNavButton = createPost;

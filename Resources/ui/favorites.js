@@ -60,7 +60,12 @@ var interval = setInterval(function() {
 		win.add(tableView);
 	}
 	if (error) {
-		alert(error);
+		var confirm = Ti.UI.createAlertDialog({
+			title:L('Error'),
+			message:error,
+			ok:L('Ok')
+		});
+		confirm.show();
 		clearInterval(interval);
 		loading.hide();
 		win.remove(loading);

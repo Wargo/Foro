@@ -9,7 +9,12 @@ var loading = Titanium.UI.createActivityIndicator({
 });
 
 if (!user.value || !pass.value || !repeatPass.value || !name.value || !email.value) {
-	alert(L('Faltan campos por rellenar'));
+	var confirm = Ti.UI.createAlertDialog({
+		title:L('Error'),
+		message:L('Faltan campos por rellenar'),
+		ok:L('Ok')
+	});
+	confirm.show();
 } else {
 	loging.add(loading);
 	loading.show();

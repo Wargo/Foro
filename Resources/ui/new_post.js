@@ -35,7 +35,12 @@ cancelButton.addEventListener('click', function() {
 });
 saveButton.addEventListener('click', function() {
 	if (text.value == '') {
-		alert(L('Debes rellenar el mensaje'));
+		var confirm = Ti.UI.createAlertDialog({
+			title:L('Error'),
+			message:L('Debes rellenar el mensaje'),
+			ok:L('Ok')
+		});
+		confirm.show();
 		return false;
 	}
 	var loging = Ti.UI.createView({
