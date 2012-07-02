@@ -9,9 +9,10 @@ if (!facebookData['email']) {
 		onload: function(e) {
 			Ti.API.info('success ' + this.responseText);
 			var result = eval('(' + this.responseText + ')');
-			if (result.status == 'ok') {
-				Ti.App.Properties.setString('login', result.userId);
-				Ti.App.Properties.setString('user', result.username);
+			if (result['status'] == 'ok') {
+				Ti.App.Properties.setString('login', result['userId']);
+				Ti.App.Properties.setString('user', result['username']);
+				Ti.App.Properties.setString('token', result['token']);
 				close();
 			} else {
 				var fRegister = Ti.UI.createView({
@@ -36,15 +37,21 @@ if (!facebookData['email']) {
 				var fGo = Ti.UI.createButton({
 					top:10,
 					title:L('Registrarme')
-				})
+				});
+				errorMsg = Ti.UI.createLabel({
+					text:'',
+					color:'red',
+					top:10
+				});
 				
 				fRegister.add(fLogin);
 				fRegister.add(fPass);
 				fRegister.add(fGo);
+				fRegister.add(errorMsg);
 				win.add(fRegister);
 				
 				fGo.addEventListener('click', function() {
-					Ti.include('/fRegister.js');
+					Ti.include('/fregister.js');
 				})
 			}
 		},
@@ -63,8 +70,6 @@ if (!facebookData['email']) {
 }
 
 function close() {
-	//loading.hide();
-	//win.remove(loging);
 	if (typeof win.root != 'undefined') {
 		win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 	} else {

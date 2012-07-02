@@ -16,6 +16,7 @@ client.send({
 	//user:Ti.App.Properties.getString('user'),
 	//pass:Ti.App.Properties.getString('pass'),
 	userId:Ti.App.Properties.getString('login'),
+	token:Ti.App.Properties.getString('token'),
 	onlyLogin:true
 });
 	
@@ -78,7 +79,8 @@ saveButton.addEventListener('click', function() {
 			post_content:text.value,
 			//user:Ti.App.Properties.getString('user'),
 			//pass:Ti.App.Properties.getString('pass'),
-			userId:Ti.App.Properties.getString('login')
+			userId:Ti.App.Properties.getString('login'),
+			token:Ti.App.Properties.getString('token')
 		});
 	} else if (typeof win.forum_id != 'undefined') {
 		client.send({
@@ -87,7 +89,8 @@ saveButton.addEventListener('click', function() {
 			post_content:text.value,
 			//user:Ti.App.Properties.getString('user'),
 			//pass:Ti.App.Properties.getString('pass'),
-			userId:Ti.App.Properties.getString('login')
+			userId:Ti.App.Properties.getString('login'),
+			token:Ti.App.Properties.getString('token')
 		});
 	} else {
 		alert(L('Error enviando mensaje'));

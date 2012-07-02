@@ -1,5 +1,11 @@
 var win = Ti.UI.currentWindow;
 
+if (!Ti.App.Properties.getString('login')) {
+	if (Ti.Facebook.loggedIn) {
+		Ti.Facebook.logout();
+	}
+}
+
 win.title = L('Login');
 win.barColor = '#429BDA';
 
@@ -17,8 +23,6 @@ cancelButton.addEventListener('click', function() {
 	if (typeof win.root != 'undefined') {
 		win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 	} else {
-		//user.blur();
-		//password.blur();
 		win.close();
 	}
 });
@@ -65,16 +69,17 @@ view.add(user);
 view.add(password);
 
 register.addEventListener('click', function() {
-	/*
 	var registerWin = Ti.UI.createWindow({
 		title:L('Registro'),
 		url:'register.js',
 		barColor:'#429BDA'
 	});
-	registerWin.root = win.root;
-	win.nav.open(registerWin);
-	*/
-	Ti.Platform.openURL('http://elembarazo.net');
+	registerWin.parentWin = win;
+	//registerWin.root = win.root;
+	//win.nav.open(registerWin);
+	Ti.UI.currentTab.open(registerWin)
+	
+	//Ti.Platform.openURL('http://elembarazo.net');
 });
 
 Ti.Facebook.appid = '79e6bd59041528981deb53e94c325651';
@@ -97,6 +102,8 @@ Ti.Facebook.addEventListener('login', function(e) {
     } else if (e.error) {
         alert(e.error);
     } else if (e.cancelled) {
+    	loading.hide();
+    	win.remove(loging);
         //alert("Cancelled");
     }
 });
@@ -106,26 +113,31 @@ Ti.Facebook.addEventListener('login', function(e) {
 //});
 
 var facebook = Ti.Facebook.createLoginButton({
-	top:15,
+	top:60,
 	style:Ti.Facebook.BUTTON_STYLE_WIDE
 });
 
-view.add(facebook);
 view.add(register);
+view.add(facebook);
 
 win.add(view);
 
-
-if (Ti.Facebook.loggedIn) {
-	//realLogin();
-}
-
 var facebookData = [];
 function realLogin() {
-	Ti.Facebook.requestWithGraphPath('me', {}, 'GET', function(e) {
+	Ti.Facebook.requestWithGraphPath('me', {}, 'GET', function(e) { //?locale=es_ES
 	    if (e.success) {
-	        facebookData = eval('(' + e.result + ')');
-	        Ti.include('/flogin.js');
+	    	Ti.Facebook.requestWithGraphPath('me', {fields:'picture', type:'square'}, 'GET', function(e2) {
+	    		if (e2.success) {
+	    			Ti.Facebook.requestWithGraphPath('me', {fields:'picture', type:'large'}, 'GET', function(e3) {
+	    				if (e3.success) {
+			    			facebookData = eval('(' + e.result + ')');
+			    			facebookData['pic_square'] = eval('(' + e2.result + ')')['picture'];
+			    			facebookData['pic_big'] = eval('(' + e3.result + ')')['picture'];
+			        		Ti.include('/flogin.js');
+			        	}
+			      });
+	    		}
+	    	});
 	    } else if (e.error) {
 	        alert(e.error);
 	    } else {

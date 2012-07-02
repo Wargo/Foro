@@ -80,7 +80,7 @@ var email = Ti.UI.createLabel({
 });
 
 var register = Ti.UI.createLabel({
-	text:L('Si no tienes cuenta, regístrate'),
+	text:'', //L('Si no tienes cuenta, regístrate'),
 	color:'#429BDA',
 	top:15,
 	left:20,
@@ -152,17 +152,31 @@ var disconnect = Ti.UI.createButton({
 	title:L('Desconectar'),
 });
 disconnect.addEventListener('click', function() {
-	Ti.App.Properties.setString('login', null);
-	Ti.App.Properties.setString('user', null);
-	Ti.App.Properties.setString('pass', null);
-	if (Ti.Facebook.loggedIn) {
-		Ti.Facebook.logout();
-	}
-	switchPage(win);
+	var confirm = Ti.UI.createAlertDialog({
+		title:L('Desconectar'),
+		message:L('¿Seguro que deseas desconectarte?'),
+		buttonNames:[L('Sí'), L('No')],
+		cancel:1
+	});
+	confirm.show();
+	
+	confirm.addEventListener('click', function(e) {
+		if (e.index === e.cancel || e.cancel === true) { // Comparador iOS y Android
+			return;
+		}
+		Ti.App.Properties.setString('login', null);
+		Ti.App.Properties.setString('user', null);
+		Ti.App.Properties.setString('pass', null);
+		Ti.App.Properties.setString('token', null);
+		if (Ti.Facebook.loggedIn) {
+			Ti.Facebook.logout();
+		}
+		switchPage(win);
+	});
 });
 
 var goLogin = Ti.UI.createButton({
-	title:L('Login')
+	title:L('Acceder')
 });
 	
 goLogin.addEventListener('click', function() {
@@ -216,7 +230,7 @@ function switchPage(win) {
 				image.image = 'images/profile.png';
 				numPosts.text = '';
 				email.text = '';
-				register.text = L('Si no tienes cuenta, regístrate');
+				register.text = ''; //L('Si no tienes cuenta, regístrate');
 			}
 		}, 100);
 	} else {
@@ -230,6 +244,6 @@ function switchPage(win) {
 		image.image = 'images/profile.png';
 		numPosts.text = '';
 		email.text = '';
-		register.text = L('Si no tienes cuenta, regístrate');
+		register.text = ''; //L('Si no tienes cuenta, regístrate');
 	}
 }

@@ -3,19 +3,19 @@ var loging = Ti.UI.createView({
 	opacity:0.5,
 });
 var loading = Titanium.UI.createActivityIndicator({
-    message:L('Autentificando...'),
+    message:L('Registrando...'),
     style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
     top:'50%'
 });
 
-if (!user.value || !password.value) {
-	alert(L('Debes rellenar ambos campos.'));
+if (!user.value || !pass.value || !repeatPass.value || !name.value || !email.value) {
+	alert(L('Faltan campos por rellenar'));
 } else {
 	loging.add(loading);
 	loading.show();
 	win.add(loging);
 	var error = '';
-	var path = Ti.App.dataURL + 'login.php';
+	var path = Ti.App.dataURL + 'register.php';
 	var client = Ti.Network.createHTTPClient({
 		onload: function(e) {
 			Ti.API.info('success ' + this.responseText);
@@ -24,7 +24,6 @@ if (!user.value || !password.value) {
 				Ti.App.Properties.setString('login', result['id']);
 				Ti.App.Properties.setString('user', user.value);
 				Ti.App.Properties.setString('token', result['token']);
-				//Ti.App.Properties.setString('pass', password.value);
 				close();
 			} else {
 				alert(result['message']);
@@ -43,17 +42,14 @@ if (!user.value || !password.value) {
 	client.open('POST', path);
 	client.send({
 		user:user.value,
-		password:password.value
+		pass:pass.value,
+		repeatPass:repeatPass.value,
+		name:name.value,
+		email:email.value
 	});
 }
-
+	
 function close() {
-	loading.hide();
-	win.remove(loging);
-	if (typeof win.root != 'undefined') {
-		win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
-	} else {
-		win.switchPage(win.p);
-		win.close();
-	}
+	win.close({transition:Ti.UI.iPhone.AnimationStyle.NONE});
+	win.parentWin.close();
 }
