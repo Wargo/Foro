@@ -90,6 +90,146 @@ register.addEventListener('click', function() {
 	Ti.Platform.openURL('http://elembarazo.net');
 });
 
+var changeAvatar = Ti.UI.createButton({
+	systemButton:Ti.UI.iPhone.SystemButton.CAMERA
+});
+changeAvatar.addEventListener('click', function() {
+	var dialog = Ti.UI.createOptionDialog({
+	    title: L('Elige de dónde quieres obtener la imagen'),
+	    options: [L('Cámara'), L('Galería'), L('Cancelar')],
+	    cancel:2
+	});
+	dialog.show();
+	
+	dialog.addEventListener('click', function(e) {
+		if (e.index == 0) {
+			camera();
+		} else if (e.index == 1) {
+			gallery();
+		}
+	});
+});
+
+function gallery() {
+	Ti.Media.openPhotoGallery({
+		mediaType:[Ti.Media.MEDIA_TYPE_PHOTO],
+		success: function(e) {
+			var path = Ti.App.dataURL + 'uploadPhoto.php';
+			var client = Ti.Network.createHTTPClient({
+				onload: function() {
+					Ti.API.info('success ' + this.responseText);
+					var result = eval('(' + this.responseText + ')');
+					if (result['status'] == 'ok') {
+						image.image = result['thumb'];
+						image.big = result['image'];
+						setTimeout(function() {
+							win.remove(loading);
+						}, 1000);
+					} else {
+						alert(result['message']);
+					}
+				},
+				onerror: function() {
+					var error = Ti.UI.createAlertDialog({
+						title:L('Error'),
+						message:L('Ha ocurrido un error con la conexión'),
+						ok:L('Ok')
+					});
+					error.show();
+					win.remove(loading);
+				},
+				timeout: 15000
+			});
+			client.open('POST', path);
+			client.send({
+				thumb:e.thumbnail,
+				file:e.media,
+				user:Ti.App.Properties.getString('login'),
+				token:Ti.App.Properties.getString('token')
+			});
+			
+			var loging = Ti.UI.createView({
+				backgroundColor:'#CCC',
+				opacity:0.7,
+			});
+			var loading = Titanium.UI.createActivityIndicator({
+			    message:L('Enviando...'),
+			    style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
+			    top:60
+			});
+			win.add(loging);
+			win.add(loading);
+			loading.show();
+		},
+		cancel: function(e) {
+			
+		}
+	})
+}
+
+function camera() {
+	Ti.Media.showCamera({
+		mediaTypes:[Ti.Media.MEDIA_TYPE_PHOTO],
+		success: function(e) {
+			var path = Ti.App.dataURL + 'uploadPhoto.php';
+			var client = Ti.Network.createHTTPClient({
+				onload: function() {
+					Ti.API.info('success ' + this.responseText);
+					var result = eval('(' + this.responseText + ')');
+					if (result['status'] == 'ok') {
+						image.image = result['thumb'];
+						image.big = result['image'];
+						setTimeout(function() {
+							win.remove(loading);
+						}, 1000);
+					} else {
+						alert(result['message']);
+					}
+				},
+				onerror: function() {
+					var error = Ti.UI.createAlertDialog({
+						title:L('Error'),
+						message:L('Ha ocurrido un error con la conexión'),
+						ok:L('Ok')
+					});
+					error.show();
+					win.remove(loading);
+				},
+				timeout: 15000
+			});
+			client.open('POST', path);
+			client.send({
+				//thumb:e.thumbnail,
+				file:e.media,
+				user:Ti.App.Properties.getString('login'),
+				token:Ti.App.Properties.getString('token')
+			});
+			
+			var loging = Ti.UI.createView({
+				backgroundColor:'#CCC',
+				opacity:0.7,
+			});
+			var loading = Titanium.UI.createActivityIndicator({
+			    message:L('Enviando...'),
+			    style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
+			    top:60
+			});
+			win.add(loging);
+			win.add(loading);
+			loading.show();
+		},
+		error: function(e) {
+			var error = Ti.UI.createAlertDialog({
+				ok:L('Ok'),
+				title:L('Error'),
+				message:L('Ha ocurrido un error con la cámara')
+			});
+			error.show();
+		},
+		allowEditing:true
+	});
+}
+
 content.add(image);
 user.add(username);
 user.add(name);
@@ -208,7 +348,7 @@ function switchPage(win) {
 	if (Ti.App.Properties.getString('login')) {
 		currentStatus = 'in';
 		win.rightNavButton = disconnect;
-		//win.leftNavButton = disconnect;
+		win.leftNavButton = changeAvatar;
 		
 		Ti.include('/user.js');
 		var interval = setInterval(function() {
@@ -238,7 +378,7 @@ function switchPage(win) {
 	} else {
 		currentStatus = 'out';
 		win.rightNavButton = goLogin;
-		//win.leftNavButton = emptyView;
+		win.leftNavButton = emptyView;
 		
 		username.text = '';
 		name.text = L('No estás autentificado');
