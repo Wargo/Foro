@@ -45,6 +45,7 @@ var numPosts = Ti.UI.createLabel({
 
 var image = Ti.UI.createImageView({
 	image:data[i].avatar,
+	defaultImage:'images/clock.png',
 	left:10,
 	top:15,
 	width:48,

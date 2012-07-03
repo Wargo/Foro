@@ -22,6 +22,7 @@ var user = Ti.UI.createView({
 
 var image = Ti.UI.createImageView({
 	image: win.current.avatar,
+	defaultImage:'images/clock.png',
 	left:15,
 	top:15,
 	width:48,
