@@ -31,6 +31,7 @@ reply.addEventListener('click', function() {
 	}
 	
 	createPost.topic_id = win.current.id;
+	createPost.beginReloading = beginReloading;
 	
 	var nav = Ti.UI.iPhone.createNavigationGroup({
 		window:createPost

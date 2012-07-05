@@ -19,6 +19,8 @@ var numTopics = Ti.UI.createLabel({
 
 if (loadFrom == '/forums.js') {
 	numTopics.text = data[i].topics == 1 ? '1 foro' : data[i].topics + ' foros';
+} else if (loadFrom == '/photo_folders.js') {
+	numTopics.text = data[i].topics == 1 ? '1 foto' : data[i].topics + ' fotos';
 }
 
 var numPosts = Ti.UI.createLabel({

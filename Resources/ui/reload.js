@@ -164,3 +164,11 @@ function endReloading(data, error) {
 	actInd.hide();
 	arrow.show();
 }
+
+var first_time = true;
+win.addEventListener('focus', function() {
+	if (!first_time) {
+		beginReloading();
+	}
+	first_time = false;
+})

@@ -16,7 +16,10 @@ var cancel = Titanium.UI.createButton({
 	style:Titanium.UI.iPhone.SystemButtonStyle.DONE
 });
 
-win.rightNavButton = edit;
+if (win.current.id != -1) {
+	win.rightNavButton = edit;
+}
+
 edit.addEventListener('click', function() {
 	editing = true;
 	startAddToFav(false);
@@ -126,6 +129,12 @@ var url = 'posts.js';
 var element = '/ui/elements/category.js';
 var id = win.current.id;
 var loadFrom = '/subforums.js'
+
+if (id == -1) {
+	loadFrom = '/photo_folders.js';
+	url = 'photos.js'
+}
+
 Ti.include(loadFrom);
 
 var interval = setInterval(function() {

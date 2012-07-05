@@ -118,8 +118,16 @@ function gallery() {
 			Ti.include('/uploadPhoto.js');
 			upload(e);
 		},
-		cancel: function(e) {
+		cancel: function() {
 			
+		},
+		error: function(e) {
+			var error = Ti.UI.createAlertDialog({
+				ok:L('Ok'),
+				title:L('Error'),
+				message:L('Ha ocurrido un error con la galería')
+			});
+			error.show();
 		},
 		allowEditing:true
 	})
@@ -131,6 +139,9 @@ function camera() {
 		success: function(e) {
 			Ti.include('/uploadPhoto.js');
 			upload(e);
+		},
+		cancel: function() {
+			
 		},
 		error: function(e) {
 			var error = Ti.UI.createAlertDialog({

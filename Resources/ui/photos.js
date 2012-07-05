@@ -11,9 +11,9 @@ win.rightNavButton = createPost;
 createPost.addEventListener('click', function() {
 	if (Ti.App.Properties.getString('login')) {
 		var createPost = Ti.UI.createWindow({
-			url:'new_post.js',
+			url:'new_photo.js',
 			barColor:'#429BDA',
-			title:L('Nuevo post')
+			title:L('Nueva foto')
 		});
 	} else {
 		var createPost = Ti.UI.createWindow({
@@ -23,7 +23,7 @@ createPost.addEventListener('click', function() {
 		});
 	}
 	
-	createPost.forum_id = win.current.id;
+	createPost.folder_id = win.current.id;
 	createPost.beginReloading = beginReloading;
 	
 	var nav = Ti.UI.iPhone.createNavigationGroup({
@@ -50,10 +50,10 @@ win.add(loading);
 loading.show();
 var tableData = [];
 
-var element = '/ui/elements/post_row.js'
+var element = '/ui/elements/photo_row.js'
 var id = win.current.id;
 
-var loadFrom = '/posts.js';
+var loadFrom = '/photos.js';
 Ti.include(loadFrom);
 
 var interval = setInterval(function() {

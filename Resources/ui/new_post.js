@@ -66,6 +66,7 @@ saveButton.addEventListener('click', function() {
 				loading.hide();
 				win.remove(loging);
 			} else {
+				win.beginReloading();
 				win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 			}
 			
