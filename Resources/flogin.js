@@ -22,7 +22,8 @@ if (!facebookData['email']) {
 					layout:'vertical'
 				});
 				fLogin = Ti.UI.createTextField({
-					value:facebookData['first_name'].toLowerCase() + '_' + facebookData['last_name'].toLowerCase(),
+					//value:facebookData['first_name'].toLowerCase() + '_' + facebookData['last_name'].toLowerCase().replace(' ', '_'),
+					value:facebookData['username'].replace('.', '_'),
 					left:10,right:10,top:10,
 					borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 					autocapitalization:Ti.UI.TEXT_AUTOCAPITALIZATION_NONE

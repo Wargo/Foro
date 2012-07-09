@@ -3,8 +3,14 @@ var page = 1;
 var lastPage = 1;
 var margin = 7;
 
+var ad = Ti.UI.iOS.createAdView({
+	bottom:-200,
+	zIndex:100,
+	height:Ti.UI.SIZE,
+	width:Ti.UI.SIZE
+});
+
 var reply = Ti.UI.createButton({
-	//title:L('Responder')
 	systemButton:Ti.UI.iPhone.SystemButton.REPLY
 });
 
@@ -92,6 +98,11 @@ var interval = setInterval(function() {
 		tableView.data = tableData;
 		Ti.include('/ui/paginator.js');
 		win.add(tableView);
+		ad.addEventListener('load', function() {
+			ad.animate({bottom:40, duration:300});
+			tableView.animate({bottom:90, duration:300});
+		});
+		win.add(ad);
 	}
 	if (error) {
 		alert(error);

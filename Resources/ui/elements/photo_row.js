@@ -12,7 +12,8 @@ var auxView = Ti.UI.createView({
 	top:2,
 	left:10,
 	height:15,
-	right:15
+	right:15,
+	bottom:10
 });
 var dateLabel = Ti.UI.createLabel({
 	text:data[i].date,
@@ -44,8 +45,6 @@ if (Ti.App.strpos(data[i].date, 'segundo') || Ti.App.strpos(data[i].date, 'minut
 var image = Ti.UI.createImageView({
 	image:data[i].photo,
 	defaultImage:'images/clock.png',
-	//left:10,right:10,top:10,bottom:10
-	//width:300,
 	top:15,
 	height:275,
 	width:275
@@ -55,11 +54,8 @@ var margin = 7;
 
 var content = Ti.UI.createView({
 	backgroundColor:'#FFF',
-	//height:80,
 	left:margin,
 	right:margin,
-	//top:0,
-	//bottom:1,
 	layout:'vertical'
 });
 
@@ -120,8 +116,7 @@ content.addEventListener('click', function(e) {
 	animation.addEventListener('complete', function() {
 		current.backgroundColor = '#FFF';
 	});
-	current.animate(animation);
+	//current.animate(animation);
 	
-	//win.nav.open(post);
-	Ti.UI.currentTab.open(post);
+	//Ti.UI.currentTab.open(post);
 });

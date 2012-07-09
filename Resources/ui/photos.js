@@ -2,8 +2,14 @@ var win = Ti.UI.currentWindow;
 var page = 1;
 
 var createPost = Ti.UI.createButton({
-	//title:L('Nuevo')
 	systemButton:Ti.UI.iPhone.SystemButton.COMPOSE
+});
+
+var ad = Ti.UI.iOS.createAdView({
+	bottom:-200,
+	zIndex:100,
+	height:Ti.UI.SIZE,
+	width:Ti.UI.SIZE
 });
 
 win.rightNavButton = createPost;
@@ -63,9 +69,13 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		//win.remove(loading);
 		tableView.data = tableData;
 		win.add(tableView);
+		ad.addEventListener('load', function() {
+			ad.animate({bottom:0, duration:300});
+			tableView.animate({bottom:50, duration:300});
+		});
+		win.add(ad);
 	}
 	if (error) {
 		alert(error);

@@ -1,7 +1,8 @@
 var paginate = Ti.UI.createView({
 	height:40,
 	backgroundColor:'#DDD',
-	bottom:0
+	bottom:0,
+	zIndex:200
 });
 
 var first = Ti.UI.createLabel({

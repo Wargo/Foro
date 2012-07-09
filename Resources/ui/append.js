@@ -64,7 +64,6 @@ tableView.addEventListener('scroll', function(e){
 	if (distance < lastDistance) {
 		// adjust the % of rows scrolled before we decide to start fetching
 		var nearEnd = theEnd * .95;
-	
 		if (!updating && (total >= nearEnd)) {
 			if (data.length > 10) {
 				beginUpdate();
