@@ -23,9 +23,9 @@ win.rightNavButton = reply;
 reply.addEventListener('click', function() {
 	if (Ti.App.Properties.getString('login')) {
 		var createPost = Ti.UI.createWindow({
-			url:'new_post.js',
+			url:'new_comment.js',
 			barColor:'#429BDA',
-			title:L('Responder')
+			title:L('Comentar')
 		});
 	} else {
 		var createPost = Ti.UI.createWindow({
@@ -35,7 +35,7 @@ reply.addEventListener('click', function() {
 		});
 	}
 	
-	createPost.topic_id = win.current.id;
+	createPost.photo_id = win.current.id;
 	createPost.beginReloading = beginReloading;
 	
 	var nav = Ti.UI.iPhone.createNavigationGroup({
@@ -64,26 +64,56 @@ loading.show();
 
 var tableData = [];
 
-var title = Ti.UI.createLabel({
-	text:win.title,
-	top:5,left:5,right:5,
-	textAlign:'center',
-	color:'#429BDA',
-	font:{fontWeight:'bold'},
-	shadowColor:"#CCC",
-	shadowOffset:{x:1,y:1}
+var image = Ti.UI.createImageView({
+	image:win.current.image.image,
+	defaultImage:'images/clock.png',
+	top:15,
+	height:275,
+	width:275
 });
-var rowTitle = Ti.UI.createTableViewRow({
+var rowImage = Ti.UI.createTableViewRow({
 	backgroundColor:'#EEE',
 	bottom:5,
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 });
-rowTitle.add(title);
-tableData.push(rowTitle);
+rowImage.add(image);
+tableData.push(rowImage);
+image.addEventListener('click', function(e) {
+	var imageUrl = e.source.image;
+	
+	var imageBigWin = Ti.UI.createWindow({
+		title:L('Foto'),
+		backgroundColor:'#000',
+		barColor:'#429BDA'
+	});
+	
+	var imageScrollView = Ti.UI.createScrollView({
+		contentWidth: 'auto',
+	    contentHeight: 'auto',
+	    top: 0,
+	    bottom: 0,
+	    showVerticalScrollIndicator: false,
+	    showHorizontalScrollIndicator: false,
+	    maxZoomScale: 10,
+	    minZoomScale: 1,
+	    zoomScale: 1
+	});
+	
+	var imageBig = Ti.UI.createImageView({
+		image:imageUrl,
+		width:'100%',
+		height:'100%'
+	});
+	
+	imageScrollView.add(imageBig);
+	imageBigWin.add(imageScrollView);
+	
+	Ti.UI.currentTab.open(imageBigWin);
+});
 
 var element = '/ui/elements/post.js'
 var id = win.current.id;
-var loadFrom = '/post.js';
+var loadFrom = '/comments.js';
 Ti.include(loadFrom);
 
 var interval = setInterval(function() {
@@ -93,7 +123,6 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		//win.remove(loading);
 		tableView.data = tableData;
 		Ti.include('/ui/paginator.js');
 		win.add(tableView);

@@ -101,7 +101,7 @@ content.addEventListener('click', function(e) {
 	
 	var post = Ti.UI.createWindow({
 		title:current.title.text,
-		url:'post.js',
+		url:'photo.js',
 		backgroundColor:'#FFF',
 		barColor:'#429BDA'
 	});
@@ -116,7 +116,7 @@ content.addEventListener('click', function(e) {
 	animation.addEventListener('complete', function() {
 		current.backgroundColor = '#FFF';
 	});
-	//current.animate(animation);
+	current.animate(animation);
 	
-	//Ti.UI.currentTab.open(post);
+	Ti.UI.currentTab.open(post);
 });

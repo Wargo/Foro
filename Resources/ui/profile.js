@@ -88,7 +88,7 @@ var register = Ti.UI.createLabel({
 	font:{fontSize:14}
 });
 register.addEventListener('click', function() {
-	Ti.Platform.openURL('http://elembarazo.net');
+	Ti.Platform.openURL('http://elembarazo.net/wp-login.php');
 });
 
 var changeAvatar = Ti.UI.createButton({

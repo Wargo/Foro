@@ -138,6 +138,9 @@ function endReloading(data, error) {
 		if (typeof rowTitle != 'undefined') {
 			tableData.push(rowTitle);
 		}
+		if (typeof rowImage != 'undefined') {
+			tableData.push(rowImage);
+		}
 		
 		for (i in data) {
 			//Ti.include('/ui/elements/category.js');
@@ -168,7 +171,13 @@ function endReloading(data, error) {
 var first_time = true;
 win.addEventListener('focus', function() {
 	if (!first_time) {
-		beginReloading();
+		if (page == 1) {
+			beginReloading();
+		} else {
+			if (typeof first != 'undefined') { // Si está en paginador de post.js (NO es append)
+				beginReloading();
+			}
+		}
 	}
 	first_time = false;
 })
