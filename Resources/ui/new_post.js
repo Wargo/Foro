@@ -55,6 +55,7 @@ saveButton.addEventListener('click', function() {
 	win.add(loging);
 	win.add(loading);
 	loading.show();
+	saveButton.enabled = false;
 	var path = Ti.App.dataURL + 'create_post.php';
 	//var path = 'http://elembarazo.net/foro/bb-post.php'
 	var client = Ti.Network.createHTTPClient({
@@ -74,6 +75,7 @@ saveButton.addEventListener('click', function() {
 		onerror: function(e) {
 			alert(L('Ha ocurrido un error con la conexión'));
 			Ti.API.info('error');
+			saveButton.enabled = true;
 		},
 		timeout: 15000
 	});

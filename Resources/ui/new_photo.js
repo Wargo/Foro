@@ -33,7 +33,7 @@ saveButton.addEventListener('click', function() {
 		max:1,
 		value:0,
 		style:Titanium.UI.iPhone.ProgressBarStyle.PLAIN,
-		top:20,
+		top:50,
 		message:L('Subiendo imagen...'),
 		font:{fontSize:12, fontWeight:'bold'},
 		color:'#888'
@@ -43,6 +43,7 @@ saveButton.addEventListener('click', function() {
 		opacity:0.7
 	})
 	
+	saveButton.enabled = false;
 	win.add(backgroundLoader);
 	win.add(ind);
 	ind.show();
@@ -67,6 +68,7 @@ saveButton.addEventListener('click', function() {
 		onerror: function(e) {
 			alert(L('Ha ocurrido un error con la conexión'));
 			Ti.API.info('error');
+			saveButton.enabled = true;
 		},
 		onsendstream: function(e2) {
 			ind.value = e2.progress;
@@ -94,7 +96,8 @@ var title = Ti.UI.createTextField({
 	top:20,
 	left:15,right:15,
 	backgroundColor:'#FFF',
-	borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
+	borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	maxLength:50
 });
 
 var icon = Ti.UI.createImageView({

@@ -2,41 +2,46 @@ var title = Ti.UI.createLabel({
 	text:data[i].title,
 	font:{fontSize:14},
 	color:'#257CBC',
-	top:0,
+	top:300,
 	height:40,
-	left:10,
-	right:25
-});
-var auxView = Ti.UI.createView({
-	layout:'horizontal',
-	top:2,
-	left:10,
-	height:15,
-	right:15,
-	bottom:10
+	left:15,
+	right:25,
+	width:200
 });
 var dateLabel = Ti.UI.createLabel({
 	text:data[i].date,
 	font:{fontSize:13},
 	color:'#666',
 	height:15,
+	right:20,
+	top:340,
+	bottom:20
 });
 var usernameLabel = Ti.UI.createLabel({
-	//text:' (' + data[i].username + ')',
-	text:' - ' + data[i].username + ' - ',
+	text:data[i].username,
 	font:{fontSize:13},
 	color:'#666',
 	height:15,
+	left:15,
+	top:340,
+	bottom:20
 });
 var numComments = Ti.UI.createLabel({
 	color:'#666',
 	font:{fontSize:13},
-	text:data[i].comments == 1 ? '1 comentario' : data[i].comments + ' comentarios',
+	//text:data[i].comments == 1 ? '1 comentario' : data[i].comments + ' comentarios',
+	text:data[i].comments,
 	height:15,
+	right:35,
+	top:310
 });
-auxView.add(dateLabel);
-auxView.add(usernameLabel);
-auxView.add(numComments);
+var icoComments = Ti.UI.createImageView({
+	image:'images/foro.png',
+	width:15,
+	height:15,
+	right:15,
+	top:312
+});
 
 if (Ti.App.strpos(data[i].date, 'segundo') || Ti.App.strpos(data[i].date, 'minuto')) { // TODO distinto para idiomas
 	dateLabel.color = '#72AD34';
@@ -49,6 +54,7 @@ var image = Ti.UI.createImageView({
 	height:275,
 	width:275
 });
+image.imageBig = data[i].photoBig;
 
 var margin = 7;
 
@@ -56,7 +62,7 @@ var content = Ti.UI.createView({
 	backgroundColor:'#FFF',
 	left:margin,
 	right:margin,
-	layout:'vertical'
+	//layout:'vertical'
 });
 
 content.index = i + 1;
@@ -67,7 +73,10 @@ content.image = image;
 
 content.add(image);
 content.add(title);
-content.add(auxView);
+content.add(numComments);
+content.add(icoComments);
+content.add(dateLabel);
+content.add(usernameLabel);
 
 var row = Ti.UI.createTableViewRow({
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,

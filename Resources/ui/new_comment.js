@@ -32,6 +32,7 @@ saveButton.addEventListener('click', function() {
 	    style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
 	    top:60
 	});
+	saveButton.enabled = false;
 	win.add(loging);
 	win.add(loading);
 	loading.show();
@@ -52,6 +53,7 @@ saveButton.addEventListener('click', function() {
 		onerror: function(e) {
 			alert(L('Ha ocurrido un error con la conexión'));
 			Ti.API.info('error');
+			saveButton.enabled = true;
 		},
 		timeout: 15000
 	});

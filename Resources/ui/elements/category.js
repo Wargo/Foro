@@ -57,6 +57,16 @@ content.title = title;
 content.id = data[i].id;
 
 content.add(title);
+if (data[i].id == -1 || loadFrom == '/photo_folders.js') {
+	title.left = 40;
+	var p = Ti.UI.createImageView({
+		image:'images/photo.png',
+		width:20,
+		height:20,
+		left:15
+	});
+	content.add(p);
+}
 
 if (data[i].topics > 0) {
 	content.add(numTopics);

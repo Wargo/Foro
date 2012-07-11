@@ -71,15 +71,24 @@ var image = Ti.UI.createImageView({
 	height:275,
 	width:275
 });
+image.imageBig = win.current.image.imageBig;
+
+var hiddenImage = Ti.UI.createImageView({
+	image:win.current.image.imageBig,
+	height:1,
+	width:1
+});
+
 var rowImage = Ti.UI.createTableViewRow({
 	backgroundColor:'#EEE',
 	bottom:5,
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 });
+rowImage.add(hiddenImage);
 rowImage.add(image);
 tableData.push(rowImage);
 image.addEventListener('click', function(e) {
-	var imageUrl = e.source.image;
+	var imageUrl = e.source.imageBig;
 	
 	var imageBigWin = Ti.UI.createWindow({
 		title:L('Foto'),
@@ -101,6 +110,7 @@ image.addEventListener('click', function(e) {
 	
 	var imageBig = Ti.UI.createImageView({
 		image:imageUrl,
+		defaultImage:'images/clock.png',
 		width:'100%',
 		height:'100%'
 	});

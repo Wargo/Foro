@@ -6,7 +6,7 @@ function upload(e) {
 		max:1,
 		value:0,
 		style:Titanium.UI.iPhone.ProgressBarStyle.PLAIN,
-		top:20,
+		top:50,
 		message:L('Subiendo imagen...'),
 		font:{fontSize:12, fontWeight:'bold'},
 		color:'#888'

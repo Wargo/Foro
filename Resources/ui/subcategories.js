@@ -144,7 +144,6 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		//win.remove(loading);
 		tableView.data = tableData;
 		win.add(tableView);
 	}

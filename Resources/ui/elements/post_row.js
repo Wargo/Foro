@@ -21,7 +21,6 @@ var dateLabel = Ti.UI.createLabel({
 	height:20,
 });
 var usernameLabel = Ti.UI.createLabel({
-	//text:' (' + data[i].username + ')',
 	text:' - ' + data[i].username,
 	font:{fontSize:13},
 	color:'#666',
@@ -69,6 +68,9 @@ content.numPosts = numPosts;
 content.id = data[i].id;
 content.open = data[i].open;
 content.image = image;
+content.auxView = auxView;
+
+//auxView.title = '...'
 
 content.add(image);
 content.add(title);
@@ -99,6 +101,9 @@ content.addEventListener('click', function(e) {
 		var current = e.source;
 	} else {
 		var current = e.source.parent;
+		if (typeof current.title == 'undefined') {
+			current = current.parent;
+		}
 	}
 	
 	if (typeof current.title == 'undefined') {
@@ -124,6 +129,5 @@ content.addEventListener('click', function(e) {
 	});
 	current.animate(animation);
 	
-	//win.nav.open(post);
 	Ti.UI.currentTab.open(post);
 });
