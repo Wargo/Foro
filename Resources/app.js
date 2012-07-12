@@ -58,7 +58,6 @@ if (Ti.version < 1.8 ) {
 	});
 	
 	var tab2 = Ti.UI.createTab({
-		//icon: Ti.UI.iPhone.SystemIcon.FAVORITES,
 		icon:'ui/images/star.png',
 		title:L('Favoritos'),
 		window: favorites
@@ -73,7 +72,6 @@ if (Ti.version < 1.8 ) {
 	});
 	
 	var tab3 = Ti.UI.createTab({
-		//icon: Ti.UI.iPhone.SystemIcon.MOST_RECENT,
 		title:L('Más recientes'),
 		icon:'ui/images/recents.png',
 		window: recent
@@ -83,12 +81,10 @@ if (Ti.version < 1.8 ) {
 	var profile = Ti.UI.createWindow({
 		backgroundColor:'#CCC',
 		url:'ui/profile.js',
-		//url:'ui/my.js',
 		barColor:'#429BDA'
 	});
 	
 	var tab5 = Ti.UI.createTab({
-		//icon: Ti.UI.iPhone.SystemIcon.CONTACTS,
 		title:L('Mi perfil'),
 		icon:'ui/images/profile.png',
 		window: profile

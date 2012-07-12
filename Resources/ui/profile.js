@@ -18,21 +18,18 @@ var view = Ti.UI.createTableView({
 var content = Ti.UI.createView({
 	backgroundColor:'#F2F2F2',
 	borderRadius:5,
-	//height:Ti.UI.SIZE,
 	left:margin,
 	right:margin,
 	top:margin,
 	layout:'horizontal',
-	height:200
+	height:170
 });
 
 var user = Ti.UI.createView({
-	//backgroundColor:'#FFF',
 	layout:'vertical'
 });
 
 var image = Ti.UI.createImageView({
-	//image: win.current.avatar,
 	defaultImage:'images/clock.png',
 	left:15,
 	top:15,
@@ -40,7 +37,6 @@ var image = Ti.UI.createImageView({
 	height:48
 });
 var username = Ti.UI.createLabel({
-	//text:win.current.username,
 	font:{fontSize:14},
 	color:'#257CBC',
 	top:5,
@@ -48,7 +44,6 @@ var username = Ti.UI.createLabel({
 	right:15
 });
 var name = Ti.UI.createLabel({
-	//text:win.current.name,
 	font:{fontSize:14},
 	color:'#333',
 	top:5,
@@ -56,7 +51,6 @@ var name = Ti.UI.createLabel({
 	right:15
 });
 var registered = Ti.UI.createLabel({
-	//text:L('Fecha registro') + ': ' + win.current.registered,
 	font:{fontSize:14},
 	color:'#999',
 	top:5,
@@ -64,7 +58,6 @@ var registered = Ti.UI.createLabel({
 	right:15
 });
 var numPosts = Ti.UI.createLabel({
-	//text:L('Fecha registro') + ': ' + win.current.registered,
 	font:{fontSize:14},
 	color:'#999',
 	top:5,
@@ -72,7 +65,6 @@ var numPosts = Ti.UI.createLabel({
 	right:15
 });
 var email = Ti.UI.createLabel({
-	//text:L('Fecha registro') + ': ' + win.current.registered,
 	font:{fontSize:14},
 	color:'#999',
 	top:5,
@@ -258,12 +250,10 @@ switchPage(win);
 
 win.addEventListener('focus', function() {
 	if (Ti.App.Properties.getString('login')) {
-		//if (userLabel.text != Ti.App.Properties.getString('user')) {
 		if (currentStatus == 'out') {
 			switchPage(win);
 		}
 	} else {
-		//if (userLabel.text != L('No estás autentificado')) {
 		if (currentStatus == 'in') {
 			switchPage(win);
 		}
@@ -316,3 +306,5 @@ function switchPage(win) {
 		register.text = ''; //L('Si no tienes cuenta, regístrate');
 	}
 }
+
+Ti.include('messages.js');

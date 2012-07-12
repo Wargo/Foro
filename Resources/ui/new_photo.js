@@ -106,7 +106,7 @@ var icon = Ti.UI.createImageView({
 });
 var text = Ti.UI.createLabel({
 	text:L('Capturar foto'),
-	textAlign:'right',
+	textAlign:'center',
 	color:'#CCC',
 	font:{fontWeight:'bold',fontSize:18},
 	//left:40

@@ -117,6 +117,12 @@ content.addEventListener('click', function(e) {
 		barColor:'#429BDA'
 	});
 	
+	if (loadFrom == '/messages.js') {
+		post.messages = true;
+	} else {
+		post.messages = false;
+	}
+	
 	var animation = Ti.UI.createAnimation({
 		backgroundColor:'#429BDA',
 		duration:300

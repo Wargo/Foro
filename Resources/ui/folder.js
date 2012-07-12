@@ -1,18 +1,28 @@
 var win = Ti.UI.currentWindow;
 var page = 1;
 
-var createPost = Ti.UI.createButton({
-	systemButton:Ti.UI.iPhone.SystemButton.COMPOSE
+win.backgroundColor = '#FFF';
+if (win.folder == 'inbox') {
+	win.title = L('Bandeja de entrada');
+} else {
+	win.title = L('Bandeja de salida');
+}
+win.barColor = '#429BDA';
+
+var tableView = Ti.UI.createTableView({
+	backgroundColor: '#DDD'
 });
 
-win.rightNavButton = createPost;
-
-createPost.addEventListener('click', function() {
+var newMessage = Ti.UI.createButton({
+	systemButton:Ti.UI.iPhone.SystemButton.COMPOSE
+});
+win.rightNavButton = newMessage;
+newMessage.addEventListener('click', function() {
 	if (Ti.App.Properties.getString('login')) {
 		var createPost = Ti.UI.createWindow({
-			url:'new_post.js',
+			url:'answer.js',
 			barColor:'#429BDA',
-			title:L('Nuevo post')
+			title:L('Enviar mensaje')
 		});
 	} else {
 		var createPost = Ti.UI.createWindow({
@@ -22,7 +32,6 @@ createPost.addEventListener('click', function() {
 		});
 	}
 	
-	createPost.forum_id = win.current.id;
 	createPost.beginReloading = beginReloading;
 	
 	var nav = Ti.UI.iPhone.createNavigationGroup({
@@ -33,10 +42,6 @@ createPost.addEventListener('click', function() {
 	root.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
 	createPost.root = root;
 	createPost.nav = nav;
-});
-
-var tableView = Ti.UI.createTableView({
-	backgroundColor: '#DDD'
 });
 
 var loading = Titanium.UI.createActivityIndicator({
@@ -50,9 +55,8 @@ loading.show();
 var tableData = [];
 
 var element = '/ui/elements/post_row.js'
-var id = win.current.id;
 
-var loadFrom = '/posts.js';
+var loadFrom = '/messages.js';
 Ti.include(loadFrom);
 
 var interval = setInterval(function() {

@@ -22,11 +22,21 @@ win.rightNavButton = reply;
 
 reply.addEventListener('click', function() {
 	if (Ti.App.Properties.getString('login')) {
-		var createPost = Ti.UI.createWindow({
-			url:'new_post.js',
-			barColor:'#429BDA',
-			title:L('Responder')
-		});
+		if (typeof win.messages != 'undefined' && win.messages == true) {
+			var createPost = Ti.UI.createWindow({
+				url:'answer.js',
+				barColor:'#429BDA',
+				title:L('Responder')
+			});
+			createPost.thread_id = win.current.id;
+		} else {
+			var createPost = Ti.UI.createWindow({
+				url:'new_post.js',
+				barColor:'#429BDA',
+				title:L('Responder')
+			});
+			createPost.topic_id = win.current.id;
+		}
 	} else {
 		var createPost = Ti.UI.createWindow({
 			url:'login.js',
@@ -35,7 +45,6 @@ reply.addEventListener('click', function() {
 		});
 	}
 	
-	createPost.topic_id = win.current.id;
 	createPost.beginReloading = beginReloading;
 	
 	var nav = Ti.UI.iPhone.createNavigationGroup({
@@ -83,7 +92,12 @@ tableData.push(rowTitle);
 
 var element = '/ui/elements/post.js'
 var id = win.current.id;
-var loadFrom = '/post.js';
+if (win.messages) {
+	var loadFrom = '/message.js';
+} else {
+	var loadFrom = '/post.js';
+}
+
 Ti.include(loadFrom);
 
 var interval = setInterval(function() {
@@ -93,7 +107,6 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		//win.remove(loading);
 		tableView.data = tableData;
 		Ti.include('/ui/paginator.js');
 		win.add(tableView);
