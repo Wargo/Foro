@@ -28,6 +28,12 @@ var image = Ti.UI.createImageView({
 	width:48,
 	height:48
 });
+image.big = win.current.avatar_big;
+var hiddenImage = Ti.UI.createImageView({
+	image:win.current.avatar_big,
+	height:1,
+	width:1
+});
 var username = Ti.UI.createLabel({
 	text:win.current.username,
 	font:{fontSize:14},
@@ -62,6 +68,7 @@ var numPosts = Ti.UI.createLabel({
 });
 
 content.add(image);
+content.add(hiddenImage);
 user.add(username);
 user.add(name);
 user.add(registered);
@@ -79,7 +86,7 @@ view.data = tableData;
 win.add(view);
 
 image.addEventListener('click', function(e) {
-	var imageUrl = e.source.image;
+	var imageUrl = e.source.big;
 	
 	var imageBigWin = Ti.UI.createWindow({
 		title:win.current.username,

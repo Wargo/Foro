@@ -86,6 +86,11 @@ var rowImage = Ti.UI.createTableViewRow({
 });
 rowImage.add(hiddenImage);
 rowImage.add(image);
+rowImage.add(win.current.title);
+rowImage.add(win.current.numComments);
+rowImage.add(win.current.icoComments);
+rowImage.add(win.current.dateLabel);
+rowImage.add(win.current.usernameLabel);
 tableData.push(rowImage);
 image.addEventListener('click', function(e) {
 	var imageUrl = e.source.imageBig;

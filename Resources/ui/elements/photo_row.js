@@ -67,7 +67,10 @@ var content = Ti.UI.createView({
 
 content.index = i + 1;
 content.title = title;
-content.numPosts = numComments;
+content.numComments = numComments;
+content.dateLabel = dateLabel;
+content.usernameLabel = usernameLabel;
+content.icoComments = icoComments;
 content.id = data[i].id;
 content.image = image;
 

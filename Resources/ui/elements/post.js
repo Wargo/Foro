@@ -53,6 +53,7 @@ user.username = data[i].username;
 user.name = data[i].name;
 user.registered = data[i].registered;
 user.avatar = data[i].avatar;
+user.avatar_big = data[i].avatar_big;
 user.num_posts = data[i].num_posts;
 
 user.index = 1;
@@ -118,14 +119,14 @@ user.addEventListener('click', function(e) {
 		var current = e.source.parent;
 	}
 	
-	var user = Ti.UI.createWindow({
+	var userWin = Ti.UI.createWindow({
 		title:current.username,
 		url:'user.js',
 		backgroundColor:'#FFF',
 		barColor:'#429BDA'
 	});
 	
-	user.current = current;
+	userWin.current = current;
 	
 	var animation = Ti.UI.createAnimation({
 		backgroundColor:'#429BDA',
@@ -137,5 +138,5 @@ user.addEventListener('click', function(e) {
 	});
 	current.animate(animation);
 	
-	Ti.UI.currentTab.open(user);
+	Ti.UI.currentTab.open(userWin);
 });
