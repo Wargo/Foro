@@ -6,8 +6,7 @@ var view = Ti.UI.createTableView({
 });
 
 var newMessage = Ti.UI.createButton({
-	//systemButton:Ti.UI.iPhone.SystemButton.COMPOSE
-	image:'images/mail2.png',
+	image:'images/message.png',
 });
 win.rightNavButton = newMessage;
 newMessage.addEventListener('click', function() {

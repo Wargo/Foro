@@ -180,4 +180,5 @@ win.addEventListener('focus', function() {
 		}
 	}
 	first_time = false;
-})
+	Ti.include('/notifications.js');
+});

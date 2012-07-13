@@ -283,6 +283,7 @@ function switchPage(win) {
 				} else {
 					Ti.include('messages.js');
 				}
+				Ti.include('/notifications.js');
 			}
 			if (error) {
 				clearInterval(interval);
@@ -297,6 +298,7 @@ function switchPage(win) {
 				if (typeof rowMessages != 'undefined') {
 					rowMessages.remove(c);
 				}
+				Ti.UI.currentTab.badge = null;
 			}
 		}, 100);
 	} else {
@@ -315,6 +317,7 @@ function switchPage(win) {
 		if (typeof rowMessages != 'undefined') {
 			rowMessages.remove(c);
 		}
+		Ti.UI.currentTab.badge = null;
 	}
 }
 

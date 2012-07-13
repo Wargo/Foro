@@ -96,6 +96,21 @@ if (page > 1) {
 	}
 }
 
+if (loadFrom == '/messages.js' && data[i].unread > 0) {
+	var badge = Ti.UI.createLabel({
+		text:data[i].unread,
+		color:'white',
+		backgroundColor:'red',
+		borderColor:'white',
+		textAlign:'center',
+		font:{fontSize:12,fontWeight:'bold'},
+		width:18,
+		height:16,
+		bottom:1,left:1
+	});
+	image.add(badge);
+}
+
 content.addEventListener('click', function(e) {
 	if (e.source.index) {
 		var current = e.source;
@@ -119,6 +134,8 @@ content.addEventListener('click', function(e) {
 	
 	if (loadFrom == '/messages.js') {
 		post.messages = true;
+		Ti.include('/markAsRead.js');
+		markAsRead(current.id);
 	} else {
 		post.messages = false;
 	}

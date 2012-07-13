@@ -90,6 +90,7 @@ if (Ti.version < 1.8 ) {
 		window: profile
 	});
 	profile.containingTab = tab5;
+	Ti.App.tab5 = tab5;
 	
 	tabGroup.addTab(tab1);
 	tabGroup.addTab(tab2);
@@ -97,6 +98,8 @@ if (Ti.version < 1.8 ) {
 	tabGroup.addTab(tab5);
 	
 	tabGroup.open();
+	
+	Ti.include('/notifications.js');
 	
 	/*
 	var root = Ti.UI.createWindow();
