@@ -60,6 +60,7 @@ saveButton.addEventListener('click', function() {
 					message:result.message
 				});
 				error.show();
+				saveButton.enabled = true;
 			} else {
 				win.beginReloading();
 				win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});

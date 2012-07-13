@@ -3,7 +3,39 @@ var margin = 7;
 
 var view = Ti.UI.createTableView({
 	backgroundColor: '#DDD'
-})
+});
+
+var newMessage = Ti.UI.createButton({
+	//systemButton:Ti.UI.iPhone.SystemButton.COMPOSE
+	image:'images/mail2.png',
+});
+win.rightNavButton = newMessage;
+newMessage.addEventListener('click', function() {
+	if (Ti.App.Properties.getString('login')) {
+		var createPost = Ti.UI.createWindow({
+			url:'answer.js',
+			barColor:'#429BDA',
+			title:L('Enviar mensaje')
+		});
+	} else {
+		var createPost = Ti.UI.createWindow({
+			url:'login.js',
+			barColor:'#429BDA',
+			title:L('Login')
+		});
+	}
+	
+	createPost.user_id = win.current.user_id;
+	
+	var nav = Ti.UI.iPhone.createNavigationGroup({
+		window:createPost
+	});
+	var root = Ti.UI.createWindow();
+	root.add(nav);
+	root.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
+	createPost.root = root;
+	createPost.nav = nav;
+});
 
 var content = Ti.UI.createView({
 	backgroundColor:'#F2F2F2',

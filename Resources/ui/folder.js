@@ -13,37 +13,6 @@ var tableView = Ti.UI.createTableView({
 	backgroundColor: '#DDD'
 });
 
-var newMessage = Ti.UI.createButton({
-	systemButton:Ti.UI.iPhone.SystemButton.COMPOSE
-});
-win.rightNavButton = newMessage;
-newMessage.addEventListener('click', function() {
-	if (Ti.App.Properties.getString('login')) {
-		var createPost = Ti.UI.createWindow({
-			url:'answer.js',
-			barColor:'#429BDA',
-			title:L('Enviar mensaje')
-		});
-	} else {
-		var createPost = Ti.UI.createWindow({
-			url:'login.js',
-			barColor:'#429BDA',
-			title:L('Login')
-		});
-	}
-	
-	createPost.beginReloading = beginReloading;
-	
-	var nav = Ti.UI.iPhone.createNavigationGroup({
-		window:createPost
-	});
-	var root = Ti.UI.createWindow();
-	root.add(nav);
-	root.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
-	createPost.root = root;
-	createPost.nav = nav;
-});
-
 var loading = Titanium.UI.createActivityIndicator({
     message:'',
     style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,

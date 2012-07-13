@@ -66,11 +66,11 @@ saveButton.addEventListener('click', function() {
 				alert(L('Error guardando el mensaje, vuelve a intentarlo en unos momentos'));
 				loading.hide();
 				win.remove(loging);
+				saveButton.enabled = true;
 			} else {
 				win.beginReloading();
 				win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 			}
-			
 		},
 		onerror: function(e) {
 			alert(L('Ha ocurrido un error con la conexión'));

@@ -278,6 +278,11 @@ function switchPage(win) {
 				numPosts.text = userData[0].num_posts == 1 ? '1 post' : userData[0].num_posts + ' posts';
 				email.text = userData[0].email;
 				register.text = L('Para editar tus datos, pincha aquí');
+				if (typeof rowMessages != 'undefined') {
+					rowMessages.add(c);
+				} else {
+					Ti.include('messages.js');
+				}
 			}
 			if (error) {
 				clearInterval(interval);
@@ -289,6 +294,9 @@ function switchPage(win) {
 				numPosts.text = '';
 				email.text = '';
 				register.text = ''; //L('Si no tienes cuenta, regístrate');
+				if (typeof rowMessages != 'undefined') {
+					rowMessages.remove(c);
+				}
 			}
 		}, 100);
 	} else {
@@ -304,7 +312,12 @@ function switchPage(win) {
 		numPosts.text = '';
 		email.text = '';
 		register.text = ''; //L('Si no tienes cuenta, regístrate');
+		if (typeof rowMessages != 'undefined') {
+			rowMessages.remove(c);
+		}
 	}
 }
 
-Ti.include('messages.js');
+if (Ti.App.Properties.getString('login')) {
+	Ti.include('messages.js');
+}

@@ -13,8 +13,6 @@ cancelButton.addEventListener('click', function() {
 	win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 });
 saveButton.addEventListener('click', function() {
-	alert('Todavía no está terminado');
-	return;
 	if (text.value == '') {
 		var confirm = Ti.UI.createAlertDialog({
 			title:L('Error'),
@@ -37,20 +35,20 @@ saveButton.addEventListener('click', function() {
 	win.add(loading);
 	loading.show();
 	saveButton.enabled = false;
-	var path = Ti.App.dataURL + 'send_message.php';
+	var path = Ti.App.dataURL + 'create_message.php';
 	var client = Ti.Network.createHTTPClient({
 		onload: function(e) {
 			Ti.API.info('success ' + this.responseText);
 			var result = eval('(' + this.responseText + ')');
 			if (!result || result.status != 'ok') {
-				alert(L('Error guardando el mensaje, vuelve a intentarlo en unos momentos'));
+				alert(result.message);
 				loading.hide();
 				win.remove(loging);
+				saveButton.enabled = true;
 			} else {
 				win.beginReloading();
 				win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 			}
-			
 		},
 		onerror: function(e) {
 			alert(L('Ha ocurrido un error con la conexión'));
@@ -72,6 +70,7 @@ saveButton.addEventListener('click', function() {
 		client.send({
 			subject:title.value,
 			message:text.value,
+			toUserId:win.user_id, // TODO esto no está terminado
 			userId:Ti.App.Properties.getString('login'),
 			token:Ti.App.Properties.getString('token')
 		});

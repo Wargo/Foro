@@ -62,12 +62,12 @@ c.add(messages);
 c.add(inbox);
 c.add(outbox);
 
-var row = Ti.UI.createTableViewRow({
+var rowMessages = Ti.UI.createTableViewRow({
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 });
 
-row.add(c);
-tableData.push(row);
+rowMessages.add(c);
+tableData.push(rowMessages);
 view.data = tableData;
 
 inbox.addEventListener('click', function(e) {

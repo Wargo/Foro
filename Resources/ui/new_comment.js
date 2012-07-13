@@ -45,6 +45,7 @@ saveButton.addEventListener('click', function() {
 				alert(result.message);
 				loading.hide();
 				win.remove(loging);
+				saveButton.enabled = true;
 			} else {
 				win.beginReloading();
 				win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
