@@ -28,11 +28,35 @@ var content = Ti.UI.createView({
 	bottom:1
 });
 
+var icon1 = Ti.UI.createImageView({
+	image:'images/mail.png',
+	left:10
+});
+var text1 = Ti.UI.createLabel({
+	left:10,
+	text:L('Enviar mensaje'),
+	textAlign:'center',
+	color:'#CCC',
+	font:{fontWeight:'bold',fontSize:15}
+});
+var send = Ti.UI.createView({
+	borderColor:'#CCC',
+	borderRadius:10,
+	width:150,
+	top:12,
+	bottom:12,
+	right:10,
+	layout:'horizontal'
+});
+send.add(icon1);
+send.add(text1);
+
 content.index = i + 1;
 content.title = title;
 content.id = data[i].id;
 content.image = image;
 
+content.add(send);
 content.add(image);
 content.add(title);
 
@@ -75,10 +99,10 @@ content.addEventListener('click', function(e) {
 		title:L('Enviar mensaje')
 	});
 	post.user_id = current.id;
-	/*
+	
 	var animation = Ti.UI.createAnimation({
 		backgroundColor:'#429BDA',
-		duration:300
+		duration:100
 	});
 	
 	post.current = current;
@@ -87,9 +111,7 @@ content.addEventListener('click', function(e) {
 		current.backgroundColor = '#FFF';
 	});
 	current.animate(animation);
-	
-	Ti.UI.currentTab.open(post);
-	*/
+
 	var nav = Ti.UI.iPhone.createNavigationGroup({
 		window:post
 	});

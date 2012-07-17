@@ -30,7 +30,7 @@ createPost.addEventListener('click', function() {
 	}
 	
 	createPost.folder_id = win.current.id;
-	createPost.beginReloading = beginReloading;
+	//createPost.beginReloading = beginReloading;
 	
 	var nav = Ti.UI.iPhone.createNavigationGroup({
 		window:createPost
@@ -42,8 +42,15 @@ createPost.addEventListener('click', function() {
 	createPost.nav = nav;
 });
 
+/*
 var tableView = Ti.UI.createTableView({
 	backgroundColor: '#DDD'
+});
+*/
+
+var tableView = Ti.UI.createScrollView({
+	contentHeight:'auto',
+	showVerticalScrollIndicator:true
 });
 
 var loading = Titanium.UI.createActivityIndicator({
@@ -54,13 +61,19 @@ var loading = Titanium.UI.createActivityIndicator({
 
 win.add(loading);
 loading.show();
-var tableData = [];
+//var tableData = [];
 
 var element = '/ui/elements/photo_row.js'
 var id = win.current.id;
 
 var loadFrom = '/photos.js';
 Ti.include(loadFrom);
+
+var h = 0;
+var x = 0;
+var size = 100;
+var cols = 3;
+var space = 5;
 
 var interval = setInterval(function() {
 	if (data) {
@@ -69,11 +82,15 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		tableView.data = tableData;
+		//tableView.data = tableData;
 		win.add(tableView);
 		ad.addEventListener('load', function() {
 			ad.animate({bottom:0, duration:300});
 			tableView.animate({bottom:50, duration:300});
+		});
+		ad.addEventListener('error', function() {
+			ad.animate({bottom:-200, duration:300});
+			tableView.animate({bottom:0, duration:300});
 		});
 		win.add(ad);
 	}
@@ -85,5 +102,5 @@ var interval = setInterval(function() {
 	}
 }, 100);
 
-Ti.include('/ui/reload.js');
-Ti.include('/ui/append.js');
+//Ti.include('/ui/reload.js');
+//Ti.include('/ui/append.js');

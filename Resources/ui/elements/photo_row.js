@@ -1,12 +1,13 @@
 var title = Ti.UI.createLabel({
 	text:data[i].title,
-	font:{fontSize:14},
-	color:'#257CBC',
-	top:300,
-	height:40,
-	left:15,
-	right:25,
-	width:200
+	font:{fontSize:13},
+	color:'#55ACFF',
+	//top:300,
+	height:15,
+	top:2,
+	left:2,
+	//right:25,
+	width:90
 });
 var dateLabel = Ti.UI.createLabel({
 	text:data[i].date,
@@ -19,28 +20,32 @@ var dateLabel = Ti.UI.createLabel({
 });
 var usernameLabel = Ti.UI.createLabel({
 	text:data[i].name,
-	font:{fontSize:13},
-	color:'#666',
+	font:{fontSize:12},
+	color:'#FFF',
 	height:15,
-	left:15,
-	top:340,
-	bottom:20
+	left:2,
+	//top:340,
+	bottom:2,
+	width:60
 });
 var numComments = Ti.UI.createLabel({
-	color:'#666',
-	font:{fontSize:13},
-	//text:data[i].comments == 1 ? '1 comentario' : data[i].comments + ' comentarios',
+	color:'#FFF',
+	font:{fontSize:10},
 	text:data[i].comments,
 	height:15,
-	right:35,
-	top:310
+	//right:35,
+	//top:310
+	bottom:2,
+	right:20
 });
 var icoComments = Ti.UI.createImageView({
 	image:'images/foro.png',
 	width:15,
 	height:15,
-	right:15,
-	top:312
+	//right:15,
+	//top:312
+	bottom:2,
+	right:2
 });
 
 if (Ti.App.strpos(data[i].date, 'segundo') || Ti.App.strpos(data[i].date, 'minuto')) { // TODO distinto para idiomas
@@ -56,79 +61,93 @@ var image = Ti.UI.createImageView({
 });
 image.imageBig = data[i].photoBig;
 
-var margin = 7;
-
 var content = Ti.UI.createView({
-	backgroundColor:'#FFF',
-	left:margin,
-	right:margin,
-	//layout:'vertical'
+	backgroundColor:'#000',
+	opacity:0.6,
+	bottom:-40,
+	left:0,
+	right:0,
+	top:100
+});
+
+var button = Ti.UI.createLabel({
+	opacity:0.1,
+	zIndex:100,
+	width:100,
+	height:100,
+	backgroundColor:'#000'
 });
 
 content.index = i + 1;
-content.title = title;
-content.numComments = numComments;
-content.dateLabel = dateLabel;
-content.usernameLabel = usernameLabel;
-content.icoComments = icoComments;
-content.id = data[i].id;
-content.image = image;
+button.title = title.text;
+button.numComments = numComments.text;
+button.dateLabel = dateLabel.text;
+button.usernameLabel = usernameLabel.text;
+button.icoComments = icoComments.image;
+button.id = data[i].id;
+button._image = image;
+button.image = image.image;
+button.imageBig = image.imageBig;
 
-content.add(image);
+//content.add(image);
 content.add(title);
 content.add(numComments);
 content.add(icoComments);
-content.add(dateLabel);
+//content.add(dateLabel);
 content.add(usernameLabel);
 
+image.content = content;
+image.button = button;
+
+image.addEventListener('load', function(e) {
+	e.source.add(e.source.content);
+	e.source.add(e.source.button);
+	var anim = Ti.UI.createAnimation({
+		top:60,
+		bottom:0,
+		duration:300
+	});
+	e.source.content.animate(anim);
+})
+
+/*
 var row = Ti.UI.createTableViewRow({
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 });
 
 row.add(content);
+*/
 
-if (page > 1) {
-	tableView.appendRow(row);
-} else {
-	tableData.push(row);
-	if (i == 0) {
-		content.top = margin;
-	}
-	if (i == data.length - 1) {
-		// Si no, al concatenar se queda feo
-		//content.bottom = margin;
-	}
+image.width = image.height = size;
+image.left = space + (i % cols) * (size + space);
+image.top = space + h * (size + space);
+if (i % cols == cols - 1) {
+	h ++;
 }
+tableView.add(image);
 
-content.addEventListener('click', function(e) {
-	if (e.source.index) {
-		var current = e.source;
-	} else {
-		var current = e.source.parent;
-	}
-	
-	if (typeof current.title == 'undefined') {
-		return;
-	}
-	
+button.addEventListener('click', function(e) {
 	var post = Ti.UI.createWindow({
-		title:current.title.text,
+		title:e.source.title.text,
 		url:'photo.js',
 		backgroundColor:'#FFF',
 		barColor:'#429BDA'
 	});
 	
 	var animation = Ti.UI.createAnimation({
-		backgroundColor:'#429BDA',
-		duration:300
+		opacity:0.2,
+		duration:150
 	});
 	
-	post.current = current;
+	//post.current = current;
+	post.current = e.source;
 	
 	animation.addEventListener('complete', function() {
-		current.backgroundColor = '#FFF';
+		//current.backgroundColor = '#FFF';
+		e.source._image.opacity = 1;
 	});
-	current.animate(animation);
+	//current.animate(animation);
+	e.source._image.animate(animation);
 	
 	Ti.UI.currentTab.open(post);
 });

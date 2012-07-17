@@ -114,6 +114,10 @@ var interval = setInterval(function() {
 			ad.animate({bottom:40, duration:300});
 			tableView.animate({bottom:90, duration:300});
 		});
+		ad.addEventListener('error', function() {
+			ad.animate({bottom:-200, duration:300});
+			tableView.animate({bottom:40, duration:300});
+		});
 		win.add(ad);
 	}
 	if (error) {

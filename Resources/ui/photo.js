@@ -65,19 +65,45 @@ loading.show();
 var tableData = [];
 
 var image = Ti.UI.createImageView({
-	image:win.current.image.image,
+	image:win.current.image,
 	defaultImage:'images/clock.png',
 	top:15,
 	height:275,
 	width:275
 });
-image.imageBig = win.current.image.imageBig;
+image.imageBig = win.current.imageBig;
 
 var hiddenImage = Ti.UI.createImageView({
-	image:win.current.image.imageBig,
+	image:win.current.imageBig,
 	height:1,
 	width:1
 });
+var tit = Ti.UI.createLabel({text:win.current.title});
+var usernameLabel = Ti.UI.createLabel({text:win.current.usernameLabel});
+var numComments = Ti.UI.createLabel({text:win.current.numComments});
+var icoComments = Ti.UI.createImageView({image:win.current.icoComments});
+var dateLabel = Ti.UI.createLabel({text:win.current.dateLabel});
+
+tit.top = 295;
+tit.right = 50;
+tit.left = 20;
+tit.width = 230;
+tit.height = 40;
+usernameLabel.width = 200;
+usernameLabel.top = 340;
+usernameLabel.left = 20;
+numComments.top = 310;
+numComments.right = 35;
+icoComments.top = 312;
+icoComments.right = 15;
+icoComments.width = 15;
+icoComments.height = 15;
+dateLabel.color = numComments.color = usernameLabel.color = '#666';
+dateLabel.font = numComments.font = usernameLabel.font = {fontSize:14};
+tit.font = {fontSize:15};
+tit.color = '#55ACFF';
+dateLabel.top = 340;
+dateLabel.right = 15;
 
 var rowImage = Ti.UI.createTableViewRow({
 	backgroundColor:'#EEE',
@@ -86,11 +112,11 @@ var rowImage = Ti.UI.createTableViewRow({
 });
 rowImage.add(hiddenImage);
 rowImage.add(image);
-rowImage.add(win.current.title);
-rowImage.add(win.current.numComments);
-rowImage.add(win.current.icoComments);
-rowImage.add(win.current.dateLabel);
-rowImage.add(win.current.usernameLabel);
+rowImage.add(tit);
+rowImage.add(numComments);
+rowImage.add(icoComments);
+rowImage.add(dateLabel);
+rowImage.add(usernameLabel);
 tableData.push(rowImage);
 image.addEventListener('click', function(e) {
 	var imageUrl = e.source.imageBig;
@@ -139,12 +165,30 @@ var interval = setInterval(function() {
 		clearInterval(interval);
 		loading.hide();
 		tableView.data = tableData;
-		Ti.include('/ui/paginator.js');
+		if (data.length > 0) {
+			Ti.include('/ui/paginator.js');
+		} else {
+			tableView.bottom = 0;
+		}
 		win.add(tableView);
 		ad.addEventListener('load', function() {
-			ad.animate({bottom:40, duration:300});
-			tableView.animate({bottom:90, duration:300});
+			if (data.length > 0) {
+				ad.animate({bottom:40, duration:300});
+				tableView.animate({bottom:90, duration:300});
+			} else {
+				ad.animate({bottom:0, duration:300});
+				tableView.animate({bottom:50, duration:300});
+			}
 		});
+		ad.addEventListener('error', function() {
+			if (data.length > 0) {
+				ad.animate({bottom:-200, duration:300});
+				tableView.animate({bottom:40, duration:300});
+			} else {
+				ad.animate({bottom:0, duration:300});
+				tableView.animate({bottom:0, duration:300});
+			}
+		})
 		win.add(ad);
 	}
 	if (error) {
