@@ -6,6 +6,9 @@ if (Ti.App.Properties.getString('login', null)) {
 			var badges = eval('(' + this.responseText + ')');
 			Ti.App.tab5.setBadge(badges.num);
 			Titanium.UI.iPhone.appBadge = badges.num;
+			if (typeof b != 'undefined') {
+				b.text = Titanium.UI.iPhone.appBadge;
+			}
 		},
 		onerror: function(e) {
 			error = L('Ha ocurrido un error con la conexión');

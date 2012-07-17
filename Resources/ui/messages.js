@@ -26,14 +26,28 @@ var inbox = Ti.UI.createView({
 });
 inbox.add(icon1);
 inbox.add(text1);
+var b = Ti.UI.createLabel({
+	color:'white',
+	backgroundColor:'red',
+	borderColor:'white',
+	borderWidth:2,
+	textAlign:'center',
+	font:{fontSize:12,fontWeight:'bold'},
+	width:18,
+	height:18,
+	top:50,
+	left:20,
+	borderRadius:6
+});
 
 var icon2 = Ti.UI.createImageView({
-	image:'images/outbox.png',
+	//image:'images/outbox.png',
+	image:'images/mail.png',
 	top:10
 });
 var text2 = Ti.UI.createLabel({
 	top:10,
-	text:L('Bandeja de salida'),
+	text:L('Enviar nuevo mensaje'),
 	textAlign:'center',
 	color:'#CCC',
 	font:{fontWeight:'bold',fontSize:18}
@@ -58,6 +72,16 @@ var c = Ti.UI.createView({
 	top:margin,
 	height:180
 });
+
+win.addEventListener('focus', function() {
+	b.text = Titanium.UI.iPhone.appBadge;
+	if (Titanium.UI.iPhone.appBadge) {
+		c.add(b);
+	} else {
+		c.remove(b);
+	}
+});
+
 c.add(messages);
 c.add(inbox);
 c.add(outbox);
@@ -84,10 +108,15 @@ function open(folder) {
 	});
 	var item = eval(folder);
 	animation.addEventListener('complete', function() {
-		item.backgroundColor = '#FFF';
+		item.backgroundColor = null;
 	});
 	item.animate(animation);
-	var folderWin = Ti.UI.createWindow({url:'folder.js'});
-	folderWin.folder = folder;
+	if (folder == 'inbox') {
+		var folderWin = Ti.UI.createWindow({url:'folder.js'});
+		folderWin.folder = folder;
+	} else {
+		var folderWin = Ti.UI.createWindow({url:'friends.js'});
+	}
+	
 	Ti.UI.currentTab.open(folderWin);
 }

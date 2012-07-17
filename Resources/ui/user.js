@@ -6,9 +6,12 @@ var view = Ti.UI.createTableView({
 });
 
 var newMessage = Ti.UI.createButton({
-	image:'images/message.png',
+	image:'images/message.png'
 });
-win.rightNavButton = newMessage;
+var addFriend = Ti.UI.createButton({
+	image:'images/addFriend.png'
+});
+
 newMessage.addEventListener('click', function() {
 	if (Ti.App.Properties.getString('login')) {
 		var createPost = Ti.UI.createWindow({
@@ -34,6 +37,24 @@ newMessage.addEventListener('click', function() {
 	root.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
 	createPost.root = root;
 	createPost.nav = nav;
+});
+
+addFriend.addEventListener('click', function() {
+	var confirm = Ti.UI.createAlertDialog({
+		title:L('Agregar amiga'),
+		message:L('¿Seguro que deseas enviarle una solicitud de amistad?'),
+		buttonNames:[L('Sí'), L('No')],
+		cancel:1
+	});
+	confirm.show();
+	
+	confirm.addEventListener('click', function(e) {
+		if (e.index === e.cancel || e.cancel === true) { // Comparador iOS y Android
+			return;
+		}
+		Ti.include('/addFriend.js');
+		add_friend(win.current.user_id);
+	});
 });
 
 var content = Ti.UI.createView({
@@ -148,3 +169,5 @@ image.addEventListener('click', function(e) {
 	
 	Ti.UI.currentTab.open(imageBigWin);
 });
+
+Ti.include('/friends_id.js');

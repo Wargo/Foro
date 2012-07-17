@@ -1,85 +1,40 @@
 var title = Ti.UI.createLabel({
-	text:data[i].title,
+	text:data[i].name,
 	font:{fontSize:14},
 	color:'#257CBC',
-	top:300,
+	top:10,
 	height:40,
-	left:15,
-	right:25,
-	width:200
+	left:70,
+	right:25
 });
-var dateLabel = Ti.UI.createLabel({
-	text:data[i].date,
-	font:{fontSize:13},
-	color:'#666',
-	height:15,
-	right:20,
-	top:340,
-	bottom:20
-});
-var usernameLabel = Ti.UI.createLabel({
-	text:data[i].name,
-	font:{fontSize:13},
-	color:'#666',
-	height:15,
-	left:15,
-	top:340,
-	bottom:20
-});
-var numComments = Ti.UI.createLabel({
-	color:'#666',
-	font:{fontSize:13},
-	//text:data[i].comments == 1 ? '1 comentario' : data[i].comments + ' comentarios',
-	text:data[i].comments,
-	height:15,
-	right:35,
-	top:310
-});
-var icoComments = Ti.UI.createImageView({
-	image:'images/foro.png',
-	width:15,
-	height:15,
-	right:15,
-	top:312
-});
-
-if (Ti.App.strpos(data[i].date, 'segundo') || Ti.App.strpos(data[i].date, 'minuto')) { // TODO distinto para idiomas
-	dateLabel.color = '#72AD34';
-}
 
 var image = Ti.UI.createImageView({
-	image:data[i].photo,
+	image:data[i].avatar,
 	defaultImage:'images/clock.png',
+	left:10,
 	top:15,
-	height:275,
-	width:275
+	width:48,
+	height:48
 });
-image.imageBig = data[i].photoBig;
 
 var margin = 7;
 
 var content = Ti.UI.createView({
 	backgroundColor:'#FFF',
+	height:80,
 	left:margin,
 	right:margin,
-	//layout:'vertical'
+	top:0,
+	bottom:1
 });
 
 content.index = i + 1;
 content.title = title;
-content.numComments = numComments;
-content.dateLabel = dateLabel;
-content.usernameLabel = usernameLabel;
-content.icoComments = icoComments;
 content.id = data[i].id;
 content.image = image;
 
 content.add(image);
 content.add(title);
-content.add(numComments);
-content.add(icoComments);
-content.add(dateLabel);
-content.add(usernameLabel);
 
 var row = Ti.UI.createTableViewRow({
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
@@ -105,6 +60,9 @@ content.addEventListener('click', function(e) {
 		var current = e.source;
 	} else {
 		var current = e.source.parent;
+		if (typeof current.title == 'undefined') {
+			current = current.parent;
+		}
 	}
 	
 	if (typeof current.title == 'undefined') {
@@ -112,12 +70,12 @@ content.addEventListener('click', function(e) {
 	}
 	
 	var post = Ti.UI.createWindow({
-		title:current.title.text,
-		url:'photo.js',
-		backgroundColor:'#FFF',
-		barColor:'#429BDA'
+		url:'answer.js',
+		barColor:'#429BDA',
+		title:L('Enviar mensaje')
 	});
-	
+	post.user_id = current.id;
+	/*
 	var animation = Ti.UI.createAnimation({
 		backgroundColor:'#429BDA',
 		duration:300
@@ -131,4 +89,13 @@ content.addEventListener('click', function(e) {
 	current.animate(animation);
 	
 	Ti.UI.currentTab.open(post);
+	*/
+	var nav = Ti.UI.iPhone.createNavigationGroup({
+		window:post
+	});
+	var root = Ti.UI.createWindow();
+	root.add(nav);
+	root.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
+	post.root = root;
+	post.nav = nav;
 });

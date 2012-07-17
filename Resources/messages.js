@@ -17,5 +17,7 @@ client.open('POST', path);
 client.send({
 	folder:win.folder,
 	page:page,
-	user_id:Ti.App.Properties.getString('login', null)
+	userId:Ti.App.Properties.getString('login'),
+	token:Ti.App.Properties.getString('token')
+	//user_id:Ti.App.Properties.getString('login', null)
 });

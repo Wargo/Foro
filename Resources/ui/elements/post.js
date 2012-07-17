@@ -23,7 +23,7 @@ var image = Ti.UI.createImageView({
 	height:48
 });
 var name = Ti.UI.createLabel({
-	text:data[i].username,
+	text:data[i].name,
 	font:{fontSize:14},
 	color:'#257CBC',
 	top:20,

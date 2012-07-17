@@ -1,12 +1,15 @@
 var data = '';
 var error = '';
-var path = Ti.App.dataURL + 'message.php';
+var path = Ti.App.dataURL + 'friends.php';
 var client = Ti.Network.createHTTPClient({
 	onload: function(e) {
 		Ti.API.info('success ' + this.responseText);
-		data = eval('(' + this.responseText + ')');
-		lastPage = data.lastPage;
-		data = data.data;
+		var result = eval('(' + this.responseText + ')');
+		if (result.status == 'ok') {
+			data = result.data;
+		} else {
+			error = result.message;
+		}
 	},
 	onerror: function(e) {
 		error = L('Ha ocurrido un error con la conexión');
@@ -17,8 +20,7 @@ var client = Ti.Network.createHTTPClient({
 
 client.open('POST', path);
 client.send({
-	id:id,
-	page:page,
 	userId:Ti.App.Properties.getString('login'),
-	token:Ti.App.Properties.getString('token')
+	token:Ti.App.Properties.getString('token'),
+	page:page
 });

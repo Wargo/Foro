@@ -46,7 +46,9 @@ saveButton.addEventListener('click', function() {
 				win.remove(loging);
 				saveButton.enabled = true;
 			} else {
-				win.beginReloading();
+				if (typeof win.beginReloading != 'undefined') {
+					win.beginReloading();
+				}
 				win.root.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 			}
 		},

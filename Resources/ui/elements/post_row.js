@@ -21,7 +21,7 @@ var dateLabel = Ti.UI.createLabel({
 	height:20,
 });
 var usernameLabel = Ti.UI.createLabel({
-	text:' - ' + data[i].username,
+	text:' - ' + data[i].name,
 	font:{fontSize:13},
 	color:'#666',
 	height:20,
@@ -102,11 +102,14 @@ if (loadFrom == '/messages.js' && data[i].unread > 0) {
 		color:'white',
 		backgroundColor:'red',
 		borderColor:'white',
+		borderWidth:2,
 		textAlign:'center',
 		font:{fontSize:12,fontWeight:'bold'},
 		width:18,
-		height:16,
-		bottom:1,left:1
+		height:18,
+		bottom:1,
+		left:1,
+		borderRadius:6
 	});
 	image.add(badge);
 }
