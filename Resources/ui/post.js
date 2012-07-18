@@ -88,7 +88,8 @@ var rowTitle = Ti.UI.createTableViewRow({
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 });
 rowTitle.add(title);
-tableData.push(rowTitle);
+//tableData.push(rowTitle);
+tableView.appendRow(rowTitle)
 
 var element = '/ui/elements/post.js'
 var id = win.current.id;
@@ -107,7 +108,7 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		tableView.data = tableData;
+		//tableView.data = tableData;
 		Ti.include('/ui/paginator.js');
 		win.add(tableView);
 		ad.addEventListener('load', function() {

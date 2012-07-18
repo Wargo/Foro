@@ -47,7 +47,7 @@ var loading = Titanium.UI.createActivityIndicator({
 
 win.add(loading);
 loading.show();
-var tableData = [];
+//var tableData = [];
 
 var element = '/ui/elements/post_row.js'
 var id = win.current.id;
@@ -62,7 +62,7 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		tableView.data = tableData;
+		//tableView.data = tableData;
 		win.add(tableView);
 	}
 	if (error) {

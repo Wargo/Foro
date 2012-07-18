@@ -111,7 +111,8 @@ if (page > 1) {
 	tableData.push(row);
 }
 */
-tableData.push(row);
+//tableData.push(row);
+tableView.appendRow(row);
 
 user.addEventListener('click', function(e) {
 	if (e.source.index) {

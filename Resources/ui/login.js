@@ -75,9 +75,16 @@ register.addEventListener('click', function() {
 		barColor:'#429BDA'
 	});
 	registerWin.parentWin = win;
+	if (typeof Ti.UI.currentTab != 'undefined') {
+		Ti.UI.currentTab.open(registerWin);
+	} else {
+		registerWin.root = win.root;
+		win.nav.open(registerWin);
+	}
+	
 	//registerWin.root = win.root;
 	//win.nav.open(registerWin);
-	Ti.UI.currentTab.open(registerWin)
+	
 	
 	//Ti.Platform.openURL('http://elembarazo.net');
 });

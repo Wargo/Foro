@@ -8,7 +8,7 @@ var tableView = Ti.UI.createTableView({
 var editing = false;
 
 var edit = Ti.UI.createButton({
-	title:L('Favoritos')
+	title:L('Mis foros')
 	//style:Ti.UI.iPhone.SystemIcon.FAVORITES
 });
 var cancel = Titanium.UI.createButton({
@@ -123,7 +123,7 @@ var loading = Titanium.UI.createActivityIndicator({
 
 win.add(loading);
 loading.show();
-var tableData = [];
+//var tableData = [];
 
 var url = 'posts.js';
 var element = '/ui/elements/category.js';
@@ -144,7 +144,7 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		tableView.data = tableData;
+		//tableView.data = tableData;
 		win.add(tableView);
 	}
 	if (error) {

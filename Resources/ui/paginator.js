@@ -107,8 +107,8 @@ function reload(p, button) {
 	launchAnimation(button);
 	page = p;
 	Ti.include(loadFrom);
-	tableData = [];
-	tableData.push(rowTitle);
+	//tableData = [];
+	//tableData.push(rowTitle);
 	tableView.data = null;
 	win.remove(tableView);
 	loading.show();
@@ -120,7 +120,7 @@ function reload(p, button) {
 			clearInterval(interval);
 			loading.hide();
 			//win.remove(loading);
-			tableView.data = tableData;
+			//tableView.data = tableData;
 			Ti.include('/ui/paginator.js');
 			win.add(tableView);
 		}

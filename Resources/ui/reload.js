@@ -119,7 +119,11 @@ function beginReloading() {
 	Ti.include(loadFrom);
 	var interval = setInterval(function() {
 		if (data) {
-			endReloading(data, null);
+			tableView.data = null;
+			setTimeout(function() {
+				endReloading(data, null);
+			}, 50)
+			
 			clearInterval(interval);
 			
 			// Reseteando paginación "append"
@@ -134,12 +138,15 @@ function beginReloading() {
  
 function endReloading(data, error) {
 	if (data) {
-		tableData = [];
+		//tableData = [];
+		
 		if (typeof rowTitle != 'undefined') {
-			tableData.push(rowTitle);
+			//tableData.push(rowTitle);
+			tableView.appendRow(rowTitle);
 		}
 		if (typeof rowImage != 'undefined') {
-			tableData.push(rowImage);
+			//tableData.push(rowImage);
+			tableView.appendRow(rowImage);
 		}
 		
 		for (i in data) {
@@ -149,7 +156,7 @@ function endReloading(data, error) {
 		clearInterval(interval);
 		loading.hide();
 		//win.remove(loading);
-		tableView.data = tableData;
+		//tableView.data = tableData;
 		win.add(tableView);
 		
 		if (typeof editing != 'undefined' && editing == true) {

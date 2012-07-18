@@ -38,7 +38,7 @@ if (Ti.version < 1.8 ) {
 	
 	var posts = Ti.UI.createWindow({
 		backgroundColor:'#CCC',
-		title:L('Categorías'),
+		title:L('Foro Elembarazo.net'),
 		url:'ui/categories.js',
 		barColor:'#429BDA'
 	});
@@ -52,14 +52,14 @@ if (Ti.version < 1.8 ) {
 	
 	var favorites = Ti.UI.createWindow({
 		backgroundColor:'#CCC',
-		title:L('Favoritos'),
+		title:L('Mis foros'),
 		url:'ui/favorites.js',
 		barColor:'#429BDA'
 	});
 	
 	var tab2 = Ti.UI.createTab({
 		icon:'ui/images/star.png',
-		title:L('Favoritos'),
+		title:L('Mis foros'),
 		window: favorites
 	});
 	favorites.containingTab = tab2;
@@ -93,8 +93,8 @@ if (Ti.version < 1.8 ) {
 	Ti.App.tab5 = tab5;
 	
 	tabGroup.addTab(tab1);
-	tabGroup.addTab(tab2);
 	tabGroup.addTab(tab3);
+	tabGroup.addTab(tab2);
 	tabGroup.addTab(tab5);
 	
 	tabGroup.open();

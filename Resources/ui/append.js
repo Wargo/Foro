@@ -24,7 +24,12 @@ function beginUpdate(){
 	updating = true;
 	tableView.appendRow(loadingRow);
 	
-	lastRow += data.length;
+	if (typeof cols != 'undefined') {
+		lastRow += Math.ceil(data.length / cols);
+	} else {
+		lastRow += data.length;
+	}
+	
 	data = null;
 	page += 1;
 	Ti.include(loadFrom);

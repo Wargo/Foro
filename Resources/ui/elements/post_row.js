@@ -81,8 +81,14 @@ var row = Ti.UI.createTableViewRow({
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 });
 
-row.add(content);
 
+if (page == 1 && i == 0) {
+	content.top = margin;
+}
+row.add(content);
+tableView.appendRow(row);
+
+/*
 if (page > 1) {
 	tableView.appendRow(row);
 } else {
@@ -95,23 +101,49 @@ if (page > 1) {
 		//content.bottom = margin;
 	}
 }
+*/
 
-if (loadFrom == '/messages.js' && data[i].unread > 0) {
-	var badge = Ti.UI.createLabel({
-		text:data[i].unread,
-		color:'white',
-		backgroundColor:'red',
-		borderColor:'white',
-		borderWidth:2,
-		textAlign:'center',
-		font:{fontSize:12,fontWeight:'bold'},
-		width:18,
-		height:18,
-		bottom:1,
-		left:1,
-		borderRadius:6
+if (loadFrom == '/messages.js') {
+	if (data[i].unread > 0) {
+		var badge = Ti.UI.createLabel({
+			text:data[i].unread,
+			color:'white',
+			backgroundColor:'red',
+			borderColor:'white',
+			borderWidth:2,
+			textAlign:'center',
+			font:{fontSize:12,fontWeight:'bold'},
+			width:18,
+			height:18,
+			bottom:1,
+			left:1,
+			borderRadius:6
+		});
+		image.add(badge);
+	}
+	var text = Ti.UI.createLabel({
+		text:data[i].text,
+		top:30,
+		height:15,
+		color:'#333',
+		font:{fontSize:14},
+		left:70,
+		right:25
 	});
-	image.add(badge);
+	title.height = 15;
+	content.add(text);
+	var to = data[i].to[0].name
+	if (data[i].num_to > 1) {
+		var to = to + ' + ' + (data[i].num_to - 1);
+	}
+	var to_name = Ti.UI.createLabel({
+		text:' - con ' + to,
+		font:{fontSize:13},
+		color:'#666',
+		height:20,
+	});
+	auxView.remove(usernameLabel);
+	auxView.add(to_name);
 }
 
 content.addEventListener('click', function(e) {

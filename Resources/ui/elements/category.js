@@ -82,15 +82,20 @@ if (data[i].posts > 0) {
 	content.add(numPosts);
 }
 */
-
 var row = Ti.UI.createTableViewRow({
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
 });
 
 row.content = content;
 
-row.add(content);
+if (page == 1 && i == 0) {
+	content.top = margin;
+}
 
+row.add(content);
+tableView.appendRow(row);
+
+/*
 if (page > 1) {
 	tableView.appendRow(row);
 } else {
@@ -103,6 +108,7 @@ if (page > 1) {
 		//content.bottom = margin;
 	}
 }
+*/
 
 /*
 content.touched = false;

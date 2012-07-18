@@ -42,17 +42,17 @@ createPost.addEventListener('click', function() {
 	createPost.nav = nav;
 });
 
-/*
+
 var tableView = Ti.UI.createTableView({
 	backgroundColor: '#DDD'
 });
-*/
 
+/*
 var tableView = Ti.UI.createScrollView({
 	contentHeight:'auto',
 	showVerticalScrollIndicator:true
 });
-
+*/
 var loading = Titanium.UI.createActivityIndicator({
     message:'',
     style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
@@ -102,5 +102,5 @@ var interval = setInterval(function() {
 	}
 }, 100);
 
-//Ti.include('/ui/reload.js');
-//Ti.include('/ui/append.js');
+Ti.include('/ui/reload.js');
+Ti.include('/ui/append.js');

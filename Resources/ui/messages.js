@@ -91,8 +91,9 @@ var rowMessages = Ti.UI.createTableViewRow({
 });
 
 rowMessages.add(c);
-tableData.push(rowMessages);
-view.data = tableData;
+//tableData.push(rowMessages);
+//view.data = tableData;
+view.appendRow(rowMessages);
 
 inbox.addEventListener('click', function(e) {
 	open('inbox');

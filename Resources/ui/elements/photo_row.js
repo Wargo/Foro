@@ -96,39 +96,43 @@ content.add(icoComments);
 //content.add(dateLabel);
 content.add(usernameLabel);
 
-image.content = content;
-image.button = button;
+image.add(button);
+image._content = content;
+//image._button = button;
 
 image.addEventListener('load', function(e) {
-	e.source.add(e.source.content);
-	e.source.add(e.source.button);
+	//e.source.add(e.source._button);
 	var anim = Ti.UI.createAnimation({
 		top:60,
 		bottom:0,
 		duration:300
 	});
-	e.source.content.animate(anim);
+	e.source._content.animate(anim);
+	e.source.add(e.source._content);
 })
 
-/*
-var row = Ti.UI.createTableViewRow({
-	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
-});
-
-row.add(content);
-*/
+if (i % cols == 0) {
+	var row = Ti.UI.createTableViewRow({
+		selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
+		layout:'horizontal'
+	});
+	tableView.appendRow(row);
+}
 
 image.width = image.height = size;
-image.left = space + (i % cols) * (size + space);
-image.top = space + h * (size + space);
+//image.left = space + (i % cols) * (size + space);
+image.left = space;
+//image.top = space + h * (size + space);
+image.top = space;
 if (i % cols == cols - 1) {
-	h ++;
+	//h ++;
 }
-tableView.add(image);
+//tableView.add(image);
+row.add(image);
 
 button.addEventListener('click', function(e) {
 	var post = Ti.UI.createWindow({
-		title:e.source.title.text,
+		title:e.source.title,
 		url:'photo.js',
 		backgroundColor:'#FFF',
 		barColor:'#429BDA'
