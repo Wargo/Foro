@@ -1,6 +1,11 @@
 var win = Ti.UI.currentWindow;
 var page = 1;
 
+if (win.current.id != -1) {
+	var help = require('help');
+	help(L('Añadir a mis foros'));
+}
+
 var tableView = Ti.UI.createTableView({
 	backgroundColor: '#DDD'
 });
@@ -123,7 +128,7 @@ var loading = Titanium.UI.createActivityIndicator({
 
 win.add(loading);
 loading.show();
-//var tableData = [];
+var tableData = [];
 
 var url = 'posts.js';
 var element = '/ui/elements/category.js';
@@ -144,7 +149,7 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		//tableView.data = tableData;
+		tableView.data = tableData;
 		win.add(tableView);
 	}
 	if (error) {

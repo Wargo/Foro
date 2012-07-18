@@ -13,7 +13,7 @@ var loading = Titanium.UI.createActivityIndicator({
 
 win.add(loading);
 loading.show();
-//var tableData = [];
+var tableData = [];
 
 var url = 'subcategories.js';
 var element = '/ui/elements/category.js';
@@ -28,7 +28,7 @@ var interval = setInterval(function() {
 		clearInterval(interval);
 		loading.hide();
 		win.remove(loading);
-		//tableView.data = tableData;
+		tableView.data = tableData;
 		win.add(tableView);
 	}
 	if (error) {

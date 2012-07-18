@@ -1,5 +1,10 @@
 var win = Ti.UI.currentWindow;
 
+//win.addEventListener('focus', function() {
+	var help = require('help');
+	help(L('Modificar foto de perfil'), true);
+//});
+
 win.backgroundColor = '#FFF';
 win.title = L('Tu perfil');
 win.barColor = '#429BDA';

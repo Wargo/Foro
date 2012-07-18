@@ -3,7 +3,7 @@ var page = 1;
 
 win.backgroundColor = '#FFF';
 if (win.folder == 'inbox') {
-	win.title = L('Bandeja de entrada');
+	win.title = L('Mensajes privados');
 } else {
 	win.title = L('Bandeja de salida');
 }
@@ -21,7 +21,7 @@ var loading = Titanium.UI.createActivityIndicator({
 
 win.add(loading);
 loading.show();
-//var tableData = [];
+var tableData = [];
 
 var element = '/ui/elements/post_row.js'
 
@@ -35,7 +35,7 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		//tableView.data = tableData;
+		tableView.data = tableData;
 		win.add(tableView);
 	}
 	if (error) {

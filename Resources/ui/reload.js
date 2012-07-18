@@ -119,10 +119,15 @@ function beginReloading() {
 	Ti.include(loadFrom);
 	var interval = setInterval(function() {
 		if (data) {
-			tableView.data = null;
+			if (typeof tableData == 'undefined') {
+				tableView.data = [];
+			} else {
+				tableData = [];
+			}
+			//alert(data.length)
 			setTimeout(function() {
 				endReloading(data, null);
-			}, 50)
+			}, 150)
 			
 			clearInterval(interval);
 			
@@ -141,29 +146,27 @@ function endReloading(data, error) {
 		//tableData = [];
 		
 		if (typeof rowTitle != 'undefined') {
-			//tableData.push(rowTitle);
-			tableView.appendRow(rowTitle);
+			//tableView.appendRow(rowTitle);
+			tableData.push(rowTitle);
 		}
 		if (typeof rowImage != 'undefined') {
-			//tableData.push(rowImage);
 			tableView.appendRow(rowImage);
 		}
 		
 		for (i in data) {
-			//Ti.include('/ui/elements/category.js');
 			Ti.include(element);
 		}
 		clearInterval(interval);
 		loading.hide();
-		//win.remove(loading);
-		//tableView.data = tableData;
-		win.add(tableView);
+		if (typeof tableData != 'undefined') {
+			tableView.data = tableData;
+		}
 		
 		if (typeof editing != 'undefined' && editing == true) {
 			startAddToFav(false);
 		}
 	} else {
-		alert(error)
+		//alert(error)
 	}
 	
 	// when you're done, just reset

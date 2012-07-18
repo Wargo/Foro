@@ -14,7 +14,7 @@ var numTopics = Ti.UI.createLabel({
 	text:data[i].topics == 1 ? '1 tema' : data[i].topics + ' temas',
 	top:5,
 	right:5,
-	height:10
+	height:15
 });
 
 if (loadFrom == '/forums.js') {
@@ -29,7 +29,7 @@ var numPosts = Ti.UI.createLabel({
 	text:data[i].posts + ' posts',
 	bottom:5,
 	right:5,
-	height:10
+	height:15
 });
 
 var when = Ti.UI.createLabel({
@@ -38,7 +38,7 @@ var when = Ti.UI.createLabel({
 	text:data[i].date,
 	bottom:5,
 	right:5,
-	height:10
+	height:15
 });
 
 var margin = 7;
@@ -93,9 +93,10 @@ if (page == 1 && i == 0) {
 }
 
 row.add(content);
-tableView.appendRow(row);
+//tableView.appendRow(row);
+//tableData.push(row);
 
-/*
+
 if (page > 1) {
 	tableView.appendRow(row);
 } else {
@@ -108,7 +109,7 @@ if (page > 1) {
 		//content.bottom = margin;
 	}
 }
-*/
+
 
 /*
 content.touched = false;

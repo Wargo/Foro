@@ -3,6 +3,9 @@ var page = 1;
 var lastPage = 1;
 var margin = 7;
 
+var help = require('help');
+help().text = L('Comentar esta foto');
+
 var ad = Ti.UI.iOS.createAdView({
 	bottom:-200,
 	zIndex:100,

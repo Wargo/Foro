@@ -1,6 +1,9 @@
 var win = Ti.UI.currentWindow;
 var page = 1;
 
+var help = require('help');
+help(L('Insertar una nueva foto'));
+
 var createPost = Ti.UI.createButton({
 	systemButton:Ti.UI.iPhone.SystemButton.COMPOSE
 });

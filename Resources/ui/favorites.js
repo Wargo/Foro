@@ -1,6 +1,11 @@
 var win = Ti.UI.currentWindow;
 var page = 1;
 
+//win.addEventListener('focus', function() {
+	var help = require('help');
+	help(L('Modificar mis foros'));
+//});
+
 var tableView = Ti.UI.createTableView({
 	backgroundColor: '#DDD'
 });

@@ -10,7 +10,7 @@ var icon1 = Ti.UI.createImageView({
 });
 var text1 = Ti.UI.createLabel({
 	top:10,
-	text:L('Bandeja de entrada'),
+	text:L('Mensajes privados'),
 	textAlign:'center',
 	color:'#CCC',
 	font:{fontWeight:'bold',fontSize:18}

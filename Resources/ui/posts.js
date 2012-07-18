@@ -1,6 +1,9 @@
 var win = Ti.UI.currentWindow;
 var page = 1;
 
+var help = require('help');
+help(L('Insertar un nuevo post'));
+
 var createPost = Ti.UI.createButton({
 	systemButton:Ti.UI.iPhone.SystemButton.COMPOSE
 });
@@ -47,7 +50,7 @@ var loading = Titanium.UI.createActivityIndicator({
 
 win.add(loading);
 loading.show();
-//var tableData = [];
+var tableData = [];
 
 var element = '/ui/elements/post_row.js'
 var id = win.current.id;
@@ -62,7 +65,7 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		//tableView.data = tableData;
+		tableView.data = tableData;
 		win.add(tableView);
 	}
 	if (error) {

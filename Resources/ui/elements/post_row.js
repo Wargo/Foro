@@ -86,9 +86,8 @@ if (page == 1 && i == 0) {
 	content.top = margin;
 }
 row.add(content);
-tableView.appendRow(row);
+//tableView.appendRow(row);
 
-/*
 if (page > 1) {
 	tableView.appendRow(row);
 } else {
@@ -101,7 +100,6 @@ if (page > 1) {
 		//content.bottom = margin;
 	}
 }
-*/
 
 if (loadFrom == '/messages.js') {
 	if (data[i].unread > 0) {

@@ -3,6 +3,9 @@ var page = 1;
 var lastPage = 1;
 var margin = 7;
 
+var help = require('help');
+help(L('Responder a este post'));
+
 var ad = Ti.UI.iOS.createAdView({
 	bottom:-200,
 	zIndex:100,
@@ -88,7 +91,7 @@ var rowTitle = Ti.UI.createTableViewRow({
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 });
 rowTitle.add(title);
-//tableData.push(rowTitle);
+tableData.push(rowTitle);
 tableView.appendRow(rowTitle)
 
 var element = '/ui/elements/post.js'
@@ -108,7 +111,7 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		//tableView.data = tableData;
+		tableView.data = tableData;
 		Ti.include('/ui/paginator.js');
 		win.add(tableView);
 		ad.addEventListener('load', function() {
