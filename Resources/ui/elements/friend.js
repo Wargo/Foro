@@ -68,9 +68,8 @@ if (i == 0 && page == 1) {
 	content.top = margin;
 }
 row.add(content);
-tableView.appendRow(row);
+//tableView.appendRow(row);
 
-/*
 if (page > 1) {
 	tableView.appendRow(row);
 } else {
@@ -83,7 +82,6 @@ if (page > 1) {
 		//content.bottom = margin;
 	}
 }
-*/
 
 content.addEventListener('click', function(e) {
 	if (e.source.index) {

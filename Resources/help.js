@@ -1,9 +1,15 @@
-function help(text, left) {
+function help (text, left) {
+	//Ti.App.Properties.removeProperty(text);
+	if (Ti.App.Properties.getInt(text, 0) < 3) {
+		Ti.App.Properties.setInt(text, Ti.App.Properties.getInt(text, 0) + 1);
+	} else {
+		return;
+	}
 	var help = Ti.UI.createView({
 		backgroundColor:'#000',
 		opacity:0,
-		top:5,
-		right:5,
+		top:2,
+		right:2,
 		borderRadius:5,
 		width:130,
 		height:40,
@@ -11,7 +17,7 @@ function help(text, left) {
 	});
 	if (left) {
 		help.right = null;
-		help.left = 5;
+		help.left = 2;
 	}
 	var helpText = Ti.UI.createLabel({
 		color:'white',
@@ -36,14 +42,7 @@ function help(text, left) {
 		}, 2000);
 	});
 	
-	/*
-	help.appear = appearHelp;
-	help.disappear = disappearHelp;
-	help.helpText = helpText;
-	*/
 	win.add(help);
 	help.animate(appearHelp);
-	
-	//return helpText;
 }
 module.exports = help

@@ -13,48 +13,11 @@ var addFriend = Ti.UI.createButton({
 });
 
 newMessage.addEventListener('click', function() {
-	if (Ti.App.Properties.getString('login')) {
-		var createPost = Ti.UI.createWindow({
-			url:'answer.js',
-			barColor:'#429BDA',
-			title:L('Enviar mensaje')
-		});
-	} else {
-		var createPost = Ti.UI.createWindow({
-			url:'login.js',
-			barColor:'#429BDA',
-			title:L('Login')
-		});
-	}
-	
-	createPost.user_id = win.current.user_id;
-	
-	var nav = Ti.UI.iPhone.createNavigationGroup({
-		window:createPost
-	});
-	var root = Ti.UI.createWindow();
-	root.add(nav);
-	root.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
-	createPost.root = root;
-	createPost.nav = nav;
+	send_private_message();
 });
 
 addFriend.addEventListener('click', function() {
-	var confirm = Ti.UI.createAlertDialog({
-		title:L('Agregar amiga'),
-		message:L('¿Seguro que deseas enviarle una solicitud de amistad?'),
-		buttonNames:[L('Sí'), L('No')],
-		cancel:1
-	});
-	confirm.show();
-	
-	confirm.addEventListener('click', function(e) {
-		if (e.index === e.cancel || e.cancel === true) { // Comparador iOS y Android
-			return;
-		}
-		Ti.include('/addFriend.js');
-		add_friend(win.current.user_id);
-	});
+	send_invitation();
 });
 
 var content = Ti.UI.createView({
@@ -134,7 +97,7 @@ var row = Ti.UI.createTableViewRow({
 row.add(content);
 var tableData = [];
 tableData.push(row);
-view.data = tableData;
+//view.data = tableData;
 win.add(view);
 
 image.addEventListener('click', function(e) {
@@ -170,4 +133,125 @@ image.addEventListener('click', function(e) {
 	Ti.UI.currentTab.open(imageBigWin);
 });
 
+var icon1 = Ti.UI.createImageView({
+	image:'images/addFriendGreen.png',
+	left:10,
+	top:12
+});
+var icon2 = Ti.UI.createImageView({
+	image:'images/mail.png',
+	left:10,
+	top:8
+});
+var text1 = Ti.UI.createLabel({
+	left:20,
+	right:20,
+	top:10,
+	text:L('Enviar solicitud de amistad'),
+	textAlign:'center',
+	color:'#AAA',
+	font:{fontWeight:'bold',fontSize:16}
+});
+var text2 = Ti.UI.createLabel({
+	left:20,
+	right:20,
+	top:10,
+	text:L('Enviar mensaje privado'),
+	textAlign:'center',
+	color:'#AAA',
+	font:{fontWeight:'bold',fontSize:16}
+});
+var send1 = Ti.UI.createView({
+	borderColor:'#CCC',
+	borderRadius:10,
+	top:10,
+	bottom:10,
+	right:40,
+	left:40,
+	layout:'horizontal',
+	backgroundColor:'#FFF'
+});
+var send2 = Ti.UI.createView({
+	borderColor:'#CCC',
+	borderRadius:10,
+	top:10,
+	bottom:10,
+	right:40,
+	left:40,
+	layout:'horizontal',
+	backgroundColor:'#FFF'
+});
+
+send1.add(icon1);
+send1.add(text1);
+var rowAddFriend = Ti.UI.createTableViewRow({
+	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
+	height:80
+});
+rowAddFriend.add(send1);
+
+send2.add(icon2);
+send2.add(text2);
+var rowSendMessage = Ti.UI.createTableViewRow({
+	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
+	height:80
+});
+rowSendMessage.add(send2);
+
+rowSendMessage.addEventListener('click', function() {
+	send_private_message();
+});
+
+rowAddFriend.addEventListener('click', function() {
+	send_invitation();
+});
+
 Ti.include('/friends_id.js');
+
+function send_private_message() {
+	if (Ti.App.Properties.getString('login')) {
+		var createPost = Ti.UI.createWindow({
+			url:'answer.js',
+			barColor:'#429BDA',
+			title:L('Enviar mensaje')
+		});
+	} else {
+		var createPost = Ti.UI.createWindow({
+			url:'login.js',
+			barColor:'#429BDA',
+			title:L('Login')
+		});
+	}
+	
+	createPost.user_id = win.current.user_id;
+	
+	var nav = Ti.UI.iPhone.createNavigationGroup({
+		window:createPost
+	});
+	var root = Ti.UI.createWindow();
+	root.add(nav);
+	root.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
+	createPost.root = root;
+	createPost.nav = nav;
+}
+
+function send_invitation() {
+	if (addFriend.enabled == false) {
+		return;
+	}
+	var confirm = Ti.UI.createAlertDialog({
+		title:L('Agregar amiga'),
+		message:L('¿Seguro que deseas enviarle una solicitud de amistad?'),
+		buttonNames:[L('Sí'), L('No')],
+		cancel:1
+	});
+	confirm.show();
+	
+	confirm.addEventListener('click', function(e) {
+		if (e.index === e.cancel || e.cancel === true) { // Comparador iOS y Android
+			return;
+		}
+		Ti.include('/addFriend.js');
+		add_friend(win.current.user_id);
+	});
+}

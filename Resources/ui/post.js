@@ -3,8 +3,13 @@ var page = 1;
 var lastPage = 1;
 var margin = 7;
 
-var help = require('help');
-help(L('Responder a este post'));
+if (win.messages) {
+	var help = require('help');
+	help(L('Responder a este mensaje'));
+} else {
+	var help = require('help');
+	help(L('Responder a este post'));
+}
 
 var ad = Ti.UI.iOS.createAdView({
 	bottom:-200,

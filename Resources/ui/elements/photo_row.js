@@ -116,7 +116,8 @@ if (i % cols == 0) {
 		selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 		layout:'horizontal'
 	});
-	tableView.appendRow(row);
+	//tableView.appendRow(row);
+	tableData.push(row);
 }
 
 image.width = image.height = size;

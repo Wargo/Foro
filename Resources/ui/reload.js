@@ -150,7 +150,8 @@ function endReloading(data, error) {
 			tableData.push(rowTitle);
 		}
 		if (typeof rowImage != 'undefined') {
-			tableView.appendRow(rowImage);
+			//tableView.appendRow(rowImage);
+			tableData.push(rowImage);
 		}
 		
 		for (i in data) {

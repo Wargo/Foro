@@ -7,6 +7,8 @@ function add_friend(id) {
 			if (result.status == 'ok') {
 				if (result.data == 1) {
 					addFriend.enabled = false;
+					text1.text = L('Solicitud de amistad enviada');
+					icon1.image = 'images/addFriend2.png';
 				} else if (result.data == 2) {
 					win.rightNavButton = newMessage;
 				}

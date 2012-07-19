@@ -4,7 +4,7 @@ var lastPage = 1;
 var margin = 7;
 
 var help = require('help');
-help().text = L('Comentar esta foto');
+help(L('Comentar esta foto'));
 
 var ad = Ti.UI.iOS.createAdView({
 	bottom:-200,
@@ -65,7 +65,7 @@ var loading = Titanium.UI.createActivityIndicator({
 win.add(loading);
 loading.show();
 
-//var tableData = [];
+var tableData = [];
 
 var image = Ti.UI.createImageView({
 	image:win.current.image,
@@ -120,7 +120,7 @@ rowImage.add(numComments);
 rowImage.add(icoComments);
 rowImage.add(dateLabel);
 rowImage.add(usernameLabel);
-//tableData.push(rowImage);
+tableData.push(rowImage);
 tableView.appendRow(rowImage);
 
 image.addEventListener('click', function(e) {
@@ -169,7 +169,7 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		//tableView.data = tableData;
+		tableView.data = tableData;
 		if (data.length > 0) {
 			Ti.include('/ui/paginator.js');
 		} else {

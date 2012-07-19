@@ -14,14 +14,19 @@ function is_friend(id) {
 					win.rightNavButton = newMessage;
 					var help = require('help');
 					help(L('Enviar mensaje privado'));
+					tableData.push(rowSendMessage);
 				} else if (Ti.App.Properties.getString('login', null) != id) {
 					win.rightNavButton = addFriend;
 					var help = require('help');
 					help(L('Enviar solicitud de amistad'));
+					tableData.push(rowAddFriend);
 				}
+				view.data = tableData;
 				
 				if (Ti.App.inArray(id, petitions)) {
 					addFriend.enabled = false;
+					text1.text = L('Solicitud de amistad enviada');
+					icon1.image = 'images/addFriend2.png';
 				}
 			} else {
 				error = result.message;

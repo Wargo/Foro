@@ -64,7 +64,7 @@ var loading = Titanium.UI.createActivityIndicator({
 
 win.add(loading);
 loading.show();
-//var tableData = [];
+var tableData = [];
 
 var element = '/ui/elements/photo_row.js'
 var id = win.current.id;
@@ -85,7 +85,7 @@ var interval = setInterval(function() {
 		}
 		clearInterval(interval);
 		loading.hide();
-		//tableView.data = tableData;
+		tableView.data = tableData;
 		win.add(tableView);
 		ad.addEventListener('load', function() {
 			ad.animate({bottom:0, duration:300});
