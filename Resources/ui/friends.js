@@ -1,6 +1,7 @@
 var win = Ti.UI.currentWindow;
 win.title = L('Amigos');
 win.barColor = '#429BDA';
+win.backgroundColor = '#FFF';
 var page = 1;
 
 var tableView = Ti.UI.createTableView({

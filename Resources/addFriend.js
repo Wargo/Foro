@@ -11,6 +11,14 @@ function add_friend(id) {
 					icon1.image = 'images/addFriend2.png';
 				} else if (result.data == 2) {
 					win.rightNavButton = newMessage;
+					view.deleteRow(1);
+					view.appendRow(rowSendMessage);
+					var alert = Ti.UI.createAlertDialog({
+						title:L('¡Enhorabuena!'),
+						message:L('Ya sois amigas'),
+						ok:L('Ok')
+					});
+					alert.show();
 				}
 			} else {
 				error = result.message;

@@ -90,10 +90,11 @@ var rowMessages = Ti.UI.createTableViewRow({
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 });
 
+c.opacity = 0;
 rowMessages.add(c);
-//tableData.push(rowMessages);
-//view.data = tableData;
 view.appendRow(rowMessages);
+var anim = Ti.UI.createAnimation({opacity:1,duration:300});
+c.animate(anim);
 
 inbox.addEventListener('click', function(e) {
 	open('inbox');
