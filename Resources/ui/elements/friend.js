@@ -1,11 +1,11 @@
 var title = Ti.UI.createLabel({
-	text:data[i].name,
+	text:data[i].name + ' pepito de los palotes palotes palotes palotes',
 	font:{fontSize:14},
 	color:'#257CBC',
 	top:10,
 	height:40,
 	left:70,
-	right:25
+	right:80
 });
 
 var image = Ti.UI.createImageView({
@@ -28,28 +28,10 @@ var content = Ti.UI.createView({
 	bottom:1
 });
 
-var icon1 = Ti.UI.createImageView({
+var send = Ti.UI.createImageView({
 	image:'images/mail.png',
-	left:10
+	right:20
 });
-var text1 = Ti.UI.createLabel({
-	left:10,
-	text:L('Enviar mensaje'),
-	textAlign:'center',
-	color:'#CCC',
-	font:{fontWeight:'bold',fontSize:15}
-});
-var send = Ti.UI.createView({
-	borderColor:'#CCC',
-	borderRadius:10,
-	width:150,
-	top:12,
-	bottom:12,
-	right:10,
-	layout:'horizontal'
-});
-send.add(icon1);
-send.add(text1);
 
 content.index = i + 1;
 content.title = title;

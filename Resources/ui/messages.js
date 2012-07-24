@@ -73,15 +73,6 @@ var c = Ti.UI.createView({
 	height:180
 });
 
-win.addEventListener('focus', function() {
-	b.text = Titanium.UI.iPhone.appBadge;
-	if (Titanium.UI.iPhone.appBadge) {
-		c.add(b);
-	} else {
-		c.remove(b);
-	}
-});
-
 c.add(messages);
 c.add(inbox);
 c.add(outbox);

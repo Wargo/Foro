@@ -143,7 +143,7 @@ function beginReloading() {
  
 function endReloading(data, error) {
 	if (data) {
-		//tableData = [];
+		tableData = [];
 		
 		if (typeof rowTitle != 'undefined') {
 			//tableView.appendRow(rowTitle);

@@ -97,7 +97,7 @@ var rowTitle = Ti.UI.createTableViewRow({
 });
 rowTitle.add(title);
 tableData.push(rowTitle);
-tableView.appendRow(rowTitle)
+//tableView.appendRow(rowTitle)
 
 var element = '/ui/elements/post.js'
 var id = win.current.id;
@@ -115,7 +115,6 @@ var interval = setInterval(function() {
 			Ti.include(element);
 		}
 		clearInterval(interval);
-		loading.hide();
 		tableView.data = tableData;
 		Ti.include('/ui/paginator.js');
 		win.add(tableView);
@@ -139,3 +138,4 @@ var interval = setInterval(function() {
 
 Ti.include('/ui/reload.js');
 //Ti.include('/ui/append.js');
+Ti.include('/notifications.js');

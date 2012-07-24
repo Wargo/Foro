@@ -1,8 +1,10 @@
 var win = Ti.UI.currentWindow;
 
 //win.addEventListener('focus', function() {
+if (Ti.App.Properties.getString('login')) {
 	var help = require('help');
 	help(L('Modificar foto de perfil'), true);
+}
 //});
 
 win.backgroundColor = '#FFF';
@@ -27,7 +29,8 @@ var content = Ti.UI.createView({
 	right:margin,
 	top:margin,
 	layout:'horizontal',
-	height:170
+	height:170,
+	opacity:0
 });
 
 var user = Ti.UI.createView({
@@ -172,6 +175,11 @@ tableData.push(row);
 view.data = tableData;
 win.add(view);
 
+var anim = Ti.UI.createAnimation({opacity:1,duration:300});
+setTimeout(function() {
+	content.animate(anim);
+}, 300);
+
 image.addEventListener('click', function(e) {
 	if (!Ti.App.Properties.getString('login')) {
 		return;
@@ -288,7 +296,10 @@ function switchPage(win) {
 				} else {
 					Ti.include('messages.js');
 				}
-				Ti.include('/notifications.js');
+				//Ti.include('/notifications.js');
+				check_notifications();
+				var help = require('help');
+				help(L('Modificar foto de perfil'), true);
 			}
 			if (error) {
 				clearInterval(interval);
@@ -303,7 +314,8 @@ function switchPage(win) {
 				if (typeof rowMessages != 'undefined') {
 					rowMessages.remove(c);
 				}
-				Ti.UI.currentTab.badge = null;
+				//Ti.UI.currentTab.badge = null;
+				check_notifications();
 			}
 		}, 100);
 	} else {
@@ -322,9 +334,12 @@ function switchPage(win) {
 		if (typeof rowMessages != 'undefined') {
 			rowMessages.remove(c);
 		}
-		Ti.UI.currentTab.badge = null;
+		//Ti.UI.currentTab.badge = null;
+		check_notifications();
 	}
 }
+
+Ti.include('/notifications.js');
 
 if (Ti.App.Properties.getString('login')) {
 	Ti.include('messages.js');

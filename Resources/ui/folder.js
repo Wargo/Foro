@@ -48,3 +48,4 @@ var interval = setInterval(function() {
 
 Ti.include('/ui/reload.js');
 Ti.include('/ui/append.js');
+Ti.include('/notifications.js');

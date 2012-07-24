@@ -46,3 +46,4 @@ var interval = setInterval(function() {
 }, 100);
 
 Ti.include('/ui/reload.js');
+Ti.include('/notifications.js');
