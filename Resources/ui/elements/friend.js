@@ -1,5 +1,5 @@
 var title = Ti.UI.createLabel({
-	text:data[i].name + ' pepito de los palotes palotes palotes palotes',
+	text:data[i].name,
 	font:{fontSize:14},
 	color:'#257CBC',
 	top:10,

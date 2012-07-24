@@ -13,7 +13,5 @@ var client = Ti.Network.createHTTPClient({
 	timeout: 15000
 });
 
-Ti.API.info('entro');
-
 client.open('GET', path);
 client.send();

@@ -33,7 +33,7 @@ var b = Ti.UI.createLabel({
 	borderWidth:2,
 	textAlign:'center',
 	font:{fontSize:12,fontWeight:'bold'},
-	width:18,
+	width:22,
 	height:18,
 	top:50,
 	left:20,
@@ -95,6 +95,7 @@ outbox.addEventListener('click', function(e) {
 });
 
 function open(folder) {
+	Ti.App.goToMessages = false;
 	var animation = Ti.UI.createAnimation({
 		backgroundColor:'#429BDA',
 		duration:300
@@ -113,3 +114,12 @@ function open(folder) {
 	
 	Ti.UI.currentTab.open(folderWin);
 }
+
+win.addEventListener('focus', function() {
+	if (Ti.App.goToMessages) {
+		if (Ti.App.Properties.getString('login')) {
+			open('inbox');
+		}
+	}
+});
+

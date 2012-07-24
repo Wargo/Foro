@@ -57,9 +57,31 @@ function getDeviceToken() {
 	        Ti.API.info("Error during registration: " + e.error);
 	    },
 	    callback:function(e) {
-			//Ti.UI.iPhone.appBadge = 0;
-	        //tabs.setActiveTab(0);
-			tabGroup.setActiveTab(3);
+	    	var help = require('help');
+			help(L('Tienes un mensaje nuevo'));
+      		
+      		var badge = e.data.badge;
+			Titanium.UI.iPhone.appBadge = badge;
+			Ti.App.tab5.setBadge(badge);
+			Ti.UI.iPhone.appBadge = badge;
+			if (typeof b != 'undefined') {
+				if (Titanium.UI.iPhone.appBadge) {
+					b.text = badge;
+					c.add(b);
+				} else {
+					c.remove(b);
+				}
+			}
+			
+			
+			/*
+	        if (Ti.App.tabGroup.activeTab != 3) {
+	        	Ti.App.goToMessages = true;
+	        	Ti.App.tabGroup.setActiveTab(3);
+	        } else {
+	        	open('inbox');
+	        }
+	        */
 	    }
 	});
 }

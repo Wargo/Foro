@@ -17,10 +17,6 @@ if (Ti.version < 1.8 ) {
 // This is a single context application with mutliple windows in a stack
 (function() {
 	
-	if (Ti.App.Properties.getString('login')) {
-		Ti.include('/bg_cloud.js');
-	}
-	
 	Ti.App.dataURL = 'http://elembarazo.net/appMovil/'
 	
 	function strpos (haystack, needle, offset) {
@@ -37,6 +33,8 @@ if (Ti.version < 1.8 ) {
 
 	Ti.App.inArray = inArray;
 	Ti.App.strpos = strpos;
+	
+	Ti.App.goToMessages = false;
 	
 	var tabGroup = Ti.UI.createTabGroup();
 	
@@ -106,6 +104,10 @@ if (Ti.version < 1.8 ) {
 	//Ti.include('/notifications.js');
 	
 	Ti.App.tabGroup = tabGroup;
+	
+	if (Ti.App.Properties.getString('login')) {
+		Ti.include('/bg_cloud.js');
+	}
 	
 	/*
 	var root = Ti.UI.createWindow();

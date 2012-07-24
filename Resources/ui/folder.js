@@ -1,5 +1,8 @@
 var win = Ti.UI.currentWindow;
 var page = 1;
+win.addEventListener('focus', function() {
+	Ti.App.goToMessages = false;
+});
 
 win.backgroundColor = '#FFF';
 if (win.folder == 'inbox') {

@@ -9,8 +9,12 @@ function check_notifications() {
 			onload: function(e) {
 				Ti.API.info('success ' + this.responseText);
 				var badges = eval('(' + this.responseText + ')');
+				/*if (badges.num > Ti.UI.iPhone.appBadge) {
+					var help = require('help');
+					help(L('Tienes un mensaje nuevo'));
+				}*/
 				Ti.App.tab5.setBadge(badges.num);
-				Titanium.UI.iPhone.appBadge = badges.num;
+				Ti.UI.iPhone.appBadge = badges.num;
 				if (typeof b != 'undefined') {
 					if (Titanium.UI.iPhone.appBadge) {
 						b.text = Ti.UI.iPhone.appBadge;

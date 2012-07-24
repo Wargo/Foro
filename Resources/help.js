@@ -1,10 +1,4 @@
 function help (text, left) {
-	//Ti.App.Properties.removeProperty(text);
-	if (Ti.App.Properties.getInt(text, 0) < 3) {
-		Ti.App.Properties.setInt(text, Ti.App.Properties.getInt(text, 0) + 1);
-	} else {
-		return;
-	}
 	var help = Ti.UI.createView({
 		backgroundColor:'#000',
 		opacity:0,
@@ -32,14 +26,46 @@ function help (text, left) {
 		width:20,
 		height:20
 	});
-	help.add(helpIco);
-	help.add(helpText);
 	var appearHelp = Ti.UI.createAnimation({duration:600, opacity:0.8});
 	var disappearHelp = Ti.UI.createAnimation({duration:600, opacity:0});
+	var timeShowing = 3000;
+	
+	if (text != L('Tienes un mensaje nuevo')) {
+		if (Ti.App.Properties.getInt(text, 0) < 3) {
+			Ti.App.Properties.setInt(text, Ti.App.Properties.getInt(text, 0) + 1);
+		} else {
+			return;
+		}
+	} else {
+		help.top = null;
+		help.bottom = 2;
+		timeShowing = 5000;
+		help.addEventListener('click', function() {
+			if (Ti.App.tabGroup.activeTab != 3) {
+	        	Ti.App.goToMessages = true;
+	        	Ti.App.tabGroup.setActiveTab(3);
+	        } else {
+	        	open('inbox');
+	        }
+		});
+		
+		Ti.Media.vibrate();
+		var sound = Ti.Media.createSound({
+			looping:false,
+			url:'/ui/sounds/notify.mp3',
+			volume:1
+		});
+		sound.play();
+		
+		var win = Ti.App.tabGroup.activeTab.window;
+	}
+	
+	help.add(helpIco);
+	help.add(helpText);
 	appearHelp.addEventListener('complete', function() {
 		setTimeout(function() {
 			help.animate(disappearHelp);
-		}, 2000);
+		}, timeShowing);
 	});
 	
 	win.add(help);
