@@ -2,7 +2,7 @@ var win = Ti.UI.currentWindow;
 var page = 1;
 
 var help = require('help');
-help(L('Insertar una nueva foto'));
+help(L('Insertar una nueva foto'), win);
 
 var createPost = Ti.UI.createButton({
 	systemButton:Ti.UI.iPhone.SystemButton.COMPOSE
@@ -77,6 +77,34 @@ var x = 0;
 var size = 100;
 var cols = 3;
 var space = 5;
+if (Ti.Platform.osname == 'ipad') {
+	cols = 5;
+}
+
+if (Ti.Platform.osname == 'ipad') {
+	Ti.Gesture.addEventListener('orientationchange', function(e) {
+		if (e.orientation == 1 || e.orientation == 2 || e.orientation == 3 || e.orientation == 4) {
+			beginReloading();
+		}
+		/*
+		size = Math.round((Titanium.Platform.displayCaps.platformWidth - ((cols + 1) * space)) / cols);
+		for (x in tableData) {
+			son = tableData[x];
+		    for (i = 0; i < son.children.length; i++){
+		        if (e.orientation == 1 || e.orientation == 2) {
+		        	son.children[i]._content.top = 100;
+		        	son.children[i].width = size;
+	        		son.children[i].height = size;
+		        } else if (e.orientation == 3 || e.orientation == 4){
+		        	son.children[i]._content.top = 160;
+		        	son.children[i].width = size;
+	        		son.children[i].height = size;
+		        }
+		    };
+		}
+		*/
+	});
+}
 
 var interval = setInterval(function() {
 	if (data) {

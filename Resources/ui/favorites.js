@@ -3,7 +3,7 @@ var page = 1;
 
 //win.addEventListener('focus', function() {
 	var help = require('help');
-	help(L('Modificar mis foros'));
+	help(L('Modificar mis foros'), win);
 //});
 
 var tableView = Ti.UI.createTableView({

@@ -1,4 +1,4 @@
-function help (text, left) {
+function help (text, win, left) {
 	var help = Ti.UI.createView({
 		backgroundColor:'#000',
 		opacity:0,
@@ -68,7 +68,10 @@ function help (text, left) {
 		}, timeShowing);
 	});
 	
-	win.add(help);
+	if (typeof win != 'undefined') {
+		win.add(help);
+	}
+	
 	help.animate(appearHelp);
 }
 module.exports = help

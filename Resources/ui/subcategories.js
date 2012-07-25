@@ -3,7 +3,7 @@ var page = 1;
 
 if (win.current.id != -1) {
 	var help = require('help');
-	help(L('Añadir a mis foros'));
+	help(L('Añadir a mis foros'), win);
 }
 
 var tableView = Ti.UI.createTableView({

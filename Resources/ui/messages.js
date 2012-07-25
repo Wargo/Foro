@@ -64,6 +64,10 @@ var outbox = Ti.UI.createView({
 outbox.add(icon2);
 outbox.add(text2);
 
+if (Ti.Platform.osname == 'ipad') {
+	outbox.right = inbox.left = 200;
+}
+
 var c = Ti.UI.createView({
 	backgroundColor:'#FFF',
 	borderRadius:5,

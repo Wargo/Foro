@@ -56,8 +56,8 @@ var image = Ti.UI.createImageView({
 	image:data[i].photo,
 	defaultImage:'images/clock.png',
 	top:15,
-	height:275,
-	width:275
+	//height:275,
+	//width:275
 });
 image.imageBig = data[i].photoBig;
 
@@ -73,8 +73,8 @@ var content = Ti.UI.createView({
 var button = Ti.UI.createLabel({
 	opacity:0.1,
 	zIndex:100,
-	width:100,
-	height:100,
+	//width:100,
+	//height:100,
 	backgroundColor:'#000'
 });
 
@@ -107,6 +107,13 @@ image.addEventListener('load', function(e) {
 		bottom:0,
 		duration:300
 	});
+	if (Ti.Platform.osname == 'ipad') {
+		if (Ti.UI.orientation == 1 || Ti.UI.orientation == 2) {
+			anim.top = 100;
+		} else {
+			anim.top = 160;
+		}
+	}
 	e.source._content.animate(anim);
 	e.source.add(e.source._content);
 })
@@ -120,11 +127,11 @@ if (i % cols == 0) {
 	tableData.push(row);
 }
 
-image.width = image.height = size;
+size = Math.round((Titanium.Platform.displayCaps.platformWidth - ((cols + 1) * space)) / cols);
+button.width = button.height = image.width = image.height = size;
 //image.left = space + (i % cols) * (size + space);
-image.left = space;
+image.top = image.left = space;
 //image.top = space + h * (size + space);
-image.top = space;
 if (i % cols == cols - 1) {
 	//h ++;
 }

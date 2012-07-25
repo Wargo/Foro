@@ -1,5 +1,6 @@
 var win = Ti.UI.currentWindow;
 var margin = 7;
+win.title = win.current.name;
 
 var view = Ti.UI.createTableView({
 	backgroundColor: '#DDD'
@@ -97,7 +98,9 @@ var row = Ti.UI.createTableViewRow({
 row.add(content);
 var tableData = [];
 tableData.push(row);
-//view.data = tableData;
+if (!Ti.App.Properties.getString('login')) {
+	view.data = tableData;
+}
 win.add(view);
 
 image.addEventListener('click', function(e) {
@@ -166,8 +169,9 @@ var send1 = Ti.UI.createView({
 	borderRadius:10,
 	top:10,
 	bottom:10,
-	right:40,
-	left:40,
+	//right:40,
+	//left:40,
+	width:250,
 	layout:'horizontal',
 	backgroundColor:'#FFF'
 });
@@ -176,8 +180,9 @@ var send2 = Ti.UI.createView({
 	borderRadius:10,
 	top:10,
 	bottom:10,
-	right:40,
-	left:40,
+	//right:40,
+	//left:40,
+	width:250,
 	layout:'horizontal',
 	backgroundColor:'#FFF'
 });
@@ -206,7 +211,9 @@ rowAddFriend.addEventListener('click', function() {
 	send_invitation();
 });
 
-Ti.include('/friends_id.js');
+if (Ti.App.Properties.getString('login')) {
+	Ti.include('/friends_id.js');
+}
 
 function send_private_message() {
 	if (Ti.App.Properties.getString('login')) {

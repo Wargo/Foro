@@ -1,5 +1,5 @@
 win.addEventListener('focus', function() {
-	check_notifications();
+	//check_notifications();
 });
 
 function check_notifications() {

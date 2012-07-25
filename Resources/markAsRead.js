@@ -3,6 +3,7 @@ function markAsRead(thread_id) {
 	var client = Ti.Network.createHTTPClient({
 		onload: function(e) {
 			Ti.include('/notifications.js');
+			check_notifications();
 		},
 		onerror: function(e) {
 			error = L('Ha ocurrido un error con la conexión');

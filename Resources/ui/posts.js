@@ -2,7 +2,7 @@ var win = Ti.UI.currentWindow;
 var page = 1;
 
 var help = require('help');
-help(L('Insertar un nuevo post'));
+help(L('Insertar un nuevo post'), win);
 
 var createPost = Ti.UI.createButton({
 	systemButton:Ti.UI.iPhone.SystemButton.COMPOSE

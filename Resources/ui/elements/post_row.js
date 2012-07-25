@@ -42,6 +42,10 @@ var numPosts = Ti.UI.createLabel({
 	height:10,
 });
 
+if (Ti.Platform.osname == 'ipad') {
+	numPosts.font = {fontSize:12};
+}
+
 var image = Ti.UI.createImageView({
 	image:data[i].avatar,
 	defaultImage:'images/clock.png',

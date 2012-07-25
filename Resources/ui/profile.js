@@ -1,9 +1,9 @@
 var win = Ti.UI.currentWindow;
 
 //win.addEventListener('focus', function() {
+var help = require('help');
 if (Ti.App.Properties.getString('login')) {
-	var help = require('help');
-	help(L('Modificar foto de perfil'), true);
+	help(L('Modificar foto de perfil'), win, true);
 }
 //});
 
@@ -259,6 +259,7 @@ goLogin.addEventListener('click', function() {
 
 var currentStatus = '';
 
+Ti.include('/notifications.js');
 switchPage(win);
 
 win.addEventListener('focus', function() {
@@ -298,8 +299,8 @@ function switchPage(win) {
 				}
 				//Ti.include('/notifications.js');
 				check_notifications();
-				var help = require('help');
-				help(L('Modificar foto de perfil'), true);
+
+				help(L('Modificar foto de perfil'), win, true);
 			}
 			if (error) {
 				clearInterval(interval);
@@ -338,8 +339,6 @@ function switchPage(win) {
 		check_notifications();
 	}
 }
-
-Ti.include('/notifications.js');
 
 if (Ti.App.Properties.getString('login')) {
 	Ti.include('messages.js');

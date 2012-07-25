@@ -5,10 +5,10 @@ var margin = 7;
 
 if (win.messages) {
 	var help = require('help');
-	help(L('Responder a este mensaje'));
+	help(L('Responder a este mensaje'), win);
 } else {
 	var help = require('help');
-	help(L('Responder a este post'));
+	help(L('Responder a este post'), win);
 }
 
 var ad = Ti.UI.iOS.createAdView({

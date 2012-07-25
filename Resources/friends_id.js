@@ -13,12 +13,12 @@ function is_friend(id) {
 				if (Ti.App.inArray(id, ids)) {
 					win.rightNavButton = newMessage;
 					var help = require('help');
-					help(L('Enviar mensaje privado'));
+					help(L('Enviar mensaje privado'), win);
 					tableData.push(rowSendMessage);
 				} else if (Ti.App.Properties.getString('login', null) != id) {
 					win.rightNavButton = addFriend;
 					var help = require('help');
-					help(L('Enviar solicitud de amistad'));
+					help(L('Enviar solicitud de amistad'), win);
 					tableData.push(rowAddFriend);
 				}
 				view.data = tableData;
