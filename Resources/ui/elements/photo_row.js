@@ -84,7 +84,7 @@ button.numComments = numComments.text;
 button.dateLabel = dateLabel.text;
 button.usernameLabel = usernameLabel.text;
 button.icoComments = icoComments.image;
-button.id = data[i].id;
+image.id = button.id = data[i].id;
 button._image = image;
 button.image = image.image;
 button.imageBig = image.imageBig;
@@ -96,9 +96,9 @@ content.add(icoComments);
 //content.add(dateLabel);
 content.add(usernameLabel);
 
-image.add(button);
+//image.add(button);
 image._content = content;
-//image._button = button;
+image._button = button;
 
 image.addEventListener('load', function(e) {
 	//e.source.add(e.source._button);
@@ -138,7 +138,7 @@ if (i % cols == cols - 1) {
 //tableView.add(image);
 row.add(image);
 
-button.addEventListener('click', function(e) {
+image.addEventListener('click', function(e) {
 	var post = Ti.UI.createWindow({
 		title:e.source.title,
 		url:'photo.js',
@@ -152,14 +152,25 @@ button.addEventListener('click', function(e) {
 	});
 	
 	//post.current = current;
-	post.current = e.source;
+	//post.current = e.source;
+	if (!e.source.id) {
+		if (e.source.parent.id) {
+			post.current = e.source.parent._button;
+		} else {
+			post.current = e.source.parent.parent._button;
+		}
+	} else {
+		post.current = e.source._button;
+	}
 	
 	animation.addEventListener('complete', function() {
 		//current.backgroundColor = '#FFF';
-		e.source._image.opacity = 1;
+		//e.source._image.opacity = 1;
+		e.source.opacity = 1;
 	});
 	//current.animate(animation);
-	e.source._image.animate(animation);
+	//e.source._image.animate(animation);
+	e.source.animate(animation);
 	
 	Ti.UI.currentTab.open(post);
 });

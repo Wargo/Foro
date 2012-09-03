@@ -2,6 +2,7 @@ function is_friend(id) {
 	var error = '';
 	var ids = [];
 	var petitions = [];
+	var pending = [];
 	var path = Ti.App.dataURL + 'friends_id.php';
 	var client = Ti.Network.createHTTPClient({
 		onload: function(e) {
@@ -10,11 +11,18 @@ function is_friend(id) {
 			if (result.status == 'ok') {
 				ids = result.friends;
 				petitions = result.petitions;
+				pending = result.pending;
 				if (Ti.App.inArray(id, ids)) {
 					win.rightNavButton = newMessage;
 					var help = require('help');
 					help(L('Enviar mensaje privado'), win);
 					tableData.push(rowSendMessage);
+				} else if (Ti.App.inArray(id, pending)) {
+					win.rightNavButton = addFriend;
+					var help = require('help');
+					help(L('Aceptar solicitud de amistad'), win);
+					rowAddFriend._title.text = L('Aceptar solicitud de amistad');
+					tableData.push(rowAddFriend);
 				} else if (Ti.App.Properties.getString('login', null) != id) {
 					win.rightNavButton = addFriend;
 					var help = require('help');

@@ -17,10 +17,12 @@ var reply = Ti.UI.createButton({
 	systemButton:Ti.UI.iPhone.SystemButton.REPLY
 });
 
+/*
 if (win.current.open == 0) {
 	reply.title = L('Cerrado');
 	reply.enabled = false;
 }
+*/
 win.rightNavButton = reply;
 
 reply.addEventListener('click', function() {

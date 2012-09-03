@@ -120,6 +120,7 @@ function open(folder) {
 }
 
 win.addEventListener('focus', function() {
+	check_notifications();
 	if (Ti.App.goToMessages) {
 		if (Ti.App.Properties.getString('login')) {
 			open('inbox');

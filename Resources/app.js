@@ -17,7 +17,9 @@ if (Ti.version < 1.8 ) {
 // This is a single context application with mutliple windows in a stack
 (function() {
 	
-	Ti.App.dataURL = 'http://elembarazo.net/appMovil/'
+	//Ti.UI.iPhone.hideStatusBar();
+	
+	Ti.App.dataURL = 'http://elembarazo.net/appMovil/';
 	
 	function strpos (haystack, needle, offset) {
 		var i = (haystack + '').indexOf(needle, (offset || 0));

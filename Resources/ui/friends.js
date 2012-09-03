@@ -1,8 +1,20 @@
 var win = Ti.UI.currentWindow;
-win.title = L('Amigos');
+win.title = L('Amigas');
 win.barColor = '#429BDA';
 win.backgroundColor = '#FFF';
 var page = 1;
+
+var help = require('help');
+help(L('Añadir más amigas'), win);
+
+var search = Ti.UI.createButton({
+	systemButton:Ti.UI.iPhone.SystemButton.ADD
+});
+win.rightNavButton = search;
+
+search.addEventListener('click', function() {
+	Ti.UI.currentTab.open(Ti.UI.createWindow({url:'search.js'}));
+});
 
 var tableView = Ti.UI.createTableView({
 	backgroundColor: '#DDD'

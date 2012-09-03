@@ -21,6 +21,11 @@ loadingRow.add(loadingRowView);
 loadingMore.show();
 
 function beginUpdate(){
+	if (typeof search != 'undefined') {
+		if (search.value == '') {
+			return;
+		}
+	}
 	updating = true;
 	tableView.appendRow(loadingRow);
 	

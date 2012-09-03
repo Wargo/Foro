@@ -193,6 +193,7 @@ var rowAddFriend = Ti.UI.createTableViewRow({
 	selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 	height:80
 });
+rowAddFriend._title = text1;
 rowAddFriend.add(send1);
 
 send2.add(icon2);
