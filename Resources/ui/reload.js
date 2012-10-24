@@ -92,8 +92,8 @@ tableView.addEventListener('scroll',function(e) {
 	}
 });
 
-tableView.addEventListener('scrollEnd',function(e) {
-	if (pulling && !reloading && e.contentOffset.y <= -65.0) {
+tableView.addEventListener('dragEnd',function(e) {
+	if (pulling && !reloading) {// && e.contentOffset.y <= -65.0) {
 		reloading = true;
 		pulling = false;
 		arrow.hide();
