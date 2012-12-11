@@ -7,14 +7,28 @@ help(L('Insertar una nueva foto'), win);
 var createPost = Ti.UI.createButton({
 	systemButton:Ti.UI.iPhone.SystemButton.COMPOSE
 });
-
+/*
 var ad = Ti.UI.iOS.createAdView({
 	bottom:-200,
 	zIndex:100,
 	height:Ti.UI.SIZE,
 	width:Ti.UI.SIZE
 });
+*/
+var getAd = require('ui/elements/ad');
 
+var ad = getAd({
+	bottom: -200,// left: 0,
+	width: 320, height: 50,
+	publisherId: 'a150c6fd31e0758', // You can get your own at http: //www.admob.com/
+	//adBackgroundColor: 'black',
+	testing: false,
+	//dateOfBirth: new Date(1985, 10, 1, 12, 1, 1),
+	gender: 'female',
+	//location: COORDS,
+	keywords: 'bebe, embarao, embarazada, foro, niño, madre, padre, hijo',
+	zIndex:999
+});
 win.rightNavButton = createPost;
 
 createPost.addEventListener('click', function() {
@@ -115,11 +129,13 @@ var interval = setInterval(function() {
 		loading.hide();
 		tableView.data = tableData;
 		win.add(tableView);
-		ad.addEventListener('load', function() {
+		//ad.addEventListener('load', function() {
+		ad.addEventListener('didReceiveAd', function() {
 			ad.animate({bottom:0, duration:300});
 			tableView.animate({bottom:50, duration:300});
 		});
-		ad.addEventListener('error', function() {
+		//ad.addEventListener('error', function() {
+		ad.addEventListener('didFailedReceiveAd', function() {
 			ad.animate({bottom:-200, duration:300});
 			tableView.animate({bottom:0, duration:300});
 		});
